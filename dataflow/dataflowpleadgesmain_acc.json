@@ -17,6 +17,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sepredata"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_redb",
+						"type": "DatasetReference"
+					},
+					"name": "reinstallment"
 				}
 			],
 			"sinks": [],
@@ -38,6 +45,9 @@
 				},
 				{
 					"name": "select2"
+				},
+				{
+					"name": "select3"
 				}
 			],
 			"scriptLines": [
@@ -154,6 +164,20 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sepredata",
+				"source(output(",
+				"          InstallmentId as integer,",
+				"          PledgeId as integer,",
+				"          AdjustmentId as integer,",
+				"          Amount as decimal(20,4),",
+				"          Dte as timestamp,",
+				"          Sequence as short,",
+				"          Year as short,",
+				"          Import_Id as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> reinstallment",
 				"rerecords filter(INACTIVE == 0 && KEY_INDICATOR == 'I') ~> filter1",
 				"filter1 select(mapColumn(",
 				"          CONSTITUENT_ID,",
@@ -186,7 +210,13 @@
 				"          GRId",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select2"
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"reinstallment select(mapColumn(",
+				"          PledgeId,",
+				"          Amount",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3"
 			]
 		}
 	}

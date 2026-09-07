@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "rerecords"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sepdb",
+						"type": "DatasetReference"
+					},
+					"name": "sepredata"
 				}
 			],
 			"sinks": [],
@@ -19,6 +26,12 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "filter2"
+				},
+				{
+					"name": "selectsepredata"
 				}
 			],
 			"scriptLines": [
@@ -117,6 +130,24 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> rerecords",
+				"source(output(",
+				"          Source as string,",
+				"          SourceId as string,",
+				"          GoldenRank as integer,",
+				"          GRId as integer,",
+				"          OriginalSource as string,",
+				"          GiftAidOriginalSource as string,",
+				"          OriginalCreationDate as timestamp,",
+				"          LastChangeDate as timestamp,",
+				"          CreationDate as timestamp,",
+				"          CreationSource as string,",
+				"          UpdateDate as timestamp,",
+				"          UpdateSource as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sepredata",
 				"rerecords filter(INACTIVE == 0 && KEY_INDICATOR == 'I') ~> filter1",
 				"filter1 select(mapColumn(",
 				"          CONSTITUENT_ID,",
@@ -126,7 +157,15 @@
 				"          LAST_NAME",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"sepredata filter(OriginalSource == 'RE') ~> filter2",
+				"filter2 select(mapColumn(",
+				"          SourceId,",
+				"          GRId,",
+				"          OriginalSource",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectsepredata"
 			]
 		}
 	}

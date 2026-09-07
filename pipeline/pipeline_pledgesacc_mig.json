@@ -98,7 +98,7 @@
 				}
 			},
 			{
-				"name": "Data flow1",
+				"name": "Dataflowgiftsolicitor",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {

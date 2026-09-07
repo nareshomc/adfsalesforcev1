@@ -1,0 +1,12 @@
+{
+	"name": "ds_salesforceaccountmig",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_salesforcemig",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SalesforceServiceCloudV2Object",
+		"schema": []
+	}
+}

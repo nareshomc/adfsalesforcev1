@@ -375,7 +375,8 @@
 				"          StatusDate = POST_DATE,",
 				"          Amount,",
 				"          GiftStatus = GIFT_STATUS,",
-				"          InstallmentFrequency = INSTALLMENT_FREQUENCY",
+				"          InstallmentFrequency = INSTALLMENT_FREQUENCY,",
+				"          CONSTIT_ID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectgifts"

@@ -26,6 +26,14 @@
 							"sepredata": {
 								"SchemaName": "dbo",
 								"TableName": "supportersourceid3"
+							},
+							"reinstallment": {
+								"SchemaName": "dbo",
+								"TableName": "installment3"
+							},
+							"regifts": {
+								"SchemaName": "dbo",
+								"TableName": "gift3"
 							}
 						}
 					},

@@ -33,6 +33,21 @@
 				},
 				{
 					"name": "selecttabeentries"
+				},
+				{
+					"name": "selectattributetype"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "select2"
 				}
 			],
 			"scriptLines": [
@@ -47,7 +62,7 @@
 				"          COMMENTS as string,",
 				"          SEQUENCE as short,",
 				"          TABLEENTRIESID as integer,",
-				"          ATTRIBUTEDATE as timestamp,",
+				"          ATTRIBUTEDATE as date,",
 				"          PARENTID as integer,",
 				"          IMPORTID as string,",
 				"          ConstitID as integer",
@@ -121,7 +136,42 @@
 				"          LONGDESCRIPTION",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selecttabeentries"
+				"     skipDuplicateMapOutputs: true) ~> selecttabeentries",
+				"reattributetypes select(mapColumn(",
+				"          ATTRIBUTETYPESID,",
+				"          DESCRIPTION",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectattributetype",
+				"selectgiftattribute, selectattributetype join(selectgiftattribute@ATTRIBUTETYPESID == selectattributetype@ATTRIBUTETYPESID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          ATTRIBUTETYPESID = selectgiftattribute@ATTRIBUTETYPESID,",
+				"          TABLEENTRIESID,",
+				"          ATTRIBUTEDATE,",
+				"          PARENTID,",
+				"          ATTRIBUTETYPESID = selectattributetype@ATTRIBUTETYPESID,",
+				"          DESCRIPTION",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1, selecttabeentries join(select1@TABLEENTRIESID == selecttabeentries@TABLEENTRIESID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2",
+				"join2 select(mapColumn(",
+				"          ATTRIBUTETYPESID,",
+				"          ATTRIBUTEDATE,",
+				"          PARENTID,",
+				"          DESCRIPTION,",
+				"          LONGDESCRIPTION",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2"
 			]
 		}
 	}

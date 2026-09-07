@@ -23,6 +23,9 @@
 			"transformations": [
 				{
 					"name": "selectsolicitor"
+				},
+				{
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -138,7 +141,8 @@
 				"          SolicitorId",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectsolicitor"
+				"     skipDuplicateMapOutputs: true) ~> selectsolicitor",
+				"rerecords filter(INACTIVE == 0 && KEY_INDICATOR == 'I' && SOLICITOR_FLAG == -1) ~> filter1"
 			]
 		}
 	}

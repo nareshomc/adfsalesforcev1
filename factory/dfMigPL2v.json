@@ -1,0 +1,15 @@
+{
+	"name": "dfMigPL2v",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "3f2a7a09-2166-4bbd-9402-7fc481aae39a",
+		"tenantId": "3c4f002a-8d6d-4ede-8372-faf47ca8473f"
+	}
+}

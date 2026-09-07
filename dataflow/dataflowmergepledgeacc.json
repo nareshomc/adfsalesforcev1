@@ -30,6 +30,12 @@
 			"transformations": [
 				{
 					"name": "select1"
+				},
+				{
+					"name": "selectgiftcodes"
+				},
+				{
+					"name": "selectgiftsolicitor"
 				}
 			],
 			"scriptLines": [
@@ -65,7 +71,14 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sfgiftcodes",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          ParentId as integer,",
+				"          SolicitorId as integer,",
+				"          RECID as integer,",
+				"          FirstName as string,",
+				"          LastName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sfgiftsolicitor",
@@ -87,7 +100,25 @@
 				"          InstallmentAmount",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"sfgiftcodes select(mapColumn(",
+				"          ATTRIBUTETYPESID,",
+				"          ATTRIBUTEDATE,",
+				"          PARENTID,",
+				"          DESCRIPTION,",
+				"          LONGDESCRIPTION",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectgiftcodes",
+				"sfgiftsolicitor select(mapColumn(",
+				"          ParentId,",
+				"          SolicitorId,",
+				"          RECID,",
+				"          FirstName,",
+				"          LastName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectgiftsolicitor"
 			]
 		}
 	}

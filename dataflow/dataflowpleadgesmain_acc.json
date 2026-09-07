@@ -87,6 +87,9 @@
 				},
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
 				}
 			],
 			"scriptLines": [
@@ -455,7 +458,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select5",
-				"select5 aggregate(groupBy(CONSTITUENT_ID,",
+				"derivedColumn2 aggregate(groupBy(CONSTITUENT_ID,",
 				"          FIRST_NAME,",
 				"          RECID,",
 				"          IMPORT_IDrec,",
@@ -482,6 +485,7 @@
 				"    'Unknown'",
 				")",
 				") ~> derivedColumn1",
+				"select5 derive(GiftType = 'Pledge') ~> derivedColumn2",
 				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

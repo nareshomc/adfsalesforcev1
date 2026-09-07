@@ -64,6 +64,9 @@
 				},
 				{
 					"name": "join2"
+				},
+				{
+					"name": "select4"
 				}
 			],
 			"scriptLines": [
@@ -379,7 +382,8 @@
 				"          Amount,",
 				"          GiftStatus = GIFT_STATUS,",
 				"          InstallmentFrequency = INSTALLMENT_FREQUENCY,",
-				"          CONSTIT_ID",
+				"          CONSTIT_ID,",
+				"          IMPORT_IDgift = IMPORT_ID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectgifts",
@@ -387,7 +391,24 @@
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join2"
+				"     broadcast: 'auto')~> join2",
+				"join2 select(mapColumn(",
+				"          CONSTITUENT_ID,",
+				"          FIRST_NAME,",
+				"          RECID,",
+				"          IMPORT_IDrec = IMPORT_ID,",
+				"          LAST_NAME,",
+				"          GRId,",
+				"          GiftDate,",
+				"          StatusDate,",
+				"          Amount,",
+				"          GiftStatus,",
+				"          InstallmentFrequency,",
+				"          CONSTIT_ID,",
+				"          IMPORT_IDgift",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select4"
 			]
 		}
 	}

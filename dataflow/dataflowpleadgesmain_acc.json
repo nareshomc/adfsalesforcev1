@@ -211,7 +211,7 @@
 				"          PledgeId as integer,",
 				"          AdjustmentId as integer,",
 				"          Amount as decimal(20,4),",
-				"          Dte as timestamp,",
+				"          Dte as date,",
 				"          Sequence as short,",
 				"          Year as short,",
 				"          Import_Id as string",

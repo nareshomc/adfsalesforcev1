@@ -36,6 +36,18 @@
 				},
 				{
 					"name": "selectgiftsolicitor"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select2"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "select3"
 				}
 			],
 			"scriptLines": [
@@ -118,7 +130,62 @@
 				"          LastName",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectgiftsolicitor"
+				"     skipDuplicateMapOutputs: true) ~> selectgiftsolicitor",
+				"select1, selectgiftcodes join(GiftID == PARENTID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          CONSTITUENT_ID,",
+				"          FIRST_NAME,",
+				"          RECID,",
+				"          IMPORT_IDrec,",
+				"          LAST_NAME,",
+				"          GRId,",
+				"          GiftDate,",
+				"          StatusDate,",
+				"          Amount,",
+				"          GiftStatus,",
+				"          InstallmentFrequency,",
+				"          CONSTIT_ID,",
+				"          IMPORT_IDgift,",
+				"          GiftID,",
+				"          InstallmentAmount,",
+				"          ATTRIBUTETYPESID,",
+				"          ATTRIBUTEDATE,",
+				"          DESCRIPTION,",
+				"          LONGDESCRIPTION",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2, selectgiftsolicitor join(GiftID == ParentId,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2",
+				"join2 select(mapColumn(",
+				"          CONSTITUENT_ID,",
+				"          FIRST_NAME,",
+				"          RECID = select2@RECID,",
+				"          IMPORT_IDrec,",
+				"          LAST_NAME,",
+				"          GRId,",
+				"          GiftDate,",
+				"          StatusDate,",
+				"          Amount,",
+				"          GiftStatus,",
+				"          InstallmentFrequency,",
+				"          IMPORT_IDgift,",
+				"          GiftID,",
+				"          InstallmentAmount,",
+				"          DESCRIPTION,",
+				"          LONGDESCRIPTION,",
+				"          FirstName,",
+				"          LastName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3"
 			]
 		}
 	}

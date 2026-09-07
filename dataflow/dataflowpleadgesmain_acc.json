@@ -16,6 +16,9 @@
 			"transformations": [
 				{
 					"name": "filter1"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -114,7 +117,16 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> rerecords",
-				"rerecords filter(ERROR_FUNCTION('INACTIVE == 0 and KEY_INDICATOR == __SINGLE_QUOTE__I__SINGLE_QUOTE__')) ~> filter1"
+				"rerecords filter(INACTIVE == 0 && KEY_INDICATOR == 'I') ~> filter1",
+				"filter1 select(mapColumn(",
+				"          CONSTITUENT_ID,",
+				"          FIRST_NAME,",
+				"          RECID = ID,",
+				"          IMPORT_ID,",
+				"          LAST_NAME",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}

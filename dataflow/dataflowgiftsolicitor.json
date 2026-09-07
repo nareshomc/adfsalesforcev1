@@ -19,7 +19,15 @@
 					"name": "regiftsolicitor"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sinksolicitor"
+				}
+			],
 			"transformations": [
 				{
 					"name": "selectsolicitor"
@@ -29,6 +37,12 @@
 				},
 				{
 					"name": "selectrecords"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -152,7 +166,30 @@
 				"          LastName = LAST_NAME",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectrecords"
+				"     skipDuplicateMapOutputs: true) ~> selectrecords",
+				"selectsolicitor, selectrecords join(SolicitorId == RECID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          ParentId,",
+				"          SolicitorId,",
+				"          RECID,",
+				"          FirstName,",
+				"          LastName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinksolicitor"
 			]
 		}
 	}

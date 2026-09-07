@@ -56,6 +56,9 @@
 				},
 				{
 					"name": "select2"
+				},
+				{
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -131,7 +134,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> reattributetypes",
-				"regiftattributes select(mapColumn(",
+				"filter1 select(mapColumn(",
 				"          ATTRIBUTETYPESID,",
 				"          TABLEENTRIESID,",
 				"          ATTRIBUTEDATE,",
@@ -180,6 +183,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
+				"regiftattributes filter(",
+				"in ([838,908,909,910,911,912,913,914,1039,1040,1041,1042,1043,1044,1045], ATTRIBUTETYPESID)) ~> filter1",
 				"select2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

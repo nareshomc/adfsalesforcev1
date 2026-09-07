@@ -181,8 +181,8 @@
 				"          InstallmentAmount,",
 				"          DESCRIPTION,",
 				"          LONGDESCRIPTION,",
-				"          FirstName,",
-				"          LastName",
+				"          FirstNamesoli = FirstName,",
+				"          LastNamesoli = LastName",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3"

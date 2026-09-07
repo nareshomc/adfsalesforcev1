@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflowpleadgesmain_acc",
+						"referenceName": "dataflowpleadgesmain_org",
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"rerecords": {

@@ -389,7 +389,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectreinstallment",
-				"regifts filter(! isNull(DATE_1ST_PAY)) ~> filter3",
+				"regifts filter(! isNull(DATE_1ST_PAY) && TYPE == 8) ~> filter3",
 				"filter3 select(mapColumn(",
 				"          GiftDate = DTE,",
 				"          StatusDate = POST_DATE,",

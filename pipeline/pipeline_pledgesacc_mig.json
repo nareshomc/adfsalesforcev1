@@ -119,7 +119,21 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "dataflowgiftsolicitor",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"rerecords": {
+								"SchemaName": "dbo",
+								"TableName": "records3"
+							},
+							"regiftsolicitor": {
+								"SchemaName": "dbo",
+								"TableName": "GiftSolicitor3"
+							},
+							"sinksolicitor": {
+								"SchemaName": "stg",
+								"TableName": "sf_giftsolicitor"
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,

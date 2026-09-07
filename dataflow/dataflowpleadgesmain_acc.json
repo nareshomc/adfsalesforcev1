@@ -61,6 +61,9 @@
 				},
 				{
 					"name": "selectgifts"
+				},
+				{
+					"name": "join2"
 				}
 			],
 			"scriptLines": [
@@ -379,7 +382,12 @@
 				"          CONSTIT_ID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectgifts"
+				"     skipDuplicateMapOutputs: true) ~> selectgifts",
+				"select2, selectgifts join(RECID == CONSTIT_ID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2"
 			]
 		}
 	}

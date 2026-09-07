@@ -83,9 +83,6 @@
 					"name": "select5"
 				},
 				{
-					"name": "aggregate1"
-				},
-				{
 					"name": "derivedColumn1"
 				},
 				{
@@ -454,19 +451,6 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select5",
-				"derivedColumn2 aggregate(groupBy(CONSTITUENT_ID,",
-				"          OrgName,",
-				"          RECID,",
-				"          IMPORT_IDrec,",
-				"          GRId,",
-				"          GiftDate,",
-				"          StatusDate,",
-				"          GiftStatus,",
-				"          InstallmentFrequency,",
-				"          IMPORT_IDgift,",
-				"          GiftType),",
-				"     Amount = first(Amount),",
-				"          InstallmentAmount = first(InstallmentAmount)) ~> aggregate1",
 				"filter3 derive(InstallmentFrequency = case(",
 				"    INSTALLMENT_FREQUENCY == 1, 'Semi-Annually',",
 				"    INSTALLMENT_FREQUENCY == 4, 'Annually',",
@@ -480,7 +464,7 @@
 				"    'Unknown'",
 				")) ~> derivedColumn1",
 				"select5 derive(GiftType = 'Pledge') ~> derivedColumn2",
-				"aggregate1 sink(allowSchemaDrift: true,",
+				"derivedColumn2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

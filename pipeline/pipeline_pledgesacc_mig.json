@@ -145,6 +145,8 @@
 			{
 				"name": "Dataflowmergepledge",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowgiftsolicitor",

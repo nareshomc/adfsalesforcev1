@@ -26,6 +26,9 @@
 				},
 				{
 					"name": "filter1"
+				},
+				{
+					"name": "selectrecords"
 				}
 			],
 			"scriptLines": [
@@ -142,7 +145,14 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectsolicitor",
-				"rerecords filter(INACTIVE == 0 && KEY_INDICATOR == 'I' && SOLICITOR_FLAG == -1) ~> filter1"
+				"rerecords filter(INACTIVE == 0 && KEY_INDICATOR == 'I' && SOLICITOR_FLAG == -1) ~> filter1",
+				"filter1 select(mapColumn(",
+				"          RECID = ID,",
+				"          FirstName = FIRST_NAME,",
+				"          LastName = LAST_NAME",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectrecords"
 			]
 		}
 	}

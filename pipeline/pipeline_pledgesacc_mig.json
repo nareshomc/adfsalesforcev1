@@ -68,6 +68,28 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflowgiftcodes",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"regiftattributes": {
+								"SchemaName": "dbo",
+								"TableName": "giftattributes3"
+							},
+							"retableentries": {
+								"SchemaName": "dbo",
+								"TableName": "tableentries3"
+							},
+							"reattributetypes": {
+								"SchemaName": "dbo",
+								"TableName": "attributetypes3"
+							},
+							"giftcodes": {
+								"SchemaName": "stg",
+								"TableName": "sf_giftcodes"
+							}
+						}
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"

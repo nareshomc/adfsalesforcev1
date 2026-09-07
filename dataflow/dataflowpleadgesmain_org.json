@@ -359,7 +359,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> regifts",
-				"rerecords filter(INACTIVE == 0 && KEY_INDICATOR == 'I') ~> filter1",
+				"rerecords filter(INACTIVE == 0 && KEY_INDICATOR == 'O') ~> filter1",
 				"filter1 select(mapColumn(",
 				"          CONSTITUENT_ID,",
 				"          FIRST_NAME,",

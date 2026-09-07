@@ -166,7 +166,25 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "dataflowmergepledgeacc",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"sfpledgeacc": {
+								"SchemaName": "stg",
+								"TableName": "sf_pledgeacc"
+							},
+							"sfgiftcodes": {
+								"SchemaName": "stg",
+								"TableName": "sf_giftcodes"
+							},
+							"sfgiftsolicitor": {
+								"SchemaName": "stg",
+								"TableName": "sf_giftsolicitor"
+							},
+							"sinkpledgemerge": {
+								"SchemaName": "stg",
+								"TableName": "sf_pledgemergeacc"
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,

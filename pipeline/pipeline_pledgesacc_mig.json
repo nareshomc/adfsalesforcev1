@@ -34,9 +34,40 @@
 							"regifts": {
 								"SchemaName": "dbo",
 								"TableName": "gift3"
+							},
+							"pledgerecords": {
+								"SchemaName": "stg",
+								"TableName": "sf_pledgeacc"
 							}
 						}
 					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Dataflowgiftcodes",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "Dataflowpleadgesmain",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"

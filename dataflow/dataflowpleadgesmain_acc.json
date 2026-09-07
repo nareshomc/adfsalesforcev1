@@ -33,7 +33,15 @@
 					"name": "regifts"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "pledgerecords"
+				}
+			],
 			"transformations": [
 				{
 					"name": "filter1"
@@ -440,7 +448,17 @@
 				"          InstallmentAmount",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select5"
+				"     skipDuplicateMapOutputs: true) ~> select5",
+				"select5 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> pledgerecords"
 			]
 		}
 	}

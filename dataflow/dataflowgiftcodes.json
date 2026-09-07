@@ -1,0 +1,128 @@
+{
+	"name": "dataflowgiftcodes",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_redb",
+						"type": "DatasetReference"
+					},
+					"name": "regiftattributes"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_redb",
+						"type": "DatasetReference"
+					},
+					"name": "retableentries"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_redb",
+						"type": "DatasetReference"
+					},
+					"name": "reattributetypes"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "selectgiftattribute"
+				},
+				{
+					"name": "selecttabeentries"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ATTRIBUTESID as integer,",
+				"          ATTRIBUTETYPESID as integer,",
+				"          TEXT as string,",
+				"          NUM as integer,",
+				"          DATETIME as timestamp,",
+				"          CURRENCY as decimal(19,4),",
+				"          BOOLEAN as short,",
+				"          COMMENTS as string,",
+				"          SEQUENCE as short,",
+				"          TABLEENTRIESID as integer,",
+				"          ATTRIBUTEDATE as timestamp,",
+				"          PARENTID as integer,",
+				"          IMPORTID as string,",
+				"          ConstitID as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> regiftattributes",
+				"source(output(",
+				"          TABLEENTRIESID as integer,",
+				"          ACTIVE as short,",
+				"          LONGDESCRIPTION as string,",
+				"          SHORTDESCRIPTION as string,",
+				"          SYSTEMENTRY as short,",
+				"          PHONETYPE as short,",
+				"          PHONEFORMAT as short,",
+				"          SEQUENCE as integer,",
+				"          CODETABLESID as integer,",
+				"          DATEADDED as timestamp,",
+				"          DATECHANGED as timestamp,",
+				"          ADDEDBYID as integer,",
+				"          LASTCHANGEDBYID as integer,",
+				"          NUMERICVALUE as decimal(20,4),",
+				"          AWARDAMOUNT as integer,",
+				"          AWARDAMTUNITS as short,",
+				"          MerchantNumber as string,",
+				"          ADDED_BY_ID as integer,",
+				"          LAST_CHANGED_BY_ID as integer,",
+				"          UKSPECIFIC as short,",
+				"          MEMSPECIFIC as short,",
+				"          TableNumber as integer,",
+				"          RatingsDataType as short,",
+				"          PHONETYPENOTSHAREABLE as short,",
+				"          INTEGRATION_ID as integer,",
+				"          INTEGRATION_DATE_LAST_CHANGED as timestamp,",
+				"          PGSpecific as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> retableentries",
+				"source(output(",
+				"          ATTRIBUTETYPESID as integer,",
+				"          RECORDTYPE as short,",
+				"          DESCRIPTION as string,",
+				"          TYPEOFDATA as short,",
+				"          CODETABLESID as integer,",
+				"          REQUIRED as short,",
+				"          IMPORTID as string,",
+				"          SystemMask as integer,",
+				"          MUSTBEUNIQUE as short,",
+				"          SEQUENCE as integer,",
+				"          PRODUCTFLAG as integer,",
+				"          COUNTRYMASK as integer,",
+				"          ACTIVE as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> reattributetypes",
+				"regiftattributes select(mapColumn(",
+				"          ATTRIBUTETYPESID,",
+				"          TABLEENTRIESID,",
+				"          ATTRIBUTEDATE,",
+				"          PARENTID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectgiftattribute",
+				"retableentries select(mapColumn(",
+				"          TABLEENTRIESID,",
+				"          LONGDESCRIPTION",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selecttabeentries"
+			]
+		}
+	}
+}

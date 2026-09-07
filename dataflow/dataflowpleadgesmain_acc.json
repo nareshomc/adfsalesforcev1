@@ -84,6 +84,9 @@
 				},
 				{
 					"name": "aggregate1"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -393,7 +396,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectreinstallment",
 				"regifts filter(! isNull(DATE_1ST_PAY) && TYPE == 8) ~> filter3",
-				"filter3 select(mapColumn(",
+				"derivedColumn1 select(mapColumn(",
 				"          GiftDate = DTE,",
 				"          StatusDate = POST_DATE,",
 				"          Amount,",
@@ -465,6 +468,20 @@
 				"          IMPORT_IDgift),",
 				"     Amount = first(Amount),",
 				"          InstallmentAmount = first(InstallmentAmount)) ~> aggregate1",
+				"filter3 derive(InstallmentFrequency = case(",
+				"    INSTALLMENT_FREQUENCY == 1, 'Semi-Annually',",
+				"    INSTALLMENT_FREQUENCY == 4, 'Annually',",
+				"    INSTALLMENT_FREQUENCY == 5, 'Monthly',",
+				"    'Unknown'",
+				")",
+				",",
+				"          GiftStatus = case(",
+				"    GIFT_STATUS == 1, 'Active',",
+				"    GIFT_STATUS == 4, 'Completed',",
+				"    GIFT_STATUS == 5, 'Cancelled',",
+				"    'Unknown'",
+				")",
+				") ~> derivedColumn1",
 				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

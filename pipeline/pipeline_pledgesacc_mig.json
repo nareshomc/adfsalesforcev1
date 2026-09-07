@@ -110,6 +110,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflowgiftsolicitor",
+						"type": "DataFlowReference"
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"

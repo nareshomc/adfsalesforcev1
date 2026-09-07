@@ -54,7 +54,7 @@
 					"name": "select2"
 				},
 				{
-					"name": "select3"
+					"name": "selectreinstallment"
 				},
 				{
 					"name": "filter3"
@@ -67,6 +67,12 @@
 				},
 				{
 					"name": "select4"
+				},
+				{
+					"name": "join3"
+				},
+				{
+					"name": "select5"
 				}
 			],
 			"scriptLines": [
@@ -374,7 +380,7 @@
 				"          InstallmentAmount = Amount",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select3",
+				"     skipDuplicateMapOutputs: true) ~> selectreinstallment",
 				"regifts filter(! isNull(DATE_1ST_PAY)) ~> filter3",
 				"filter3 select(mapColumn(",
 				"          GiftDate = DTE,",
@@ -383,7 +389,8 @@
 				"          GiftStatus = GIFT_STATUS,",
 				"          InstallmentFrequency = INSTALLMENT_FREQUENCY,",
 				"          CONSTIT_ID,",
-				"          IMPORT_IDgift = IMPORT_ID",
+				"          IMPORT_IDgift = IMPORT_ID,",
+				"          GiftID = ID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectgifts",
@@ -405,10 +412,35 @@
 				"          GiftStatus,",
 				"          InstallmentFrequency,",
 				"          CONSTIT_ID,",
-				"          IMPORT_IDgift",
+				"          IMPORT_IDgift,",
+				"          GiftID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select4"
+				"     skipDuplicateMapOutputs: true) ~> select4",
+				"select4, selectreinstallment join(GiftID == PledgeId,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join3",
+				"join3 select(mapColumn(",
+				"          CONSTITUENT_ID,",
+				"          FIRST_NAME,",
+				"          RECID,",
+				"          IMPORT_IDrec,",
+				"          LAST_NAME,",
+				"          GRId,",
+				"          GiftDate,",
+				"          StatusDate,",
+				"          Amount,",
+				"          GiftStatus,",
+				"          InstallmentFrequency,",
+				"          CONSTIT_ID,",
+				"          IMPORT_IDgift,",
+				"          GiftID,",
+				"          InstallmentAmount",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select5"
 			]
 		}
 	}

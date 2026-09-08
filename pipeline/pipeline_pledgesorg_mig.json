@@ -182,7 +182,7 @@
 							},
 							"sinkpledgemerge": {
 								"SchemaName": "stg",
-								"TableName": "sf_pledgemergeacc"
+								"TableName": "sf_pledgemergeorg"
 							}
 						}
 					},

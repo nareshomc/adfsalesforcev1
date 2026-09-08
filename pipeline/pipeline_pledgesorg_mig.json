@@ -176,6 +176,10 @@
 								"SchemaName": "stg",
 								"TableName": "sf_pledgeacc"
 							},
+							"salesforceorg": {
+								"SchemaName": "stg",
+								"TableName": "sf_orgrecordids"
+							},
 							"sinkpledgemerge": {
 								"SchemaName": "stg",
 								"TableName": "sf_pledgemergeacc"

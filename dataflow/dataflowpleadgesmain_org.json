@@ -90,6 +90,9 @@
 				},
 				{
 					"name": "select6"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -495,7 +498,16 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select6",
-				"select6 sink(allowSchemaDrift: true,",
+				"select6 aggregate(groupBy({} = ERROR_FUNCTION(''),",
+				"          {} = ERROR_FUNCTION(''),",
+				"          {} = ERROR_FUNCTION(''),",
+				"          {} = ERROR_FUNCTION(''),",
+				"          {} = ERROR_FUNCTION(''),",
+				"          {} = ERROR_FUNCTION(''),",
+				"          {} = ERROR_FUNCTION('')),",
+				"     InstallmentDate = first(InstallmentDate),",
+				"          InstallmentAmount = first(InstallmentAmount)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

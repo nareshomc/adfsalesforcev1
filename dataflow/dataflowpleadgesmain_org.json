@@ -87,6 +87,9 @@
 				},
 				{
 					"name": "derivedColumn2"
+				},
+				{
+					"name": "select6"
 				}
 			],
 			"scriptLines": [
@@ -470,7 +473,29 @@
 				")) ~> derivedColumn1",
 				"select5 derive(GiftType = 'Pledge',",
 				"          Name = 'Historic Pledge') ~> derivedColumn2",
-				"derivedColumn2 sink(allowSchemaDrift: true,",
+				"derivedColumn2 select(mapColumn(",
+				"          CONSTITUENT_ID,",
+				"          OrgName,",
+				"          RECID,",
+				"          IMPORT_IDrec,",
+				"          GRId,",
+				"          GiftDate,",
+				"          StatusDate,",
+				"          Amount,",
+				"          GiftStatus,",
+				"          InstallmentFrequency,",
+				"          CONSTIT_ID,",
+				"          IMPORT_IDgift,",
+				"          GiftID,",
+				"          InstallmentAmount,",
+				"          InstallmentDate,",
+				"          Reference,",
+				"          GiftType,",
+				"          Name",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select6",
+				"select6 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

@@ -119,8 +119,6 @@
 				"          InstallmentAmount,",
 				"          InstallmentDate,",
 				"          GiftType,",
-				"          GRID = selectsalesforceid@GRID,",
-				"          RECID = selectsalesforceid@RECID,",
 				"          Organisationname,",
 				"          SalesforceIDorg",
 				"     ),",

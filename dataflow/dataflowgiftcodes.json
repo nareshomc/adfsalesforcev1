@@ -59,6 +59,9 @@
 				},
 				{
 					"name": "filter1"
+				},
+				{
+					"name": "filter2"
 				}
 			],
 			"scriptLines": [
@@ -148,7 +151,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selecttabeentries",
-				"reattributetypes select(mapColumn(",
+				"filter2 select(mapColumn(",
 				"          ATTRIBUTETYPESID,",
 				"          DESCRIPTION",
 				"     ),",
@@ -183,8 +186,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
-				"regiftattributes filter(",
-				"in ([838,908,909,910,911,912,913,914,1039,1040,1041,1042,1043,1044,1045], ATTRIBUTETYPESID)) ~> filter1",
+				"regiftattributes filter(in ([838,908,909,910,911,912,913,914,1039,1040,1041,1042,1043,1044,1045], ATTRIBUTETYPESID)) ~> filter1",
+				"reattributetypes filter(in ([838,908,909,910,911,912,913,914,1039,1040,1041,1042,1043,1044,1045], ATTRIBUTETYPESID)) ~> filter2",
 				"select2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

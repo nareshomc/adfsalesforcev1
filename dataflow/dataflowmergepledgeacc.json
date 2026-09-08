@@ -10,20 +10,6 @@
 						"type": "DatasetReference"
 					},
 					"name": "sfpledgeacc"
-				},
-				{
-					"dataset": {
-						"referenceName": "ds_migrationdb",
-						"type": "DatasetReference"
-					},
-					"name": "sfgiftcodes"
-				},
-				{
-					"dataset": {
-						"referenceName": "ds_migrationdb",
-						"type": "DatasetReference"
-					},
-					"name": "sfgiftsolicitor"
 				}
 			],
 			"sinks": [
@@ -40,22 +26,10 @@
 					"name": "select1"
 				},
 				{
-					"name": "selectgiftcodes"
-				},
-				{
-					"name": "selectgiftsolicitor"
-				},
-				{
 					"name": "join1"
 				},
 				{
 					"name": "select2"
-				},
-				{
-					"name": "join2"
-				},
-				{
-					"name": "select3"
 				}
 			],
 			"scriptLines": [
@@ -80,28 +54,6 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sfpledgeacc",
-				"source(output(",
-				"          ATTRIBUTETYPESID as integer,",
-				"          ATTRIBUTEDATE as date,",
-				"          PARENTID as integer,",
-				"          DESCRIPTION as string,",
-				"          LONGDESCRIPTION as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> sfgiftcodes",
-				"source(output(",
-				"          ParentId as integer,",
-				"          SolicitorId as integer,",
-				"          RECID as integer,",
-				"          FirstName as string,",
-				"          LastName as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> sfgiftsolicitor",
 				"sfpledgeacc select(mapColumn(",
 				"          CONSTITUENT_ID,",
 				"          FIRST_NAME,",
@@ -121,25 +73,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"sfgiftcodes select(mapColumn(",
-				"          ATTRIBUTETYPESID,",
-				"          ATTRIBUTEDATE,",
-				"          PARENTID,",
-				"          DESCRIPTION,",
-				"          LONGDESCRIPTION",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectgiftcodes",
-				"sfgiftsolicitor select(mapColumn(",
-				"          ParentId,",
-				"          SolicitorId,",
-				"          RECID,",
-				"          FirstName,",
-				"          LastName",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectgiftsolicitor",
-				"select1, selectgiftcodes join(GiftID == PARENTID,",
+				"select1 join(GiftID == PARENTID,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
@@ -167,34 +101,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
-				"select2, selectgiftsolicitor join(GiftID == ParentId,",
-				"     joinType:'left',",
-				"     matchType:'exact',",
-				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join2",
-				"join2 select(mapColumn(",
-				"          CONSTITUENT_ID,",
-				"          FIRST_NAME,",
-				"          RECID = select2@RECID,",
-				"          IMPORT_IDrec,",
-				"          LAST_NAME,",
-				"          GRId,",
-				"          GiftDate,",
-				"          StatusDate,",
-				"          Amount,",
-				"          GiftStatus,",
-				"          InstallmentFrequency,",
-				"          IMPORT_IDgift,",
-				"          GiftID,",
-				"          InstallmentAmount,",
-				"          DESCRIPTION,",
-				"          LONGDESCRIPTION,",
-				"          FirstNamesoli = FirstName,",
-				"          LastNamesoli = LastName",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select3",
-				"select3 sink(allowSchemaDrift: true,",
+				"select2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

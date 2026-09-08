@@ -37,6 +37,9 @@
 				},
 				{
 					"name": "select2"
+				},
+				{
+					"name": "selectsalesforceid"
 				}
 			],
 			"scriptLines": [
@@ -92,8 +95,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1, salesforceorg join(GiftID == PARENTID,",
-				"     joinType:'left',",
+				"select1, selectsalesforceid join(select1@GRId == selectsalesforceid@GRID,",
+				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join1",
@@ -120,6 +123,14 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
+				"salesforceorg select(mapColumn(",
+				"          GRID,",
+				"          RECID,",
+				"          Organisationname,",
+				"          SalesforceIDorg = SalesforceID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectsalesforceid",
 				"select2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

@@ -149,11 +149,9 @@
 			{
 				"name": "Dataflowmergepledge",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
-						"activity": "Dataflowgiftsolicitor",
+						"activity": "Copyorgaccount",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -172,17 +170,9 @@
 						"referenceName": "dataflowmergepledgeacc",
 						"type": "DataFlowReference",
 						"datasetParameters": {
-							"sfpledgeacc": {
+							"sfpledge": {
 								"SchemaName": "stg",
 								"TableName": "sf_pledgeacc"
-							},
-							"sfgiftcodes": {
-								"SchemaName": "stg",
-								"TableName": "sf_giftcodes"
-							},
-							"sfgiftsolicitor": {
-								"SchemaName": "stg",
-								"TableName": "sf_giftsolicitor"
 							},
 							"sinkpledgemerge": {
 								"SchemaName": "stg",
@@ -200,7 +190,16 @@
 			{
 				"name": "Copyorgaccount",
 				"type": "Copy",
-				"dependsOn": [],
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Dataflowgiftsolicitor",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,

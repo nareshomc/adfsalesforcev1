@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sfpledgeacc"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "salesforceorg"
 				}
 			],
 			"sinks": [
@@ -54,6 +61,10 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sfpledgeacc",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> salesforceorg",
 				"sfpledgeacc select(mapColumn(",
 				"          CONSTITUENT_ID,",
 				"          FIRST_NAME,",
@@ -73,7 +84,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 join(GiftID == PARENTID,",
+				"select1, salesforceorg join(GiftID == PARENTID,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",

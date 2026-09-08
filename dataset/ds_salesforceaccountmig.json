@@ -7,6 +7,9 @@
 		},
 		"annotations": [],
 		"type": "SalesforceServiceCloudV2Object",
-		"schema": []
+		"schema": [],
+		"typeProperties": {
+			"objectApiName": "Account"
+		}
 	}
 }

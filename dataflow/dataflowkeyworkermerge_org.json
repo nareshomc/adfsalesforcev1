@@ -17,6 +17,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sfgiftcodes"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "Giftcodesalesforcerecords"
 				}
 			],
 			"sinks": [
@@ -83,6 +90,10 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sfgiftcodes",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Giftcodesalesforcerecords",
 				"sfgcscheduleorg select(mapColumn(",
 				"          RECID,",
 				"          OrgName,",

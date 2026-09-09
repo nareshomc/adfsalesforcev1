@@ -387,7 +387,8 @@
 									"physicalType": "nvarchar"
 								},
 								"sink": {
-									"name": "ScheduleTypest",
+									"name": "ScheduleType",
+									"type": "String",
 									"physicalType": "picklist"
 								}
 							}

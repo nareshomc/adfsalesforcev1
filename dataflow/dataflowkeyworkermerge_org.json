@@ -71,6 +71,9 @@
 				},
 				{
 					"name": "window1"
+				},
+				{
+					"name": "select6"
 				}
 			],
 			"scriptLines": [
@@ -244,7 +247,14 @@
 				"     skipDuplicateMapOutputs: true) ~> select5",
 				"select5 window(over(SalesforceGCid),",
 				"     AllocatedPercentage = round(100.0 / count(SalesforceGCid), 2)) ~> window1",
-				"window1 sink(allowSchemaDrift: true,",
+				"window1 select(mapColumn(",
+				"          SalesforceGCid,",
+				"          Salesforceidgift,",
+				"          AllocatedPercentage",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select6",
+				"select6 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

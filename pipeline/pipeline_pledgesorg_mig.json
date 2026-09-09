@@ -568,7 +568,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select *\nfrom stg.sf_gcscheduleorg\nwhere SalesforceGCid = '6gcQz0000002hFQIAY'",
+						"sqlReaderQuery": "\nselect SalesforceGCid, InstallmentAmount,installmentdate, 'Closed' as Status\nfrom stg.sf_gcscheduleorg\nwhere SalesforceGCid = '6gcQz0000002hFQIAY'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -581,18 +581,6 @@
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
-							{
-								"source": {
-									"name": "InstallmentDate",
-									"type": "Date",
-									"physicalType": "date"
-								},
-								"sink": {
-									"name": "TransactionDate",
-									"type": "DateTime",
-									"physicalType": "date"
-								}
-							},
 							{
 								"source": {
 									"name": "SalesforceGCid",
@@ -614,21 +602,33 @@
 									"precision": 20
 								},
 								"sink": {
-									"name": "DonorCoverAmount",
+									"name": "TransactionAmount",
 									"type": "Decimal",
 									"physicalType": "currency"
 								}
 							},
 							{
 								"source": {
-									"name": "GiftDate",
+									"name": "installmentdate",
 									"type": "Date",
 									"physicalType": "date"
 								},
 								"sink": {
-									"name": "TransactionDueDate",
+									"name": "StartDate",
 									"type": "DateTime",
 									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Status",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "GiftCommitmentStatus",
+									"type": "String",
+									"physicalType": "picklist"
 								}
 							}
 						],

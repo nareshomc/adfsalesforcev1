@@ -457,7 +457,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SalesforceServiceCloudV2Source",
-						"query": "SELECT Id, Name, Gift_Type__c FROM GiftCommitment where Gift_Type__c = 'Pledge'",
+						"query": "\n\nSELECT Id, name, EffectiveStartDate, Gift_Type__c FROM GiftCommitment WHERE Gift_Type__c = 'Pledge'",
 						"includeDeletedObjects": false,
 						"partitionOption": "AutoDetect",
 						"preserveScaleFromSchema": false

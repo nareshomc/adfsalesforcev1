@@ -65,6 +65,12 @@
 				},
 				{
 					"name": "aggregate1"
+				},
+				{
+					"name": "select5"
+				},
+				{
+					"name": "window1"
 				}
 			],
 			"scriptLines": [
@@ -229,7 +235,16 @@
 				"select4 aggregate(groupBy(SalesforceGCid,",
 				"          Salesforceidgift),",
 				"     AllocatedPercentage = max(AllocatedPercentage)) ~> aggregate1",
-				"aggregate1 sink(allowSchemaDrift: true,",
+				"aggregate1 select(mapColumn(",
+				"          SalesforceGCid,",
+				"          Salesforceidgift,",
+				"          AllocatedPercentage",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select5",
+				"select5 window(over(SalesforceGCid),",
+				"     AllocatedPercentage = round(100.0 / count(SalesforceGCid), 2)) ~> window1",
+				"window1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

@@ -591,20 +591,6 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "InstallmentAmount",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 4,
-									"precision": 20
-								},
-								"sink": {
-									"name": "DonorCoverAmount",
-									"type": "Decimal",
-									"physicalType": "currency"
-								}
-							},
-							{
-								"source": {
 									"name": "InstallmentDate",
 									"type": "Date",
 									"physicalType": "date"
@@ -625,6 +611,20 @@
 									"name": "GiftCommitmentId",
 									"type": "String",
 									"physicalType": "reference"
+								}
+							},
+							{
+								"source": {
+									"name": "InstallmentAmount",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 4,
+									"precision": 20
+								},
+								"sink": {
+									"name": "TotalTransactionFee",
+									"type": "Decimal",
+									"physicalType": "currency"
 								}
 							}
 						],

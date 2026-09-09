@@ -502,6 +502,8 @@
 			{
 				"name": "Dataflowmergegcsforg",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copy data2",
@@ -574,6 +576,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
+						"sqlReaderQuery": "select salesforceidorg,SalesforceGCid, donorid, InstallmentAmount,installmentdate, giftdate  \nfrom stg.sf_gcscheduleorg\nwhere SalesforceGCid = '6gcQz0000002hFNIAY'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},

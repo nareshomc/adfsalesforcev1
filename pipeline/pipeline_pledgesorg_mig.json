@@ -990,6 +990,44 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Salesforceidgift",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "GiftDesignationId",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"source": {
+									"name": "SalesforceGCid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ParentRecordId",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"source": {
+									"name": "Allocatedpercentage",
+									"type": "Double",
+									"physicalType": "float"
+								},
+								"sink": {
+									"name": "AllocatedPercentage",
+									"type": "Decimal",
+									"physicalType": "percent"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,

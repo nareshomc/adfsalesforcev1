@@ -62,6 +62,9 @@
 				},
 				{
 					"name": "select4"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -223,7 +226,10 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select4",
-				"select4 sink(allowSchemaDrift: true,",
+				"select4 aggregate(groupBy(SalesforceGCid,",
+				"          Salesforceidgift),",
+				"     AllocatedPercentage = max(AllocatedPercentage)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

@@ -85,7 +85,6 @@
 				"filter1 select(mapColumn(",
 				"          RECID,",
 				"          OrgName,",
-				"          CONSTITUENT_ID,",
 				"          IMPORT_IDrec,",
 				"          GRId,",
 				"          GiftDate,",

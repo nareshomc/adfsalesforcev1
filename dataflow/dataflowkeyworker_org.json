@@ -43,6 +43,9 @@
 				},
 				{
 					"name": "select2"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -123,7 +126,14 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
-				"select2 sink(allowSchemaDrift: true,",
+				"select2 aggregate(groupBy(PersonName,",
+				"          OrgName,",
+				"          ParentId,",
+				"          SalesforceGCid,",
+				"          DonorId,",
+				"          SalesforceIDorg),",
+				"     GiftID = first(GiftID)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

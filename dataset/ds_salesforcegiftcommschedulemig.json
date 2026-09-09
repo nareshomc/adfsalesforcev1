@@ -9,7 +9,7 @@
 		"type": "SalesforceServiceCloudV2Object",
 		"schema": [],
 		"typeProperties": {
-			"objectApiName": "GiftCommitmentSchedule"
+			"objectApiName": "GiftTransaction"
 		}
 	}
 }

@@ -5,14 +5,51 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"name": "source1"
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sfpledgemergeorg"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sfgiftcommitmentsforg"
 				}
 			],
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
+				"source(output(",
+				"          RECID as integer,",
+				"          OrgName as string,",
+				"          CONSTITUENT_ID as string,",
+				"          IMPORT_IDrec as string,",
+				"          GRId as integer,",
+				"          GiftDate as date,",
+				"          StatusDate as date,",
+				"          Amount as decimal(20,4),",
+				"          GiftStatus as string,",
+				"          IMPORT_IDgift as string,",
+				"          GiftType as string,",
+				"          Name as string,",
+				"          Reference as string,",
+				"          InstallmentFrequency as string,",
+				"          ScheduleType as string,",
+				"          InstallmentDate as date,",
+				"          InstallmentAmount as decimal(20,4),",
+				"          SalesforceIDorg as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sfpledgemergeorg",
 				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> source1"
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sfgiftcommitmentsforg"
 			]
 		}
 	}

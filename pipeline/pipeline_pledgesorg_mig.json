@@ -576,7 +576,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select *\nfrom stg.sf_gcscheduleorg\nwhere SalesforceGCid = '6gcQz0000002hFNIAY'",
+						"sqlReaderQuery": "select *\nfrom stg.sf_gcscheduleorg\nwhere SalesforceGCid = '6gcQz0000002hFOIAY'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},

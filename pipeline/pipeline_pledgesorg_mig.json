@@ -537,14 +537,6 @@
 								"SchemaName": "stg",
 								"TableName": "sf_gcscheduleorg"
 							}
-						},
-						"linkedServiceParameters": {
-							"sfpledgemergeorg": {
-								"schemaLinkedService": {
-									"SchemaName": "stg",
-									"TableName": "sf_pledgemergeorg"
-								}
-							}
 						}
 					},
 					"compute": {
@@ -625,6 +617,18 @@
 									"name": "DonorCoverAmount",
 									"type": "Decimal",
 									"physicalType": "currency"
+								}
+							},
+							{
+								"source": {
+									"name": "GiftDate",
+									"type": "Date",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "TransactionDueDate",
+									"type": "DateTime",
+									"physicalType": "date"
 								}
 							}
 						],

@@ -687,6 +687,8 @@
 			{
 				"name": "Dataflowkeyworkermerge",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copygiftcommschedule",

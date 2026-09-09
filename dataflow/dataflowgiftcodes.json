@@ -187,7 +187,7 @@
 				"          ATTRIBUTETYPESID,",
 				"          ATTRIBUTEDATE,",
 				"          PARENTID,",
-				"          DESCRIPTION,",
+				"          RcodeType = DESCRIPTION,",
 				"          RCode,",
 				"          GiftDesignationCode",
 				"     ),",

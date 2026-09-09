@@ -779,6 +779,10 @@
 								"SchemaName": "stg",
 								"TableName": "sf_giftcodes"
 							},
+							"Giftcodesalesforcerecords": {
+								"SchemaName": "stg",
+								"TableName": "Giftcode_salesforcerecords"
+							},
 							"resfgiftcodesorg": {
 								"SchemaName": "stg",
 								"TableName": "resfgiftcodesorg"
@@ -842,6 +846,8 @@
 			{
 				"name": "Copy data1",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowkeyworkerorg",
@@ -924,6 +930,29 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy data2",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
 			}
 		],
 		"annotations": []

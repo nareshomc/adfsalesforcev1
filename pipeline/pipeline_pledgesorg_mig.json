@@ -867,7 +867,7 @@
 					},
 					"sink": {
 						"type": "SalesforceServiceCloudV2Sink",
-						"writeBatchSize": 100000,
+						"writeBatchSize": 100,
 						"writeBehavior": "upsert",
 						"externalIdFieldName": "Id",
 						"ignoreNullValues": false

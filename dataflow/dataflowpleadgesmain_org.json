@@ -90,6 +90,12 @@
 				},
 				{
 					"name": "select6"
+				},
+				{
+					"name": "select7"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -502,6 +508,31 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select6",
+				"derivedColumn2 select(mapColumn(",
+				"          CONSTITUENT_ID,",
+				"          OrgName,",
+				"          RECID,",
+				"          IMPORT_IDrec,",
+				"          GRId,",
+				"          GiftDate,",
+				"          StatusDate,",
+				"          Amount,",
+				"          GiftStatus,",
+				"          InstallmentFrequency,",
+				"          CONSTIT_ID,",
+				"          IMPORT_IDgift,",
+				"          GiftID,",
+				"          InstallmentAmount,",
+				"          InstallmentDate,",
+				"          Reference,",
+				"          GiftType,",
+				"          Name,",
+				"          ScheduleType",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select7",
+				"select7 aggregate(InstallmentDate = first(InstallmentDate),",
+				"          InstallmentAmount = first(InstallmentAmount)) ~> aggregate1",
 				"select6 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

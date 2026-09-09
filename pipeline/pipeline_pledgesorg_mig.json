@@ -307,12 +307,22 @@
 									"name": "giftstatus",
 									"type": "String",
 									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Status",
+									"type": "String",
+									"physicalType": "picklist"
 								}
 							},
 							{
 								"source": {
 									"name": "giftdate",
 									"type": "Date",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "EffectiveStartDate",
+									"type": "DateTime",
 									"physicalType": "date"
 								}
 							},
@@ -323,6 +333,11 @@
 									"physicalType": "decimal",
 									"scale": 4,
 									"precision": 20
+								},
+								"sink": {
+									"name": "ExpectedTotalCmtAmount",
+									"type": "Decimal",
+									"physicalType": "currency"
 								}
 							},
 							{
@@ -330,6 +345,11 @@
 									"name": "gifttype",
 									"type": "String",
 									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Gift_Type__c",
+									"type": "String",
+									"physicalType": "picklist"
 								}
 							},
 							{
@@ -337,6 +357,11 @@
 									"name": "concatenatednotes",
 									"type": "String",
 									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Associated_Documentation__c",
+									"type": "String",
+									"physicalType": "textarea"
 								}
 							},
 							{
@@ -344,6 +369,11 @@
 									"name": "Name",
 									"type": "String",
 									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Name",
+									"type": "String",
+									"physicalType": "string"
 								}
 							},
 							{
@@ -351,6 +381,10 @@
 									"name": "ScheduleType",
 									"type": "String",
 									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ScheduleTypest",
+									"physicalType": "picklist"
 								}
 							}
 						],

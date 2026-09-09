@@ -666,18 +666,6 @@
 									"type": "String",
 									"physicalType": "picklist"
 								}
-							},
-							{
-								"source": {
-									"name": "Status",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "GiftCommitmentStatus",
-									"type": "String",
-									"physicalType": "picklist"
-								}
 							}
 						],
 						"typeConversion": true,

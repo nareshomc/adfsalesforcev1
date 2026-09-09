@@ -861,7 +861,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT distinct \n    SalesforceGCid, \n   \n    'Historic Pledge' AS PersonNameCombined\nFROM stg.sf_keyworkersog \nGROUP BY SalesforceGCid",
+						"sqlReaderQuery": "SELECT distinct \n    SalesforceGCid, \n     STRING_AGG(PersonName, ';') AS PersonNameCombined\nFROM stg.sf_keyworkersog \nGROUP BY SalesforceGCid",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -895,9 +895,9 @@
 									"physicalType": "nvarchar"
 								},
 								"sink": {
-									"name": "Name",
+									"name": "Key_Worker__c",
 									"type": "String",
-									"physicalType": "string"
+									"physicalType": "multipicklist"
 								}
 							}
 						],

@@ -121,7 +121,7 @@
 				"select1, selectsfgccommorg join(SalesforceIDorg == DonorId",
 				"     && GiftDate == EffectiveStartDate",
 				"     && GiftStatus == Status",
-				"     && InstallmentAmount == ExpectedTotalCmtAmount,",
+				"     && Amount == ExpectedTotalCmtAmount,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",

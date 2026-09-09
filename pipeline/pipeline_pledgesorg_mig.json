@@ -978,11 +978,24 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select * from  stg.sf_resfgiftcodesorg",
+						"sqlReaderQuery": " select distinct SalesforceGCid,  Salesforceidgift, Allocatedpercentage \n from stg.sf_resfgiftcodesorg",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "SalesforceServiceCloudV2Sink",
+						"writeBatchSize": 100000,
+						"writeBehavior": "insert"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
@@ -990,8 +1003,14 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "stg",
-							"TableName": "resfgiftcodesorg"
+							"TableName": "sf_resfgiftcodesorg"
 						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_salesforcegiftdefaultdesigorgmig",
+						"type": "DatasetReference"
 					}
 				]
 			}

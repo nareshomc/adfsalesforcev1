@@ -263,19 +263,7 @@
 									"physicalType": "string"
 								},
 								"sink": {
-									"name": "Parentorg",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "RecordTypeId",
-									"type": "String",
-									"physicalType": "reference"
-								},
-								"sink": {
-									"name": "RecordTypeID",
+									"name": "OrgName",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
@@ -287,7 +275,7 @@
 									"physicalType": "id"
 								},
 								"sink": {
-									"name": "ContactID",
+									"name": "SalesforceID",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}

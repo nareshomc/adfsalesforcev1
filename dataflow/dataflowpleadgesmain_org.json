@@ -90,9 +90,6 @@
 				},
 				{
 					"name": "select6"
-				},
-				{
-					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -505,24 +502,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select6",
-				"select6 aggregate(groupBy(RECID,",
-				"          OrgName,",
-				"          CONSTITUENT_ID,",
-				"          IMPORT_IDrec,",
-				"          GRId,",
-				"          GiftDate,",
-				"          StatusDate,",
-				"          Amount,",
-				"          GiftStatus,",
-				"          IMPORT_IDgift,",
-				"          GiftType,",
-				"          Name,",
-				"          Reference,",
-				"          InstallmentFrequency,",
-				"          ScheduleType),",
-				"     InstallmentDate = first(InstallmentDate),",
-				"          InstallmentAmount = first(InstallmentAmount)) ~> aggregate1",
-				"aggregate1 sink(allowSchemaDrift: true,",
+				"select6 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

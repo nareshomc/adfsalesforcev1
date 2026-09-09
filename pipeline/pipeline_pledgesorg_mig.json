@@ -38,6 +38,10 @@
 							"pledgerecords": {
 								"SchemaName": "stg",
 								"TableName": "sf_pledgeorg"
+							},
+							"sfpledgeorgagg": {
+								"SchemaName": "stg",
+								"TableName": "sf_pledgeorgagg"
 							}
 						}
 					},

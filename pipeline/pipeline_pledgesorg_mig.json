@@ -823,6 +823,10 @@
 							"sfpledgemergeorg": {
 								"SchemaName": "stg",
 								"TableName": "sf_gcscheduleorg"
+							},
+							"sinkkeyworkers": {
+								"SchemaName": "stg",
+								"TableName": "sf_keyworkersog"
 							}
 						}
 					},

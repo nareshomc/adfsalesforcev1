@@ -262,6 +262,8 @@
 			{
 				"name": "Copy data1",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowmergepledge",
@@ -281,7 +283,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "\nselect distinct salesforceIDorg,\ngiftstatus, giftdate,  amount, gifttype, Reference as concatenatednotes, Name,\nScheduleType\nfrom  stg.sf_pledgemergeorg where salesforceIDorg = '001Qz00000cYx2EIAS'",
+						"sqlReaderQuery": "\nSELECT Id, name, EffectiveStartDate FROM GiftCommitment WHERE Gift_Type__c = 'Pledge'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},

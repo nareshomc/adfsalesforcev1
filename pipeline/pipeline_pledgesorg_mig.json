@@ -523,9 +523,25 @@
 						"referenceName": "dataflowmergegcsf_org",
 						"type": "DataFlowReference",
 						"datasetParameters": {
+							"sfpledgemergeorg": {
+								"SchemaName": "stg",
+								"TableName": "sf_pledgemergeorg"
+							},
+							"sfgiftcommitmentsforg": {
+								"SchemaName": "stg",
+								"TableName": "sf_giftcommitmentsforg"
+							},
 							"gcscheduleordg": {
 								"SchemaName": "stg",
 								"TableName": "sf_gcscheduleorg"
+							}
+						},
+						"linkedServiceParameters": {
+							"sfpledgemergeorg": {
+								"schemaLinkedService": {
+									"SchemaName": "stg",
+									"TableName": "sf_pledgemergeorg"
+								}
 							}
 						}
 					},

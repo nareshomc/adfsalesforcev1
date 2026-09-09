@@ -260,7 +260,7 @@
 				]
 			},
 			{
-				"name": "Copy data1",
+				"name": "Copypledgemergetosf",
 				"type": "Copy",
 				"state": "Inactive",
 				"onInactiveMarkAs": "Succeeded",
@@ -426,7 +426,7 @@
 				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
-						"activity": "Copy data1",
+						"activity": "Copypledgemergetosf",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -438,7 +438,7 @@
 				}
 			},
 			{
-				"name": "Copy data2",
+				"name": "Copysfpledgemerge",
 				"type": "Copy",
 				"state": "Inactive",
 				"onInactiveMarkAs": "Succeeded",
@@ -506,7 +506,7 @@
 				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
-						"activity": "Copy data2",
+						"activity": "Copysfpledgemerge",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -547,7 +547,7 @@
 				}
 			},
 			{
-				"name": "Copy data3",
+				"name": "Copygiftcommschedule",
 				"type": "Copy",
 				"dependsOn": [
 					{

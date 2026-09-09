@@ -769,9 +769,25 @@
 						"referenceName": "dataflowkeyworkermerge_org",
 						"type": "DataFlowReference",
 						"datasetParameters": {
+							"sfgcscheduleorg": {
+								"SchemaName": "stg",
+								"TableName": "sf_gcscheduleorg"
+							},
+							"sfgiftcodes": {
+								"SchemaName": "stg",
+								"TableName": "sf_giftcodes"
+							},
 							"resfgiftcodesorg": {
 								"SchemaName": "stg",
 								"TableName": "resfgiftcodesorg"
+							}
+						},
+						"linkedServiceParameters": {
+							"sfgcscheduleorg": {
+								"schemaLinkedService": {
+									"SchemaName": "stg",
+									"TableName": "sf_gcscheduleorg"
+								}
 							}
 						}
 					},

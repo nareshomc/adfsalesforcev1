@@ -20,16 +20,72 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "select2"
+				}
+			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          ParentId as integer,",
+				"          SolicitorId as integer,",
+				"          RECID as integer,",
+				"          FirstName as string,",
+				"          LastName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sourcekeyworker",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          OrgName as string,",
+				"          RECID as integer,",
+				"          IMPORT_IDrec as string,",
+				"          GRId as integer,",
+				"          GiftDate as date,",
+				"          StatusDate as date,",
+				"          Amount as decimal(20,4),",
+				"          GiftStatus as string,",
+				"          InstallmentFrequency as string,",
+				"          CONSTIT_ID as integer,",
+				"          IMPORT_IDgift as string,",
+				"          GiftID as integer,",
+				"          InstallmentAmount as decimal(20,4),",
+				"          InstallmentDate as date,",
+				"          Reference as string,",
+				"          GiftType as string,",
+				"          Name as string,",
+				"          ScheduleType as string,",
+				"          SalesforceIDorg as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> sfpledgemergeorg"
+				"     format: 'table') ~> sfpledgemergeorg",
+				"sourcekeyworker derive(PersonName = trim(concat(iifNull(FirstName, ''), ' ', iifNull(LastName, '')))) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          ParentId,",
+				"          SolicitorId,",
+				"          RECID,",
+				"          PersonName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"sfpledgemergeorg select(mapColumn(",
+				"          OrgName,",
+				"          RECID,",
+				"          GRId,",
+				"          GiftID,",
+				"          SalesforceIDorg",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2"
 			]
 		}
 	}

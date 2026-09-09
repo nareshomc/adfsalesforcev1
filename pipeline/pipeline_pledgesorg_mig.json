@@ -219,6 +219,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SalesforceServiceCloudV2Source",
+						"query": "SELECT Id, Golden_Record_ID__c, Name, Raisers_Edge_ID__c FROM Account where Golden_Record_ID__c <> NULL",
 						"includeDeletedObjects": false,
 						"partitionOption": "AutoDetect",
 						"preserveScaleFromSchema": false

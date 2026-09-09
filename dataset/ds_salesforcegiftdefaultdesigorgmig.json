@@ -1,0 +1,15 @@
+{
+	"name": "ds_salesforcegiftdefaultdesigorgmig",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_salesforcemig",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SalesforceServiceCloudV2Object",
+		"schema": [],
+		"typeProperties": {
+			"objectApiName": "GiftDefaultDesignation"
+		}
+	}
+}

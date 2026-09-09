@@ -795,6 +795,8 @@
 			{
 				"name": "Dataflowkeyworkerorg",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowgiftcodemerge",

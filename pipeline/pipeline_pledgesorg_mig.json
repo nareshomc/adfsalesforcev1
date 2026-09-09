@@ -622,7 +622,7 @@
 									"precision": 20
 								},
 								"sink": {
-									"name": "TotalTransactionFee",
+									"name": "DonorCoverAmount",
 									"type": "Decimal",
 									"physicalType": "currency"
 								}

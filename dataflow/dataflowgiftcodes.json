@@ -65,6 +65,9 @@
 				},
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
 				}
 			],
 			"scriptLines": [
@@ -180,7 +183,7 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join2",
-				"derivedColumn1 select(mapColumn(",
+				"derivedColumn2 select(mapColumn(",
 				"          ATTRIBUTETYPESID,",
 				"          ATTRIBUTEDATE,",
 				"          PARENTID,",
@@ -360,6 +363,7 @@
 				"LONGDESCRIPTION == 'SCHOOLS SERVICE - SOUTH WEST|R51077','SCHOOLS SERVICE - SOUTH WEST | R51077',",
 				"",
 				"'')) ~> derivedColumn1",
+				"derivedColumn1 derive(GiftDesignationCode = trim(split(RCode, '|')[2])) ~> derivedColumn2",
 				"select2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

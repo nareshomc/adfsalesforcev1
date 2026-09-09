@@ -767,7 +767,13 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "dataflowkeyworkermerge_org",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"resfgiftcodesorg": {
+								"SchemaName": "stg",
+								"TableName": "resfgiftcodesorg"
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,

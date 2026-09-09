@@ -19,7 +19,15 @@
 					"name": "sfgiftcodes"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "resfgiftcodesorg"
+				}
+			],
 			"transformations": [
 				{
 					"name": "select1"
@@ -140,7 +148,16 @@
 				"          GiftDesignationCode",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select2"
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> resfgiftcodesorg"
 			]
 		}
 	}

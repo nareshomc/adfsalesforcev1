@@ -871,6 +871,32 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "SalesforceGCid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "String",
+									"physicalType": "id"
+								}
+							},
+							{
+								"source": {
+									"name": "PersonName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Key_Worker__c",
+									"type": "String",
+									"physicalType": "multipicklist"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,

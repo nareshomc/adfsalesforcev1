@@ -521,7 +521,13 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "dataflowmergegcsf_org",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"gcscheduleordg": {
+								"SchemaName": "stg",
+								"TableName": "sf_gcscheduleorg"
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,

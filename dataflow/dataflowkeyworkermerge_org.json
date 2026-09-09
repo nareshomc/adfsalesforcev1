@@ -56,6 +56,12 @@
 				},
 				{
 					"name": "select3"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select4"
 				}
 			],
 			"scriptLines": [
@@ -209,7 +215,15 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3",
-				"select3 sink(allowSchemaDrift: true,",
+				"select3 derive(AllocatedPercentage = 100) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          SalesforceGCid,",
+				"          Salesforceidgift,",
+				"          AllocatedPercentage",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select4",
+				"select4 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

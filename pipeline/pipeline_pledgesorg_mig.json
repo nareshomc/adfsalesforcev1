@@ -746,7 +746,7 @@
 				]
 			},
 			{
-				"name": "Dataflowkeyworkermerge",
+				"name": "Dataflowgiftcodemerge",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -780,14 +780,6 @@
 							"resfgiftcodesorg": {
 								"SchemaName": "stg",
 								"TableName": "resfgiftcodesorg"
-							}
-						},
-						"linkedServiceParameters": {
-							"sfgcscheduleorg": {
-								"schemaLinkedService": {
-									"SchemaName": "stg",
-									"TableName": "sf_gcscheduleorg"
-								}
 							}
 						}
 					},

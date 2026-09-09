@@ -568,7 +568,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "\nselect SalesforceGCid, InstallmentAmount,installmentdate as EffectiveStartDate,\ninstallmentdate as endDate,\n'Custom' as TransactionPeriod,\n'CreateTransactions' as Type,\n\n'1' as TransactionInterval\nfrom stg.sf_gcscheduleorg\nwhere SalesforceGCid = '6gcQz0000002hFQIAY'",
+						"sqlReaderQuery": "\nselect SalesforceGCid, InstallmentAmount,installmentdate as EffectiveStartDate,\ninstallmentdate as endDate,\n'Custom' as TransactionPeriod,\n'CreateTransactions' as Type,\n\n'1' as TransactionInterval\nfrom stg.sf_gcscheduleorg\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},

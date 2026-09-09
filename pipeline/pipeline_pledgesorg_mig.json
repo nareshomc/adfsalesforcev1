@@ -57,8 +57,6 @@
 			{
 				"name": "Dataflowgiftcodes",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowpleadgesmainorg",

@@ -47,6 +47,15 @@
 				},
 				{
 					"name": "select2"
+				},
+				{
+					"name": "selectrcodesc"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "select3"
 				}
 			],
 			"scriptLines": [
@@ -169,7 +178,38 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
-				"select2 sink(allowSchemaDrift: true,",
+				"Giftcodesalesforcerecords select(mapColumn(",
+				"          Rcode,",
+				"          GiftDesignationCode,",
+				"          RcodeType,",
+				"          Name,",
+				"          Salesforceidgift",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectrcodesc",
+				"select2, selectrcodesc join(select2@RCode == selectrcodesc@Rcode",
+				"     && select2@GiftDesignationCode == selectrcodesc@GiftDesignationCode",
+				"     && select2@RcodeType == selectrcodesc@RcodeType,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2",
+				"join2 select(mapColumn(",
+				"          RECID,",
+				"          OrgName,",
+				"          GRId,",
+				"          SalesforceIDorg,",
+				"          DonorId,",
+				"          SalesforceGCid,",
+				"          Rcode = selectrcodesc@Rcode,",
+				"          GiftDesignationCode = selectrcodesc@GiftDesignationCode,",
+				"          RcodeType = selectrcodesc@RcodeType,",
+				"          Name = selectrcodesc@Name,",
+				"          Salesforceidgift",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3",
+				"select3 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

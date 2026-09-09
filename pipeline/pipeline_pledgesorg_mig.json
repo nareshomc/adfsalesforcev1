@@ -813,7 +813,17 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "dataflowkeyworker_org",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"sourcekeyworker": {
+								"SchemaName": "stg",
+								"TableName": "sf_giftsolicitor"
+							},
+							"sfpledgemergeorg": {
+								"SchemaName": "stg",
+								"TableName": "sf_gcscheduleorg"
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,

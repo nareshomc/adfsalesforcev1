@@ -890,14 +890,14 @@
 							},
 							{
 								"source": {
-									"name": "PersonName",
+									"name": "PersonNameCombined",
 									"type": "String",
 									"physicalType": "nvarchar"
 								},
 								"sink": {
-									"name": "Key_Worker__c",
+									"name": "Name",
 									"type": "String",
-									"physicalType": "multipicklist"
+									"physicalType": "string"
 								}
 							}
 						],

@@ -40,6 +40,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "pledgerecords"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sfpledgeorgagg"
 				}
 			],
 			"transformations": [
@@ -542,7 +549,16 @@
 				"     recreate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> pledgerecords"
+				"     skipDuplicateMapOutputs: true) ~> pledgerecords",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sfpledgeorgagg"
 			]
 		}
 	}

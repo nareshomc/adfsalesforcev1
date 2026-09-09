@@ -170,6 +170,14 @@
 						"referenceName": "dataflowmergepledgeacc",
 						"type": "DataFlowReference",
 						"datasetParameters": {
+							"sfpledge": {
+								"SchemaName": "stg",
+								"TableName": "sf_pledgeorg"
+							},
+							"salesforceorg": {
+								"SchemaName": "stg",
+								"TableName": "sf_orgrecordids"
+							},
 							"sinkpledgemerge": {
 								"SchemaName": "stg",
 								"TableName": "sf_pledgemergeacc"

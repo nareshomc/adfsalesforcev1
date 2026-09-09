@@ -626,6 +626,18 @@
 									"type": "Decimal",
 									"physicalType": "currency"
 								}
+							},
+							{
+								"source": {
+									"name": "ScheduleType",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Type",
+									"type": "String",
+									"physicalType": "picklist"
+								}
 							}
 						],
 						"typeConversion": true,

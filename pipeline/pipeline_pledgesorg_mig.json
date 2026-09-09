@@ -598,7 +598,7 @@
 									"precision": 20
 								},
 								"sink": {
-									"name": "CurrentAmount",
+									"name": "DonorCoverAmount",
 									"type": "Decimal",
 									"physicalType": "currency"
 								}

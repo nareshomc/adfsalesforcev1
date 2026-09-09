@@ -39,7 +39,14 @@
 						"referenceName": "ds_migrationdb",
 						"type": "DatasetReference"
 					},
-					"name": "pledgerecords"
+					"name": "pledgerecordsagg"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sfpledgeacc"
 				}
 			],
 			"transformations": [
@@ -90,6 +97,9 @@
 				},
 				{
 					"name": "aggregate1"
+				},
+				{
+					"name": "select6"
 				}
 			],
 			"scriptLines": [
@@ -500,6 +510,30 @@
 				"          Reference),",
 				"     InstallmentDate = first(InstallmentDate),",
 				"          InstallmentAmount = first(InstallmentAmount)) ~> aggregate1",
+				"derivedColumn2 select(mapColumn(",
+				"          CONSTITUENT_ID,",
+				"          FIRST_NAME,",
+				"          RECID,",
+				"          IMPORT_IDrec,",
+				"          LAST_NAME,",
+				"          GRId,",
+				"          GiftDate,",
+				"          StatusDate,",
+				"          Amount,",
+				"          GiftStatus,",
+				"          InstallmentFrequency,",
+				"          CONSTIT_ID,",
+				"          IMPORT_IDgift,",
+				"          GiftID,",
+				"          InstallmentAmount,",
+				"          InstallmentDate,",
+				"          Reference,",
+				"          GiftType,",
+				"          Name,",
+				"          ScheduleType",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select6",
 				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
@@ -509,7 +543,16 @@
 				"     recreate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> pledgerecords"
+				"     skipDuplicateMapOutputs: true) ~> pledgerecordsagg",
+				"select6 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sfpledgeacc"
 			]
 		}
 	}

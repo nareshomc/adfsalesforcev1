@@ -15,49 +15,7 @@
 		},
 		"annotations": [],
 		"type": "SqlServerTable",
-		"schema": [
-			{
-				"name": "ID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "PersonName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "OrgName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "ParentId",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "SalesforceGCid",
-				"type": "nvarchar"
-			},
-			{
-				"name": "DonorId",
-				"type": "nvarchar"
-			},
-			{
-				"name": "SalesforceIDorg",
-				"type": "nvarchar"
-			},
-			{
-				"name": "GiftID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "CURRENT_TIMESTAMP",
-				"type": "datetime",
-				"precision": 23,
-				"scale": 3
-			}
-		],
+		"schema": [],
 		"typeProperties": {
 			"schema": {
 				"value": "@dataset().SchemaName",

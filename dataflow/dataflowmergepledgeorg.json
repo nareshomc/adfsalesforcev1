@@ -83,7 +83,6 @@
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> salesforceacc",
 				"sfpledge select(mapColumn(",
-				"          CONSTITUENT_ID,",
 				"          OrgName,",
 				"          RECID,",
 				"          IMPORT_IDrec,",

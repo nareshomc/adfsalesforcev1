@@ -47,6 +47,12 @@
 							}
 						},
 						"linkedServiceParameters": {
+							"pledgerecordsagg": {
+								"schemaLinkedService": {
+									"SchemaName": "stg",
+									"TableName": "sf_pledgeaccagg"
+								}
+							},
 							"sfpledgeacc": {
 								"schemaLinkedService": {
 									"SchemaName": "stg",

@@ -900,7 +900,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT distinct \n    SalesforceGCid, \n     STRING_AGG(PersonName, ';') AS PersonNameCombined\nFROM stg.sf_keyworkersog \nGROUP BY SalesforceGCid",
+						"sqlReaderQuery": "SELECT distinct \n    SalesforceGCid, \n     STRING_AGG(PersonName, ';') AS PersonNameCombined\nFROM stg.sf_keyworkersacc\nGROUP BY SalesforceGCid",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},

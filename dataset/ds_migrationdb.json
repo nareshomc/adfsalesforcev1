@@ -22,14 +22,8 @@
 				"precision": 10
 			},
 			{
-				"name": "ParentId",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "SolicitorId",
-				"type": "int",
-				"precision": 10
+				"name": "OrgName",
+				"type": "nvarchar"
 			},
 			{
 				"name": "RECID",
@@ -37,11 +31,78 @@
 				"precision": 10
 			},
 			{
-				"name": "FirstName",
+				"name": "IMPORT_IDrec",
 				"type": "nvarchar"
 			},
 			{
-				"name": "LastName",
+				"name": "GRId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GiftDate",
+				"type": "date"
+			},
+			{
+				"name": "StatusDate",
+				"type": "date"
+			},
+			{
+				"name": "Amount",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 4
+			},
+			{
+				"name": "GiftStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "InstallmentFrequency",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CONSTIT_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IMPORT_IDgift",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GiftID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "InstallmentAmount",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 4
+			},
+			{
+				"name": "InstallmentDate",
+				"type": "date"
+			},
+			{
+				"name": "Reference",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GiftType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ScheduleType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SalesforceIDorg",
 				"type": "nvarchar"
 			},
 			{

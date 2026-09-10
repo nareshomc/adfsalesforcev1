@@ -169,8 +169,6 @@
 			{
 				"name": "Dataflowmergepledge",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copyorgaccount",
@@ -203,6 +201,14 @@
 							"sinkpledgemerge": {
 								"SchemaName": "stg",
 								"TableName": "sf_pledgemergeorg"
+							}
+						},
+						"linkedServiceParameters": {
+							"sinkpledgemerge": {
+								"schemaLinkedService": {
+									"SchemaName": "stg",
+									"TableName": "sf_pledgemergeorg"
+								}
 							}
 						}
 					},

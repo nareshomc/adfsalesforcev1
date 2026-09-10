@@ -844,7 +844,7 @@
 				}
 			},
 			{
-				"name": "Copy data1",
+				"name": "Copygiftcommitment",
 				"type": "Copy",
 				"state": "Inactive",
 				"onInactiveMarkAs": "Succeeded",
@@ -932,36 +932,11 @@
 				]
 			},
 			{
-				"name": "Copy data2",
-				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [
-					{
-						"activity": "Copy data1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"enableStaging": false
-				}
-			},
-			{
-				"name": "Copy data3",
+				"name": "CopygiftdefaultDesignation",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Copy data2",
+						"activity": "Copygiftcommitment",
 						"dependencyConditions": [
 							"Succeeded"
 						]

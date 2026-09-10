@@ -111,7 +111,6 @@
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join1",
 				"join1 select(mapColumn(",
-				"          CONSTITUENT_ID,",
 				"          OrgName,",
 				"          RECID = select1@RECID,",
 				"          IMPORT_IDrec,",

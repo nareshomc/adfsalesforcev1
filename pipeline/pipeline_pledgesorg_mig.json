@@ -71,6 +71,8 @@
 			{
 				"name": "Dataflowgiftcodes",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowpleadgesmainorg",
@@ -120,8 +122,6 @@
 			{
 				"name": "Dataflowgiftsolicitor",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowgiftcodes",

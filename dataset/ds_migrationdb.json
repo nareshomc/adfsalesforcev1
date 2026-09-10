@@ -15,7 +15,107 @@
 		},
 		"annotations": [],
 		"type": "SqlServerTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CONSTITUENT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FIRST_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RECID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IMPORT_IDrec",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LAST_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GRId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GiftDate",
+				"type": "date"
+			},
+			{
+				"name": "StatusDate",
+				"type": "date"
+			},
+			{
+				"name": "Amount",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 4
+			},
+			{
+				"name": "GiftStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "InstallmentFrequency",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CONSTIT_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IMPORT_IDgift",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GiftID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "InstallmentAmount",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 4
+			},
+			{
+				"name": "InstallmentDate",
+				"type": "date"
+			},
+			{
+				"name": "Reference",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GiftType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ScheduleType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CURRENT_TIMESTAMP",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
 		"typeProperties": {
 			"schema": {
 				"value": "@dataset().SchemaName",

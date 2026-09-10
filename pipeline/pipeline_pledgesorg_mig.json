@@ -108,14 +108,6 @@
 								"SchemaName": "stg",
 								"TableName": "sf_giftcodes"
 							}
-						},
-						"linkedServiceParameters": {
-							"giftcodes": {
-								"schemaLinkedService": {
-									"SchemaName": "stg",
-									"TableName": "sf_giftcodes"
-								}
-							}
 						}
 					},
 					"compute": {

@@ -5,6 +5,8 @@
 			{
 				"name": "Dataflowpleadgesmain",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -153,8 +155,6 @@
 			{
 				"name": "Dataflowmergepledge",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copyorgaccount_copy1",
@@ -180,7 +180,7 @@
 								"SchemaName": "stg",
 								"TableName": "sf_pledgeacc"
 							},
-							"salesforceorg": {
+							"salesforceacc": {
 								"SchemaName": "stg",
 								"TableName": "accounts_sfrecord"
 							},

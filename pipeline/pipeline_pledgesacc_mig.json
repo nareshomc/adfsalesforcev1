@@ -830,6 +830,291 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Dataflowgiftcodemerge",
+				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Copygiftcommschedule",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflowkeyworkermerge_org",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"sfgcscheduleorg": {
+								"SchemaName": "stg",
+								"TableName": "sf_gcscheduleacc"
+							},
+							"sfgiftcodes": {
+								"SchemaName": "stg",
+								"TableName": "sf_giftcodes"
+							},
+							"Giftcodesalesforcerecords": {
+								"SchemaName": "stg",
+								"TableName": "Giftcode_salesforcerecords"
+							},
+							"resfgiftcodesorg": {
+								"SchemaName": "stg",
+								"TableName": "sf_resfgiftcodesacc"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Dataflowkeyworkerorg",
+				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Dataflowgiftcodemerge",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflowkeyworker_org",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"sourcekeyworker": {
+								"SchemaName": "stg",
+								"TableName": "sf_giftsolicitor"
+							},
+							"sfpledgemergeorg": {
+								"SchemaName": "stg",
+								"TableName": "sf_gcscheduleorg"
+							},
+							"sinkkeyworkers": {
+								"SchemaName": "stg",
+								"TableName": "sf_keyworkersog"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Copygiftcommitment",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Dataflowkeyworkerorg",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT distinct \n    SalesforceGCid, \n     STRING_AGG(PersonName, ';') AS PersonNameCombined\nFROM stg.sf_keyworkersog \nGROUP BY SalesforceGCid",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SalesforceServiceCloudV2Sink",
+						"writeBatchSize": 100,
+						"writeBehavior": "upsert",
+						"externalIdFieldName": "Id",
+						"ignoreNullValues": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "SalesforceGCid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "String",
+									"physicalType": "id"
+								}
+							},
+							{
+								"source": {
+									"name": "PersonNameCombined",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Key_Worker__c",
+									"type": "String",
+									"physicalType": "multipicklist"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "stg",
+							"TableName": "sf_keyworkersog"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_salesforcegiftcommmig",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "CopygiftdefaultDesignation",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Copygiftcommitment",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": " select distinct SalesforceGCid,  Salesforceidgift, Allocatedpercentage \n from stg.sf_resfgiftcodesorg",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SalesforceServiceCloudV2Sink",
+						"writeBatchSize": 100,
+						"writeBehavior": "insert",
+						"ignoreNullValues": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Salesforceidgift",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "GiftDesignationId",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"source": {
+									"name": "SalesforceGCid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ParentRecordId",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"source": {
+									"name": "Allocatedpercentage",
+									"type": "Double",
+									"physicalType": "float"
+								},
+								"sink": {
+									"name": "AllocatedPercentage",
+									"type": "Decimal",
+									"physicalType": "percent"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "stg",
+							"TableName": "sf_resfgiftcodesorg"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_salesforcegiftdefaultdesigorgmig",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []

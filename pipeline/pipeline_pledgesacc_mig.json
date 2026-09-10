@@ -863,7 +863,7 @@
 							},
 							"sfpledgemergeorg": {
 								"SchemaName": "stg",
-								"TableName": "sf_gcscheduleorg"
+								"TableName": "sf_gcscheduleacc"
 							},
 							"sinkkeyworkers": {
 								"SchemaName": "stg",

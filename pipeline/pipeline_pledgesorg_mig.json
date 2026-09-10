@@ -43,6 +43,20 @@
 								"SchemaName": "stg",
 								"TableName": "sf_pledgeorgagg"
 							}
+						},
+						"linkedServiceParameters": {
+							"pledgerecords": {
+								"schemaLinkedService": {
+									"SchemaName": "stg",
+									"TableName": "sf_pledgeorg"
+								}
+							},
+							"sfpledgeorgagg": {
+								"schemaLinkedService": {
+									"SchemaName": "stg",
+									"TableName": "sf_pledgeorgagg"
+								}
+							}
 						}
 					},
 					"compute": {

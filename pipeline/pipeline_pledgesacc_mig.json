@@ -470,8 +470,6 @@
 			{
 				"name": "Wait1",
 				"type": "Wait",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copypledgemergetosf",
@@ -488,8 +486,6 @@
 			{
 				"name": "Copysfpledgemerge",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Wait1",
@@ -542,7 +538,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "stg",
-							"TableName": "sf_giftcommitmentsforg"
+							"TableName": "sf_giftcommitmentsfacc"
 						}
 					}
 				]

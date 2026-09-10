@@ -957,6 +957,8 @@
 			{
 				"name": "Copy data3",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copy data2",

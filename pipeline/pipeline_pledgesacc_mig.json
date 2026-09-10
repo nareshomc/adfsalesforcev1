@@ -711,8 +711,9 @@
 					},
 					"sink": {
 						"type": "SalesforceServiceCloudV2Sink",
-						"writeBatchSize": 100000,
-						"writeBehavior": "insert"
+						"writeBatchSize": 1000,
+						"writeBehavior": "insert",
+						"ignoreNullValues": false
 					},
 					"enableStaging": false,
 					"translator": {

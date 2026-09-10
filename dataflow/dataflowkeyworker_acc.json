@@ -188,18 +188,10 @@
 				"     insertable:true,",
 				"     updateable:false,",
 				"     upsertable:false,",
+				"     recreate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     mapColumn(",
-				"          PersonName,",
-				"          OrgName,",
-				"          ParentId,",
-				"          SalesforceGCid,",
-				"          DonorId,",
-				"          SalesforceIDorg,",
-				"          GiftID",
-				"     )) ~> sinkkeyworkers"
+				"     skipDuplicateMapOutputs: true) ~> sinkkeyworkers"
 			]
 		}
 	}

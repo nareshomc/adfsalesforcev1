@@ -509,7 +509,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SalesforceServiceCloudV2Source",
-						"query": "SELECT DonorId,Id, name, EffectiveStartDate, Gift_Type__c, Status, ExpectedTotalCmtAmount  FROM GiftCommitment  WHERE Gift_Type__c = 'Gift-in-Kind'",
+						"query": "SELECT DonorId,Id, name, EffectiveStartDate, Gift_Type__c, Status, ExpectedTotalCmtAmount  FROM GiftCommitment  WHERE Gift_Type__c = 'Pledge'",
 						"includeDeletedObjects": false,
 						"partitionOption": "AutoDetect",
 						"preserveScaleFromSchema": false
@@ -523,13 +523,6 @@
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
-							{
-								"sink": {
-									"name": "ID",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
 							{
 								"sink": {
 									"name": "DonorId",

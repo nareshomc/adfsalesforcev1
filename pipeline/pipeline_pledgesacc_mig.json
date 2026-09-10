@@ -818,7 +818,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "stg",
-							"TableName": "sf_gcscheduleorg"
+							"TableName": "sf_gcscheduleacc"
 						}
 					}
 				],

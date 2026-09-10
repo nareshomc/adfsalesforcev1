@@ -211,6 +211,7 @@
 				"          InstallmentAmount,",
 				"          SalesforceIDorg,",
 				"          DonorId,",
+				"          SalesforceGCid,",
 				"          EffectiveStartDate,",
 				"          Gift_Type__c,",
 				"          GiftID",

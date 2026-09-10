@@ -122,6 +122,8 @@
 			{
 				"name": "Dataflowgiftsolicitor",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowgiftcodes",

@@ -152,28 +152,7 @@
 				"     recreate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     mapColumn(",
-				"          OrgName,",
-				"          RECID,",
-				"          IMPORT_IDrec,",
-				"          GRId,",
-				"          GiftDate,",
-				"          StatusDate,",
-				"          Amount,",
-				"          GiftStatus,",
-				"          InstallmentFrequency,",
-				"          CONSTIT_ID,",
-				"          IMPORT_IDgift,",
-				"          GiftID,",
-				"          InstallmentAmount,",
-				"          InstallmentDate,",
-				"          Reference,",
-				"          GiftType,",
-				"          Name,",
-				"          ScheduleType,",
-				"          SalesforceIDorg",
-				"     )) ~> sinkpledgemerge"
+				"     skipDuplicateMapOutputs: true) ~> sinkpledgemerge"
 			]
 		}
 	}

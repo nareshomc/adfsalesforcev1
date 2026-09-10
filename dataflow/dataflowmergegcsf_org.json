@@ -108,7 +108,7 @@
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"sfgiftcommitmentsforg select(mapColumn(",
 				"          DonorId,",
-				"          Id,",
+				"          SalesforceGCId = Id,",
 				"          Name,",
 				"          EffectiveStartDate,",
 				"          Gift_Type__c,",

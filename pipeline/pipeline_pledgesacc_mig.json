@@ -178,7 +178,7 @@
 						"datasetParameters": {
 							"sfpledge": {
 								"SchemaName": "stg",
-								"TableName": "sf_pledgeorg"
+								"TableName": "sf_pledgeacc"
 							},
 							"salesforceorg": {
 								"SchemaName": "stg",

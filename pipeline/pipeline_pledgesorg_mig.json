@@ -5,8 +5,6 @@
 			{
 				"name": "Dataflowpleadgesmainorg",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -57,8 +55,6 @@
 			{
 				"name": "Dataflowgiftcodes",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowpleadgesmainorg",
@@ -108,8 +104,6 @@
 			{
 				"name": "Dataflowgiftsolicitor",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowgiftcodes",
@@ -155,8 +149,6 @@
 			{
 				"name": "Dataflowmergepledge",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copyorgaccount",
@@ -202,8 +194,6 @@
 			{
 				"name": "Copyorgaccount",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowgiftsolicitor",
@@ -799,6 +789,8 @@
 			{
 				"name": "Dataflowkeyworkerorg",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowgiftcodemerge",

@@ -184,7 +184,6 @@
 				"     broadcast: 'auto')~> join1",
 				"join1 select(mapColumn(",
 				"          RECID,",
-				"          OrgName,",
 				"          GRId,",
 				"          StatusDate,",
 				"          Amount,",

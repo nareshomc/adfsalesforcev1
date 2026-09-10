@@ -62,15 +62,39 @@
 				"scale": 4
 			},
 			{
+				"name": "GiftStatus",
+				"type": "nvarchar"
+			},
+			{
 				"name": "InstallmentFrequency",
 				"type": "nvarchar"
+			},
+			{
+				"name": "CONSTIT_ID",
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "IMPORT_IDgift",
 				"type": "nvarchar"
 			},
 			{
-				"name": "Name",
+				"name": "GiftID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "InstallmentAmount",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 4
+			},
+			{
+				"name": "InstallmentDate",
+				"type": "date"
+			},
+			{
+				"name": "Reference",
 				"type": "nvarchar"
 			},
 			{
@@ -78,22 +102,16 @@
 				"type": "nvarchar"
 			},
 			{
+				"name": "Name",
+				"type": "nvarchar"
+			},
+			{
 				"name": "ScheduleType",
 				"type": "nvarchar"
 			},
 			{
-				"name": "Reference",
+				"name": "SalesforceID",
 				"type": "nvarchar"
-			},
-			{
-				"name": "InstallmentDate",
-				"type": "date"
-			},
-			{
-				"name": "InstallmentAmount",
-				"type": "decimal",
-				"precision": 20,
-				"scale": 4
 			},
 			{
 				"name": "CURRENT_TIMESTAMP",

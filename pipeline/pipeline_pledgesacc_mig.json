@@ -104,7 +104,7 @@
 				}
 			},
 			{
-				"name": "Dataflowgiftsolicitor",
+				"name": "Dataflowgiftsolicitor-nr",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -200,7 +200,7 @@
 				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
-						"activity": "Dataflowgiftsolicitor",
+						"activity": "Dataflowgiftsolicitor-nr",
 						"dependencyConditions": [
 							"Succeeded"
 						]

@@ -22,17 +22,34 @@
 				"precision": 10
 			},
 			{
+				"name": "PersonName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OrgName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ParentId",
+				"type": "int",
+				"precision": 10
+			},
+			{
 				"name": "SalesforceGCid",
 				"type": "nvarchar"
 			},
 			{
-				"name": "Salesforceidgift",
+				"name": "DonorId",
 				"type": "nvarchar"
 			},
 			{
-				"name": "AllocatedPercentage",
-				"type": "float",
-				"precision": 15
+				"name": "SalesforceIDorg",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GiftID",
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "CURRENT_TIMESTAMP",

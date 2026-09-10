@@ -33,9 +33,6 @@
 					"name": "select1"
 				},
 				{
-					"name": "filter1"
-				},
-				{
 					"name": "selectsfgccommorg"
 				},
 				{
@@ -116,7 +113,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sfgiftcommitmentsforg",
-				"filter1 select(mapColumn(",
+				"sfpledgemergeorg select(mapColumn(",
 				"          CONSTITUENT_ID,",
 				"          FIRST_NAME,",
 				"          RECID,",
@@ -141,7 +138,6 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"sfpledgemergeorg filter(in  (['001Qz00000cXpnPIAS','001Qz00000cY0ioIAC'],SalesforceID)) ~> filter1",
 				"sfgiftcommitmentsforg select(mapColumn(",
 				"          DonorId,",
 				"          SalesforceGCId,",

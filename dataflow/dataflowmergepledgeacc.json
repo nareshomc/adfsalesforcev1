@@ -138,7 +138,7 @@
 				"          GRID,",
 				"          RECID,",
 				"          OrgName,",
-				"          SalesforceID,",
+				"          SalesforceIDorg = SalesforceID,",
 				"          CURRENT_TIMESTAMP",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",

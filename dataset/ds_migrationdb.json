@@ -62,43 +62,11 @@
 				"scale": 4
 			},
 			{
-				"name": "GiftStatus",
-				"type": "nvarchar"
-			},
-			{
 				"name": "InstallmentFrequency",
 				"type": "nvarchar"
 			},
 			{
-				"name": "CONSTIT_ID",
-				"type": "int",
-				"precision": 10
-			},
-			{
 				"name": "IMPORT_IDgift",
-				"type": "nvarchar"
-			},
-			{
-				"name": "GiftID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "InstallmentAmount",
-				"type": "decimal",
-				"precision": 20,
-				"scale": 4
-			},
-			{
-				"name": "InstallmentDate",
-				"type": "date"
-			},
-			{
-				"name": "Reference",
-				"type": "nvarchar"
-			},
-			{
-				"name": "GiftType",
 				"type": "nvarchar"
 			},
 			{
@@ -106,8 +74,26 @@
 				"type": "nvarchar"
 			},
 			{
+				"name": "GiftType",
+				"type": "nvarchar"
+			},
+			{
 				"name": "ScheduleType",
 				"type": "nvarchar"
+			},
+			{
+				"name": "Reference",
+				"type": "nvarchar"
+			},
+			{
+				"name": "InstallmentDate",
+				"type": "date"
+			},
+			{
+				"name": "InstallmentAmount",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 4
 			},
 			{
 				"name": "CURRENT_TIMESTAMP",

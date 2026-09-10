@@ -312,6 +312,8 @@
 			{
 				"name": "Copypledgemergetosf",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowmergepledge",
@@ -523,6 +525,13 @@
 						"mappings": [
 							{
 								"sink": {
+									"name": "ID",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
 									"name": "DonorId",
 									"type": "String",
 									"physicalType": "nvarchar"
@@ -570,6 +579,13 @@
 									"physicalType": "decimal",
 									"scale": 2,
 									"precision": 16
+								}
+							},
+							{
+								"sink": {
+									"name": "CURRENT_TIMESTAMP",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								}
 							}
 						],

@@ -22,99 +22,17 @@
 				"precision": 10
 			},
 			{
-				"name": "RECID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "OrgName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "IMPORT_IDrec",
-				"type": "nvarchar"
-			},
-			{
-				"name": "GRId",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "GiftDate",
-				"type": "date"
-			},
-			{
-				"name": "StatusDate",
-				"type": "date"
-			},
-			{
-				"name": "Amount",
-				"type": "decimal",
-				"precision": 20,
-				"scale": 4
-			},
-			{
-				"name": "GiftStatus",
-				"type": "nvarchar"
-			},
-			{
-				"name": "IMPORT_IDgift",
-				"type": "nvarchar"
-			},
-			{
-				"name": "GiftType",
-				"type": "nvarchar"
-			},
-			{
-				"name": "Name",
-				"type": "nvarchar"
-			},
-			{
-				"name": "Reference",
-				"type": "nvarchar"
-			},
-			{
-				"name": "InstallmentFrequency",
-				"type": "nvarchar"
-			},
-			{
-				"name": "ScheduleType",
-				"type": "nvarchar"
-			},
-			{
-				"name": "InstallmentDate",
-				"type": "date"
-			},
-			{
-				"name": "InstallmentAmount",
-				"type": "decimal",
-				"precision": 20,
-				"scale": 4
-			},
-			{
-				"name": "SalesforceIDorg",
-				"type": "nvarchar"
-			},
-			{
-				"name": "DonorId",
-				"type": "nvarchar"
-			},
-			{
 				"name": "SalesforceGCid",
 				"type": "nvarchar"
 			},
 			{
-				"name": "EffectiveStartDate",
-				"type": "date"
-			},
-			{
-				"name": "Gift_Type__c",
+				"name": "Salesforceidgift",
 				"type": "nvarchar"
 			},
 			{
-				"name": "GiftID",
-				"type": "int",
-				"precision": 10
+				"name": "AllocatedPercentage",
+				"type": "float",
+				"precision": 15
 			},
 			{
 				"name": "CURRENT_TIMESTAMP",

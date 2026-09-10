@@ -117,7 +117,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectsfgccommorg",
-				"select1, selectsfgccommorg join(SalesforceID == DonorId",
+				"select1, selectsfgccommorg join(SalesforceIDorg == DonorId",
 				"     && GiftDate == EffectiveStartDate",
 				"     && GiftStatus == Status",
 				"     && Amount == ExpectedTotalCmtAmount,",

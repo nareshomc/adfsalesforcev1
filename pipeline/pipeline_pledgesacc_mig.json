@@ -176,7 +176,7 @@
 							},
 							"salesforceorg": {
 								"SchemaName": "stg",
-								"TableName": "sf_orgrecordids"
+								"TableName": "accounts_sfrecord"
 							},
 							"sinkpledgemerge": {
 								"SchemaName": "stg",

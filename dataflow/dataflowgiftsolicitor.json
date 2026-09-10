@@ -185,12 +185,11 @@
 				"     validateSchema: false,",
 				"     input(",
 				"          ID as integer,",
-				"          ATTRIBUTETYPESID as integer,",
-				"          ATTRIBUTEDATE as date,",
-				"          PARENTID as integer,",
-				"          RcodeType as string,",
-				"          RCode as string,",
-				"          GiftDesignationCode as string,",
+				"          ParentId as integer,",
+				"          SolicitorId as integer,",
+				"          RECID as integer,",
+				"          FirstName as string,",
+				"          LastName as string,",
 				"          CURRENT_TIMESTAMP as timestamp",
 				"     ),",
 				"     deletable:false,",
@@ -199,7 +198,14 @@
 				"     upsertable:false,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sinksolicitor"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          ParentId,",
+				"          SolicitorId,",
+				"          RECID,",
+				"          FirstName,",
+				"          LastName",
+				"     )) ~> sinksolicitor"
 			]
 		}
 	}

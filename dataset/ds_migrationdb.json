@@ -22,29 +22,26 @@
 				"precision": 10
 			},
 			{
-				"name": "ATTRIBUTETYPESID",
+				"name": "ParentId",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "ATTRIBUTEDATE",
-				"type": "date"
-			},
-			{
-				"name": "PARENTID",
+				"name": "SolicitorId",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "RcodeType",
+				"name": "RECID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FirstName",
 				"type": "nvarchar"
 			},
 			{
-				"name": "RCode",
-				"type": "nvarchar"
-			},
-			{
-				"name": "GiftDesignationCode",
+				"name": "LastName",
 				"type": "nvarchar"
 			},
 			{

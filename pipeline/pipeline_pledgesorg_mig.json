@@ -71,8 +71,6 @@
 			{
 				"name": "Dataflowgiftcodes",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowpleadgesmainorg",
@@ -109,6 +107,14 @@
 							"giftcodes": {
 								"SchemaName": "stg",
 								"TableName": "sf_giftcodes"
+							}
+						},
+						"linkedServiceParameters": {
+							"giftcodes": {
+								"schemaLinkedService": {
+									"SchemaName": "stg",
+									"TableName": "sf_giftcodes"
+								}
 							}
 						}
 					},

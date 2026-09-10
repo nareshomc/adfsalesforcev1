@@ -867,7 +867,7 @@
 							},
 							"sinkkeyworkers": {
 								"SchemaName": "stg",
-								"TableName": "sf_keyworkersog"
+								"TableName": "sf_keyworkersacc"
 							}
 						}
 					},

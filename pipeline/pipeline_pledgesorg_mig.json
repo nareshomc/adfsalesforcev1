@@ -600,6 +600,14 @@
 								"SchemaName": "stg",
 								"TableName": "sf_gcscheduleorg"
 							}
+						},
+						"linkedServiceParameters": {
+							"gcscheduleordg": {
+								"schemaLinkedService": {
+									"SchemaName": "stg",
+									"TableName": "sf_gcscheduleorg"
+								}
+							}
 						}
 					},
 					"compute": {

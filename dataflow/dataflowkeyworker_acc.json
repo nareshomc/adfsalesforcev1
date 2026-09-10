@@ -1,0 +1,161 @@
+{
+	"name": "dataflowkeyworker_acc",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sourcekeyworker"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sfpledgemergeorg"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sinkkeyworkers"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "selectmergerecord"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select2"
+				},
+				{
+					"name": "aggregate1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ID as integer,",
+				"          ParentId as integer,",
+				"          SolicitorId as integer,",
+				"          RECID as integer,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          CURRENT_TIMESTAMP as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sourcekeyworker",
+				"source(output(",
+				"          ID as integer,",
+				"          RECID as integer,",
+				"          OrgName as string,",
+				"          IMPORT_IDrec as string,",
+				"          GRId as integer,",
+				"          GiftDate as date,",
+				"          StatusDate as date,",
+				"          Amount as decimal(20,4),",
+				"          GiftStatus as string,",
+				"          IMPORT_IDgift as string,",
+				"          GiftType as string,",
+				"          Name as string,",
+				"          Reference as string,",
+				"          InstallmentFrequency as string,",
+				"          ScheduleType as string,",
+				"          InstallmentDate as date,",
+				"          InstallmentAmount as decimal(20,4),",
+				"          SalesforceIDorg as string,",
+				"          DonorId as string,",
+				"          SalesforceGCid as string,",
+				"          EffectiveStartDate as date,",
+				"          Gift_Type__c as string,",
+				"          GiftID as integer,",
+				"          CURRENT_TIMESTAMP as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sfpledgemergeorg",
+				"sourcekeyworker derive(PersonName = trim(concat(iifNull(FirstName, ''), ' ', iifNull(LastName, '')))) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          ParentId,",
+				"          SolicitorId,",
+				"          RECID,",
+				"          PersonName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"sfpledgemergeorg select(mapColumn(",
+				"          RECID,",
+				"          OrgName,",
+				"          GRId,",
+				"          SalesforceIDorg,",
+				"          DonorId,",
+				"          SalesforceGCid,",
+				"          GiftID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectmergerecord",
+				"select1, selectmergerecord join(ParentId == GiftID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          ParentId,",
+				"          RECID = select1@RECID,",
+				"          PersonName,",
+				"          OrgName,",
+				"          GRId,",
+				"          SalesforceIDorg,",
+				"          DonorId,",
+				"          SalesforceGCid,",
+				"          GiftID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2 aggregate(groupBy(PersonName,",
+				"          OrgName,",
+				"          ParentId,",
+				"          SalesforceGCid,",
+				"          DonorId,",
+				"          SalesforceIDorg),",
+				"     GiftID = first(GiftID)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          PersonName,",
+				"          OrgName,",
+				"          ParentId,",
+				"          SalesforceGCid,",
+				"          DonorId,",
+				"          SalesforceIDorg,",
+				"          GiftID",
+				"     )) ~> sinkkeyworkers"
+			]
+		}
+	}
+}

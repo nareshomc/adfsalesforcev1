@@ -832,8 +832,10 @@
 				]
 			},
 			{
-				"name": "Dataflowgiftcodemerge",
+				"name": "Dataflowkeyworkerorg",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copygiftcommschedule",
@@ -852,58 +854,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflowkeyworkermerge_acc",
-						"type": "DataFlowReference",
-						"datasetParameters": {
-							"sfgcscheduleorg": {
-								"SchemaName": "stg",
-								"TableName": "sf_gcscheduleacc"
-							},
-							"sfgiftcodes": {
-								"SchemaName": "stg",
-								"TableName": "sf_giftcodes"
-							},
-							"Giftcodesalesforcerecords": {
-								"SchemaName": "stg",
-								"TableName": "Giftcode_salesforcerecords"
-							},
-							"resfgiftcodesorg": {
-								"SchemaName": "stg",
-								"TableName": "sf_resfgiftcodesacc"
-							}
-						}
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
-				"name": "Dataflowkeyworkerorg",
-				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [
-					{
-						"activity": "Dataflowgiftcodemerge",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "dataflowkeyworker_org",
+						"referenceName": "dataflowkeyworker_acc",
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"sourcekeyworker": {

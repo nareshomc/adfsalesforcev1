@@ -312,8 +312,6 @@
 			{
 				"name": "Copypledgemergetosf",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowmergepledge",
@@ -347,77 +345,24 @@
 						"type": "TabularTranslator",
 						"mappings": [
 							{
-								"source": {
-									"name": "salesforceIDorg",
-									"type": "String",
-									"physicalType": "nvarchar"
-								},
 								"sink": {
-									"name": "DonorId",
+									"name": "Id",
+									"type": "String",
+									"physicalType": "id"
+								}
+							},
+							{
+								"sink": {
+									"name": "OwnerId",
 									"type": "String",
 									"physicalType": "reference"
 								}
 							},
 							{
-								"source": {
-									"name": "giftstatus",
-									"type": "String",
-									"physicalType": "nvarchar"
-								},
 								"sink": {
-									"name": "Status",
-									"type": "String",
-									"physicalType": "picklist"
-								}
-							},
-							{
-								"source": {
-									"name": "giftdate",
-									"type": "Date",
-									"physicalType": "date"
-								},
-								"sink": {
-									"name": "EffectiveStartDate",
-									"type": "DateTime",
-									"physicalType": "date"
-								}
-							},
-							{
-								"source": {
-									"name": "amount",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 4,
-									"precision": 20
-								},
-								"sink": {
-									"name": "ExpectedTotalCmtAmount",
-									"type": "Decimal",
-									"physicalType": "currency"
-								}
-							},
-							{
-								"source": {
-									"name": "gifttype",
-									"type": "String",
-									"physicalType": "nvarchar"
-								},
-								"sink": {
-									"name": "Gift_Type__c",
-									"type": "String",
-									"physicalType": "picklist"
-								}
-							},
-							{
-								"source": {
-									"name": "concatenatednotes",
-									"type": "String",
-									"physicalType": "nvarchar"
-								},
-								"sink": {
-									"name": "Associated_Documentation__c",
-									"type": "String",
-									"physicalType": "textarea"
+									"name": "IsDeleted",
+									"type": "Boolean",
+									"physicalType": "boolean"
 								}
 							},
 							{
@@ -433,6 +378,174 @@
 								}
 							},
 							{
+								"sink": {
+									"name": "CreatedDate",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"sink": {
+									"name": "CreatedById",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"sink": {
+									"name": "LastModifiedDate",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"sink": {
+									"name": "LastModifiedById",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"sink": {
+									"name": "SystemModstamp",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"sink": {
+									"name": "LastViewedDate",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"sink": {
+									"name": "LastReferencedDate",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"sink": {
+									"name": "DonorId",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"sink": {
+									"name": "IsAssetTransferExpected",
+									"type": "Boolean",
+									"physicalType": "boolean"
+								}
+							},
+							{
+								"sink": {
+									"name": "TotCommitmentScheduleAmt",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"sink": {
+									"name": "Description",
+									"type": "String",
+									"physicalType": "textarea"
+								}
+							},
+							{
+								"sink": {
+									"name": "OpportunityId",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"sink": {
+									"name": "CampaignId",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"sink": {
+									"name": "ExpectedTotalCmtAmount",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"sink": {
+									"name": "EffectiveStartDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"sink": {
+									"name": "CurrentGiftCmtScheduleId",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"sink": {
+									"name": "Status",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"sink": {
+									"name": "RecurrenceType",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"sink": {
+									"name": "FulfillmentType",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"sink": {
+									"name": "FormalCommitmentType",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"sink": {
+									"name": "GiftVehicleType",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"sink": {
+									"name": "NextTransactionAmount",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"sink": {
+									"name": "NextTransactionDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"sink": {
+									"name": "ExpectedAssetTransferDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
 								"source": {
 									"name": "ScheduleType",
 									"type": "String",
@@ -442,6 +555,181 @@
 									"name": "ScheduleType",
 									"type": "String",
 									"physicalType": "picklist"
+								}
+							},
+							{
+								"sink": {
+									"name": "ExpectedEndDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"sink": {
+									"name": "GiftVehicle",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"sink": {
+									"name": "TotalAssetPresentValue",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"sink": {
+									"name": "TotExpcAssetTransferVal",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"sink": {
+									"name": "TotExpcAssetMaturityVal",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"sink": {
+									"name": "ExpectedAssetMaturityDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"sink": {
+									"name": "WrittenOffAmount",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"sink": {
+									"name": "TotalPaidTransactionAmount",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"sink": {
+									"name": "TransactionPaymentCount",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "LastPaidTransactionDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"sink": {
+									"name": "TotalCurrentMonth",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"sink": {
+									"name": "TotalCurrentQuarter",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"sink": {
+									"name": "TotalCurrentYear",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"sink": {
+									"name": "TotalNextYear",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"sink": {
+									"name": "EffectiveTransactionPeriod",
+									"type": "String",
+									"physicalType": "string"
+								}
+							},
+							{
+								"sink": {
+									"name": "EffectiveTransactionInterval",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "PartyPhilanthropicRsrchPrflId",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"sink": {
+									"name": "Gift_Team__c",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"sink": {
+									"name": "fdff__GUID__c",
+									"type": "String",
+									"physicalType": "string"
+								}
+							},
+							{
+								"sink": {
+									"name": "fdff__PayLinks_Page__c",
+									"type": "String",
+									"physicalType": "string"
+								}
+							},
+							{
+								"sink": {
+									"name": "fdff__Setup_URL__c",
+									"type": "String",
+									"physicalType": "url"
+								}
+							},
+							{
+								"sink": {
+									"name": "Associated_Documentation__c",
+									"type": "String",
+									"physicalType": "textarea"
+								}
+							},
+							{
+								"sink": {
+									"name": "Gift_Type__c",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"sink": {
+									"name": "Pledge_Balance__c",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"sink": {
+									"name": "Key_Worker__c",
+									"type": "String",
+									"physicalType": "multipicklist"
 								}
 							}
 						],

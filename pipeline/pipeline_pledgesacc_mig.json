@@ -5,6 +5,8 @@
 			{
 				"name": "Dataflowpleadgesmain",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -42,20 +44,6 @@
 							"sfpledgeacc": {
 								"SchemaName": "stg",
 								"TableName": "sf_pledgeacc"
-							}
-						},
-						"linkedServiceParameters": {
-							"pledgerecordsagg": {
-								"schemaLinkedService": {
-									"SchemaName": "stg",
-									"TableName": "sf_pledgeaccagg"
-								}
-							},
-							"sfpledgeacc": {
-								"schemaLinkedService": {
-									"SchemaName": "stg",
-									"TableName": "sf_pledgeacc"
-								}
 							}
 						}
 					},
@@ -167,8 +155,6 @@
 			{
 				"name": "Dataflowmergepledge",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copyorgaccount_copy1",

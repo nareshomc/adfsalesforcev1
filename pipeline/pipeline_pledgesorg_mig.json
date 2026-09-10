@@ -182,7 +182,7 @@
 								"SchemaName": "stg",
 								"TableName": "sf_pledgeorg"
 							},
-							"salesforceorg": {
+							"salesforceacc": {
 								"SchemaName": "stg",
 								"TableName": "sf_orgrecordids"
 							},
@@ -587,14 +587,6 @@
 							"gcscheduleordg": {
 								"SchemaName": "stg",
 								"TableName": "sf_gcscheduleorg"
-							}
-						},
-						"linkedServiceParameters": {
-							"gcscheduleordg": {
-								"schemaLinkedService": {
-									"SchemaName": "stg",
-									"TableName": "sf_gcscheduleorg"
-								}
 							}
 						}
 					},

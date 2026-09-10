@@ -748,6 +748,8 @@
 			{
 				"name": "Dataflowgiftcodemerge",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copygiftcommschedule",
@@ -957,8 +959,6 @@
 			{
 				"name": "Copy data3",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copy data2",

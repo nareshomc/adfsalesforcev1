@@ -202,14 +202,6 @@
 								"SchemaName": "stg",
 								"TableName": "sf_pledgemergeorg"
 							}
-						},
-						"linkedServiceParameters": {
-							"sinkpledgemerge": {
-								"schemaLinkedService": {
-									"SchemaName": "stg",
-									"TableName": "sf_pledgemergeorg"
-								}
-							}
 						}
 					},
 					"compute": {

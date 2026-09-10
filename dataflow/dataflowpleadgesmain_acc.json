@@ -485,7 +485,7 @@
 				"),",
 				"          GiftStatus = case(",
 				"    GIFT_STATUS == 1, 'Active',",
-				"    GIFT_STATUS == 2, 'Held',",
+				"    GIFT_STATUS == 2, 'Paused',",
 				"    GIFT_STATUS == 4, 'Completed',",
 				"    GIFT_STATUS == 5, 'Cancelled',",
 				"    'Unknown'",

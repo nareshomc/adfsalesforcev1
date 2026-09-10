@@ -312,6 +312,8 @@
 			{
 				"name": "Copypledgemergetosf",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowmergepledge",
@@ -470,6 +472,8 @@
 			{
 				"name": "Wait1",
 				"type": "Wait",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copypledgemergetosf",
@@ -486,6 +490,8 @@
 			{
 				"name": "Copysfpledgemerge",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Wait1",
@@ -633,8 +639,6 @@
 			{
 				"name": "Dataflowmergegcsfacc",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copysfpledgemerge",

@@ -487,7 +487,7 @@
 				"    GIFT_STATUS == 1, 'Active',",
 				"    GIFT_STATUS == 2, 'Paused',",
 				"    GIFT_STATUS == 4, 'Completed',",
-				"    GIFT_STATUS == 5, 'Cancelled',",
+				"    GIFT_STATUS == 5, 'Closed',",
 				"    'Unknown'",
 				")) ~> derivedColumn1",
 				"select5 derive(GiftType = 'Pledge',",

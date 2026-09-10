@@ -151,7 +151,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "Dataflowgiftsolicitor",
+						"activity": "Copyorgaccount_copy1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -190,6 +190,116 @@
 					},
 					"traceLevel": "Fine"
 				}
+			},
+			{
+				"name": "Copyorgaccount_copy1",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Dataflowgiftsolicitor",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SalesforceServiceCloudV2Source",
+						"includeDeletedObjects": false,
+						"partitionOption": "AutoDetect",
+						"preserveScaleFromSchema": false
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Golden_Record_ID__pc",
+									"type": "String",
+									"physicalType": "string"
+								},
+								"sink": {
+									"name": "GRID",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Raisers_Edge_ID__pc",
+									"type": "String",
+									"physicalType": "string"
+								},
+								"sink": {
+									"name": "RECID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Name",
+									"type": "String",
+									"physicalType": "string"
+								},
+								"sink": {
+									"name": "PersonName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Id",
+									"type": "String",
+									"physicalType": "id"
+								},
+								"sink": {
+									"name": "SalesforceID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_salesforceaccountmig",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "stg",
+							"TableName": "accounts_sfrecord"
+						}
+					}
+				]
 			}
 		],
 		"annotations": []

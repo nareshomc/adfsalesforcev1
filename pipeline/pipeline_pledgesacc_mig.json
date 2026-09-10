@@ -45,6 +45,14 @@
 								"SchemaName": "stg",
 								"TableName": "sf_pledgeacc"
 							}
+						},
+						"linkedServiceParameters": {
+							"sfpledgeacc": {
+								"schemaLinkedService": {
+									"SchemaName": "stg",
+									"TableName": "sf_pledgeacc"
+								}
+							}
 						}
 					},
 					"compute": {

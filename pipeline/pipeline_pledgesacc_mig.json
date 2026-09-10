@@ -308,6 +308,246 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Copypledgemergetosf",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Dataflowmergepledge",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "select distinct salesforceID,recid,\ngiftstatus, giftdate,  amount, gifttype, Reference as concatenatednotes, Name,\nScheduleType\nfrom  stg.sf_pledgemergeacc where \nsalesforceID in  ('001Qz00000cXpnPIAS','001Qz00000cY0ioIAC')",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SalesforceServiceCloudV2Sink",
+						"writeBatchSize": 100000,
+						"writeBehavior": "insert"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "salesforceIDorg",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DonorId",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"source": {
+									"name": "giftstatus",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Status",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"source": {
+									"name": "giftdate",
+									"type": "Date",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "EffectiveStartDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "amount",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 4,
+									"precision": 20
+								},
+								"sink": {
+									"name": "ExpectedTotalCmtAmount",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"source": {
+									"name": "gifttype",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Gift_Type__c",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"source": {
+									"name": "concatenatednotes",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Associated_Documentation__c",
+									"type": "String",
+									"physicalType": "textarea"
+								}
+							},
+							{
+								"source": {
+									"name": "Name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Name",
+									"type": "String",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "ScheduleType",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ScheduleType",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "stg",
+							"TableName": "sf_pledgemergeacc"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_salesforcegiftcommmig",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Copypledgemergetosf",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 15
+				}
+			},
+			{
+				"name": "Copysfpledgemerge",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SalesforceServiceCloudV2Source",
+						"query": "SELECT DonorId,Id, name, EffectiveStartDate, Gift_Type__c, Status, ExpectedTotalCmtAmount  FROM GiftCommitment WHERE Gift_Type__c = 'Pledge'",
+						"includeDeletedObjects": false,
+						"partitionOption": "AutoDetect",
+						"preserveScaleFromSchema": false
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_salesforcegiftcommmig",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "stg",
+							"TableName": "sf_giftcommitmentsforg"
+						}
+					}
+				]
 			}
 		],
 		"annotations": []

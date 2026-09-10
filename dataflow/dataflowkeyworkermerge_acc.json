@@ -1,0 +1,233 @@
+{
+	"name": "dataflowkeyworkermerge_acc",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sfgcscheduleorg"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sfgiftcodes"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "Giftcodesalesforcerecords"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "resfgiftcodesorg"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				},
+				{
+					"name": "selectgiftcodes"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select2"
+				},
+				{
+					"name": "selectrcodesc"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "select3"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select4"
+				},
+				{
+					"name": "aggregate1"
+				},
+				{
+					"name": "select5"
+				},
+				{
+					"name": "window1"
+				},
+				{
+					"name": "select6"
+				}
+			],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sfgcscheduleorg",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sfgiftcodes",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Giftcodesalesforcerecords",
+				"sfgcscheduleorg select(mapColumn(",
+				"          RECID,",
+				"          OrgName,",
+				"          IMPORT_IDrec,",
+				"          GRId,",
+				"          GiftDate,",
+				"          StatusDate,",
+				"          Amount,",
+				"          GiftStatus,",
+				"          IMPORT_IDgift,",
+				"          GiftType,",
+				"          Name,",
+				"          Reference,",
+				"          InstallmentFrequency,",
+				"          ScheduleType,",
+				"          InstallmentDate,",
+				"          InstallmentAmount,",
+				"          SalesforceIDorg,",
+				"          DonorId,",
+				"          SalesforceGCid,",
+				"          EffectiveStartDate,",
+				"          Gift_Type__c,",
+				"          GiftID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"sfgiftcodes select(mapColumn(",
+				"          ATTRIBUTETYPESID,",
+				"          PARENTID,",
+				"          RcodeType,",
+				"          RCode,",
+				"          GiftDesignationCode",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectgiftcodes",
+				"select1, selectgiftcodes join(GiftID == PARENTID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          RECID,",
+				"          OrgName,",
+				"          GRId,",
+				"          StatusDate,",
+				"          Amount,",
+				"          GiftStatus,",
+				"          IMPORT_IDgift,",
+				"          GiftType,",
+				"          Name,",
+				"          Reference,",
+				"          InstallmentFrequency,",
+				"          ScheduleType,",
+				"          InstallmentDate,",
+				"          InstallmentAmount,",
+				"          SalesforceIDorg,",
+				"          DonorId,",
+				"          SalesforceGCid,",
+				"          GiftID,",
+				"          PARENTID,",
+				"          RcodeType,",
+				"          RCode,",
+				"          GiftDesignationCode",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"Giftcodesalesforcerecords select(mapColumn(",
+				"          Rcode,",
+				"          GiftDesignationCode,",
+				"          RcodeType,",
+				"          Name,",
+				"          Salesforceidgift",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectrcodesc",
+				"select2, selectrcodesc join(select2@RCode == selectrcodesc@Rcode",
+				"     && select2@GiftDesignationCode == selectrcodesc@GiftDesignationCode",
+				"     && select2@RcodeType == selectrcodesc@RcodeType,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2",
+				"join2 select(mapColumn(",
+				"          RECID,",
+				"          OrgName,",
+				"          GRId,",
+				"          SalesforceIDorg,",
+				"          DonorId,",
+				"          SalesforceGCid,",
+				"          Rcode,",
+				"          GiftDesignationCode = {select2@GiftDesignationCode},",
+				"          RcodeType = {select2@RcodeType},",
+				"          Name = {select2@Name},",
+				"          Salesforceidgift",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3",
+				"select3 derive(AllocatedPercentage = 100) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          SalesforceGCid,",
+				"          Salesforceidgift,",
+				"          AllocatedPercentage",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select4",
+				"select4 aggregate(groupBy(SalesforceGCid,",
+				"          Salesforceidgift),",
+				"     AllocatedPercentage = max(AllocatedPercentage)) ~> aggregate1",
+				"aggregate1 select(mapColumn(",
+				"          SalesforceGCid,",
+				"          Salesforceidgift,",
+				"          AllocatedPercentage",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select5",
+				"select5 window(over(SalesforceGCid),",
+				"     AllocatedPercentage = round(100.0 / count(SalesforceGCid), 2)) ~> window1",
+				"window1 select(mapColumn(",
+				"          SalesforceGCid,",
+				"          Salesforceidgift,",
+				"          AllocatedPercentage",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select6",
+				"select6 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          SalesforceGCid,",
+				"          Salesforceidgift,",
+				"          AllocatedPercentage",
+				"     )) ~> resfgiftcodesorg"
+			]
+		}
+	}
+}

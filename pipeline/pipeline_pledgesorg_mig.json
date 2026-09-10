@@ -324,7 +324,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "\nselect distinct salesforceIDorg,recid,\ngiftstatus, giftdate,  amount, gifttype, Reference as concatenatednotes, Name,\nScheduleType\nfrom  stg.sf_pledgemergeorg where \nsalesforceIDorg in  ('001Qz00000cYx2EIAS', '001Qz00000cYyL9IAK')",
+						"sqlReaderQuery": "\nselect distinct salesforceIDorg,recid,\ngiftstatus, giftdate,  amount, gifttype, Reference as concatenatednotes, Name,\nScheduleType\nfrom  stg.sf_pledgemergeorg ",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},

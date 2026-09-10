@@ -659,7 +659,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflowmergegcsf_org",
+						"referenceName": "dataflowmergegcsf_acc",
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"sfpledgemergeorg": {

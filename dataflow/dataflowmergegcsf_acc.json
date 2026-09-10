@@ -1,0 +1,181 @@
+{
+	"name": "dataflowmergegcsf_acc",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sfpledgemergeorg"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sfgiftcommitmentsforg"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "gcscheduleordg"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "selectsfgccommorg"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          CONSTITUENT_ID as string,",
+				"          FIRST_NAME as string,",
+				"          RECID as integer,",
+				"          IMPORT_IDrec as string,",
+				"          LAST_NAME as string,",
+				"          GRId as integer,",
+				"          GiftDate as date,",
+				"          StatusDate as date,",
+				"          Amount as decimal(20,4),",
+				"          GiftStatus as string,",
+				"          InstallmentFrequency as string,",
+				"          CONSTIT_ID as integer,",
+				"          IMPORT_IDgift as string,",
+				"          GiftID as integer,",
+				"          InstallmentAmount as decimal(20,4),",
+				"          InstallmentDate as date,",
+				"          Reference as string,",
+				"          GiftType as string,",
+				"          Name as string,",
+				"          ScheduleType as string,",
+				"          SalesforceID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sfpledgemergeorg",
+				"source(output(",
+				"          ID as integer,",
+				"          DonorId as string,",
+				"          SalesforceGCId as string,",
+				"          Name as string,",
+				"          EffectiveStartDate as date,",
+				"          Gift_Type__c as string,",
+				"          Status as string,",
+				"          ExpectedTotalCmtAmount as decimal(16,2),",
+				"          CURRENT_TIMESTAMP as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sfgiftcommitmentsforg",
+				"filter1 select(mapColumn(",
+				"          CONSTITUENT_ID,",
+				"          FIRST_NAME,",
+				"          RECID,",
+				"          IMPORT_IDrec,",
+				"          LAST_NAME,",
+				"          GRId,",
+				"          GiftDate,",
+				"          StatusDate,",
+				"          Amount,",
+				"          GiftStatus,",
+				"          InstallmentFrequency,",
+				"          CONSTIT_ID,",
+				"          IMPORT_IDgift,",
+				"          GiftID,",
+				"          InstallmentAmount,",
+				"          InstallmentDate,",
+				"          Reference,",
+				"          GiftType,",
+				"          Name,",
+				"          ScheduleType,",
+				"          SalesforceID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"sfpledgemergeorg filter(in  (['001Qz00000cXpnPIAS','001Qz00000cY0ioIAC'],SalesforceID)) ~> filter1",
+				"sfgiftcommitmentsforg select(mapColumn(",
+				"          DonorId,",
+				"          SalesforceGCId,",
+				"          Name,",
+				"          EffectiveStartDate,",
+				"          Gift_Type__c,",
+				"          Status,",
+				"          ExpectedTotalCmtAmount",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectsfgccommorg",
+				"select1, selectsfgccommorg join(SalesforceID == DonorId",
+				"     && GiftDate == EffectiveStartDate",
+				"     && GiftStatus == Status",
+				"     && Amount == ExpectedTotalCmtAmount,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          CONSTITUENT_ID,",
+				"          FIRST_NAME,",
+				"          RECID,",
+				"          IMPORT_IDrec,",
+				"          LAST_NAME,",
+				"          GRId,",
+				"          GiftDate,",
+				"          StatusDate,",
+				"          Amount,",
+				"          GiftStatus,",
+				"          InstallmentFrequency,",
+				"          CONSTIT_ID,",
+				"          IMPORT_IDgift,",
+				"          GiftID,",
+				"          InstallmentAmount,",
+				"          InstallmentDate,",
+				"          Reference,",
+				"          GiftType,",
+				"          Name = select1@Name,",
+				"          ScheduleType,",
+				"          SalesforceID,",
+				"          DonorId,",
+				"          SalesforceGCId,",
+				"          Name = selectsfgccommorg@Name,",
+				"          EffectiveStartDate,",
+				"          Gift_Type__c,",
+				"          Status,",
+				"          ExpectedTotalCmtAmount",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> gcscheduleordg"
+			]
+		}
+	}
+}

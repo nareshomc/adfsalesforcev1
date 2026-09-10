@@ -639,6 +639,8 @@
 			{
 				"name": "Dataflowmergegcsforg",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copysfpledgemerge",
@@ -705,7 +707,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "\nselect SalesforceGCid, InstallmentAmount,installmentdate as EffectiveStartDate,\ninstallmentdate as endDate,\n'Custom' as TransactionPeriod,\n'CreateTransactions' as Type,\n\n'1' as TransactionInterval\nfrom stg.sf_gcscheduleorg\n",
+						"sqlReaderQuery": "select SalesforceGCid, InstallmentAmount,installmentdate as EffectiveStartDate,\ninstallmentdate as endDate,\n'Custom' as TransactionPeriod,\n'CreateTransactions' as Type,\n\n'1' as TransactionInterval\nfrom stg.sf_gcscheduleacc",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},

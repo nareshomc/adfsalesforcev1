@@ -16,7 +16,7 @@
 						"referenceName": "ds_migrationdb",
 						"type": "DatasetReference"
 					},
-					"name": "salesforceorg"
+					"name": "salesforceacc"
 				}
 			],
 			"sinks": [
@@ -50,7 +50,7 @@
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> salesforceorg",
+				"     format: 'table') ~> salesforceacc",
 				"sfpledge select(mapColumn(",
 				"          CONSTITUENT_ID,",
 				"          OrgName,",
@@ -102,7 +102,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
-				"salesforceorg select(mapColumn(",
+				"salesforceacc select(mapColumn(",
 				"          ID,",
 				"          GRID,",
 				"          RECID,",

@@ -522,6 +522,11 @@
 						"type": "TabularTranslator",
 						"mappings": [
 							{
+								"source": {
+									"name": "DonorId",
+									"type": "String",
+									"physicalType": "reference"
+								},
 								"sink": {
 									"name": "DonorId",
 									"type": "String",
@@ -529,6 +534,11 @@
 								}
 							},
 							{
+								"source": {
+									"name": "Id",
+									"type": "String",
+									"physicalType": "id"
+								},
 								"sink": {
 									"name": "SalesforceGCId",
 									"type": "String",
@@ -536,6 +546,11 @@
 								}
 							},
 							{
+								"source": {
+									"name": "Name",
+									"type": "String",
+									"physicalType": "string"
+								},
 								"sink": {
 									"name": "Name",
 									"type": "String",
@@ -543,6 +558,11 @@
 								}
 							},
 							{
+								"source": {
+									"name": "EffectiveStartDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
 								"sink": {
 									"name": "EffectiveStartDate",
 									"type": "DateTime",
@@ -550,6 +570,11 @@
 								}
 							},
 							{
+								"source": {
+									"name": "Gift_Type__c",
+									"type": "String",
+									"physicalType": "picklist"
+								},
 								"sink": {
 									"name": "Gift_Type__c",
 									"type": "String",
@@ -557,6 +582,11 @@
 								}
 							},
 							{
+								"source": {
+									"name": "Status",
+									"type": "String",
+									"physicalType": "picklist"
+								},
 								"sink": {
 									"name": "Status",
 									"type": "String",
@@ -564,19 +594,17 @@
 								}
 							},
 							{
+								"source": {
+									"name": "ExpectedTotalCmtAmount",
+									"type": "Decimal",
+									"physicalType": "currency"
+								},
 								"sink": {
 									"name": "ExpectedTotalCmtAmount",
 									"type": "Decimal",
 									"physicalType": "decimal",
 									"scale": 2,
 									"precision": 16
-								}
-							},
-							{
-								"sink": {
-									"name": "CURRENT_TIMESTAMP",
-									"type": "DateTime",
-									"physicalType": "datetime"
 								}
 							}
 						],

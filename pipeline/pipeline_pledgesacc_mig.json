@@ -53,8 +53,10 @@
 				}
 			},
 			{
-				"name": "Dataflowgiftcodes",
+				"name": "Dataflowgiftcodes-nr",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowpleadgesmain",
@@ -106,7 +108,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "Dataflowgiftcodes",
+						"activity": "Dataflowgiftcodes-nr",
 						"dependencyConditions": [
 							"Succeeded"
 						]

@@ -854,14 +854,6 @@
 								"SchemaName": "stg",
 								"TableName": "sf_keyworkersog"
 							}
-						},
-						"linkedServiceParameters": {
-							"sinkkeyworkers": {
-								"schemaLinkedService": {
-									"SchemaName": "stg",
-									"TableName": "sf_keyworkersog"
-								}
-							}
 						}
 					},
 					"compute": {

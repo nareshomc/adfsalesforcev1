@@ -22,11 +22,7 @@
 				"precision": 10
 			},
 			{
-				"name": "CONSTITUENT_ID",
-				"type": "nvarchar"
-			},
-			{
-				"name": "FIRST_NAME",
+				"name": "OrgName",
 				"type": "nvarchar"
 			},
 			{
@@ -36,10 +32,6 @@
 			},
 			{
 				"name": "IMPORT_IDrec",
-				"type": "nvarchar"
-			},
-			{
-				"name": "LAST_NAME",
 				"type": "nvarchar"
 			},
 			{
@@ -110,34 +102,8 @@
 				"type": "nvarchar"
 			},
 			{
-				"name": "SalesforceID",
+				"name": "SalesforceIDorg",
 				"type": "nvarchar"
-			},
-			{
-				"name": "DonorId",
-				"type": "nvarchar"
-			},
-			{
-				"name": "SalesforceGCId",
-				"type": "nvarchar"
-			},
-			{
-				"name": "EffectiveStartDate",
-				"type": "date"
-			},
-			{
-				"name": "Gift_Type__c",
-				"type": "nvarchar"
-			},
-			{
-				"name": "Status",
-				"type": "nvarchar"
-			},
-			{
-				"name": "ExpectedTotalCmtAmount",
-				"type": "decimal",
-				"precision": 16,
-				"scale": 2
 			},
 			{
 				"name": "CURRENT_TIMESTAMP",

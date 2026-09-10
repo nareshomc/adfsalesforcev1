@@ -174,31 +174,7 @@
 				"     recreate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     mapColumn(",
-				"          RECID,",
-				"          OrgName,",
-				"          IMPORT_IDrec,",
-				"          GRId,",
-				"          GiftDate,",
-				"          StatusDate,",
-				"          Amount,",
-				"          GiftStatus,",
-				"          IMPORT_IDgift,",
-				"          GiftType,",
-				"          Name,",
-				"          Reference,",
-				"          InstallmentFrequency,",
-				"          ScheduleType,",
-				"          InstallmentDate,",
-				"          InstallmentAmount,",
-				"          SalesforceIDorg,",
-				"          DonorId,",
-				"          SalesforceGCid,",
-				"          EffectiveStartDate,",
-				"          Gift_Type__c,",
-				"          GiftID",
-				"     )) ~> gcscheduleordg"
+				"     skipDuplicateMapOutputs: true) ~> gcscheduleordg"
 			]
 		}
 	}

@@ -74,7 +74,7 @@
 				"          DonorId as string,",
 				"          Id as string,",
 				"          Name as string,",
-				"          EffectiveStartDate as timestamp,",
+				"          EffectiveStartDate as date,",
 				"          Gift_Type__c as string,",
 				"          Status as string,",
 				"          ExpectedTotalCmtAmount as decimal(16,2)",

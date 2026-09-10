@@ -807,14 +807,6 @@
 								"SchemaName": "stg",
 								"TableName": "sf_resfgiftcodesorg"
 							}
-						},
-						"linkedServiceParameters": {
-							"resfgiftcodesorg": {
-								"schemaLinkedService": {
-									"SchemaName": "stg",
-									"TableName": "sf_resfgiftcodesorg"
-								}
-							}
 						}
 					},
 					"compute": {

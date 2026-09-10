@@ -635,6 +635,201 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Dataflowmergegcsforg",
+				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Copysfpledgemerge",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflowmergegcsf_org",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"sfpledgemergeorg": {
+								"SchemaName": "stg",
+								"TableName": "sf_pledgemergeacc"
+							},
+							"sfgiftcommitmentsforg": {
+								"SchemaName": "stg",
+								"TableName": "sf_giftcommitmentsfacc"
+							},
+							"gcscheduleordg": {
+								"SchemaName": "stg",
+								"TableName": "sf_gcscheduleacc"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Copygiftcommschedule",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Dataflowmergegcsforg",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "\nselect SalesforceGCid, InstallmentAmount,installmentdate as EffectiveStartDate,\ninstallmentdate as endDate,\n'Custom' as TransactionPeriod,\n'CreateTransactions' as Type,\n\n'1' as TransactionInterval\nfrom stg.sf_gcscheduleorg\n",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SalesforceServiceCloudV2Sink",
+						"writeBatchSize": 100000,
+						"writeBehavior": "insert"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "SalesforceGCid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "GiftCommitmentId",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionInterval",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "TransactionInterval",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "InstallmentAmount",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 4,
+									"precision": 20
+								},
+								"sink": {
+									"name": "TransactionAmount",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"source": {
+									"name": "EffectiveStartDate",
+									"type": "Date",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "StartDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "endDate",
+									"type": "Date",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "EndDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionPeriod",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "TransactionPeriod",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"source": {
+									"name": "Type",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Type",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "stg",
+							"TableName": "sf_gcscheduleorg"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_salesforcegiftcommschedulemig",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []

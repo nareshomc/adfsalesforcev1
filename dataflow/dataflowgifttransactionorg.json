@@ -61,9 +61,6 @@
 					"name": "join2"
 				},
 				{
-					"name": "aggregate1"
-				},
-				{
 					"name": "select3"
 				}
 			],
@@ -302,12 +299,6 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join2",
-				"select3 aggregate(groupBy(select3@GIFTid,",
-				"          SalesforceIDorg,",
-				"          DonorId,",
-				"          SalesforceGCId,",
-				"          Amount),",
-				"     ExpectedTotalCmtAmount = max(ExpectedTotalCmtAmount)) ~> aggregate1",
 				"join2 select(mapColumn(",
 				"          ActualAmount,",
 				"          CONSTIT_ID,",
@@ -325,7 +316,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3",
-				"aggregate1 sink(allowSchemaDrift: true,",
+				"select3 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          ID as integer,",

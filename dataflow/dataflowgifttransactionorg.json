@@ -20,7 +20,14 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "selectgift"
+				},
+				{
+					"name": "selecthistory"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          ACKNOWLEDGE_FLAG as short,",
@@ -161,10 +168,35 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> giftorg",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          InstallmentPaymentId as integer,",
+				"          InstallmentId as integer,",
+				"          PaymentId as integer,",
+				"          PledgeId as integer,",
+				"          Amount as decimal(20,4)",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> installmenthistory"
+				"     format: 'table') ~> installmenthistory",
+				"giftorg select(mapColumn(",
+				"          ActualAmount = AMOUNT_SUBJECT_TO_VAT,",
+				"          CONSTIT_ID,",
+				"          DATE_1ST_PAY,",
+				"          GiftDate = DTE,",
+				"          GIFTid = ID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectgift",
+				"installmenthistory select(mapColumn(",
+				"          InstallmentPaymentId,",
+				"          InstallmentId,",
+				"          PaymentId,",
+				"          PledgeId,",
+				"          Amount",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selecthistory"
 			]
 		}
 	}

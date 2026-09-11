@@ -298,6 +298,7 @@
 				"          CONSTIT_ID,",
 				"          IMPORT_IDgift,",
 				"          GiftID,",
+				"          InstallmentID,",
 				"          InstallmentAmount,",
 				"          InstallmentDate,",
 				"          Reference,",

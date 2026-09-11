@@ -22,10 +22,6 @@
 				"precision": 10
 			},
 			{
-				"name": "CONSTITUENT_ID",
-				"type": "nvarchar"
-			},
-			{
 				"name": "OrgName",
 				"type": "nvarchar"
 			},
@@ -55,7 +51,7 @@
 				"name": "Amount",
 				"type": "decimal",
 				"precision": 20,
-				"scale": 2
+				"scale": 4
 			},
 			{
 				"name": "GiftStatus",
@@ -88,7 +84,7 @@
 				"name": "InstallmentAmount",
 				"type": "decimal",
 				"precision": 20,
-				"scale": 2
+				"scale": 4
 			},
 			{
 				"name": "InstallmentDate",
@@ -108,6 +104,10 @@
 			},
 			{
 				"name": "ScheduleType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SalesforceIDorg",
 				"type": "nvarchar"
 			},
 			{

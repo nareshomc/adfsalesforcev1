@@ -205,6 +205,7 @@
 				"          CONSTIT_ID as integer,",
 				"          IMPORT_IDgift as string,",
 				"          GiftID as integer,",
+				"          InstallmentID as integer,",
 				"          InstallmentAmount as decimal(20,4),",
 				"          InstallmentDate as date,",
 				"          Reference as string,",

@@ -1041,6 +1041,8 @@
 			{
 				"name": "Data flow1",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -1083,8 +1085,6 @@
 			{
 				"name": "Copy data1",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Data flow1",
@@ -1104,7 +1104,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select \n'Historic Test1' as Name,\n'Paid' as Status,\nDonorID,\nSalesforceGCID,\nAmount as OriginalAmount,\n'Cash Donation' as PaymentMethod,\nDATE_1ST_PAY as TransactionDate,\nGiftdate as TransactionDueDate\nfrom stg.sf_transactionorg",
+						"sqlReaderQuery": "select \n'Historic Pledge Donation' as Name,\n'Paid' as Status,\nDonorID,\nSalesforceGCID,\nAmount as OriginalAmount,\n'Cash Donation' as PaymentMethod,\nTransactiondate as TransactionDate,\nTransactiondate as TransactionDueDate\nfrom stg.sf_transactionorg",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},

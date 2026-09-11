@@ -1112,7 +1112,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select \n'Historic Test' as Name,\n'Paid' as Status,\nDonorID,\nSalesforceGCID,\nActualamount as OriginalAmount,\n'Cash Donation' as PaymentMenhod\nfrom stg.sf_transactionorg",
+						"sqlReaderQuery": "select \n'Historic Test' as Name,\n'Paid' as Status,\nDonorID,\nSalesforceGCID,\nActualamount as OriginalAmount,\n'Cash Donation' as PaymentMethod,\nDATE_1ST_PAY as TransactionDate\nfrom stg.sf_transactionorg",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -1126,27 +1126,11 @@
 						"type": "TabularTranslator",
 						"mappings": [
 							{
-								"sink": {
-									"name": "Id",
+								"source": {
+									"name": "Name",
 									"type": "String",
-									"physicalType": "id"
-								}
-							},
-							{
-								"sink": {
-									"name": "OwnerId",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "IsDeleted",
-									"type": "Boolean",
-									"physicalType": "boolean"
-								}
-							},
-							{
+									"physicalType": "varchar"
+								},
 								"sink": {
 									"name": "Name",
 									"type": "String",
@@ -1154,64 +1138,8 @@
 								}
 							},
 							{
-								"sink": {
-									"name": "RecordTypeId",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "CreatedDate",
-									"type": "DateTime",
-									"physicalType": "datetime"
-								}
-							},
-							{
-								"sink": {
-									"name": "CreatedById",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "LastModifiedDate",
-									"type": "DateTime",
-									"physicalType": "datetime"
-								}
-							},
-							{
-								"sink": {
-									"name": "LastModifiedById",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "SystemModstamp",
-									"type": "DateTime",
-									"physicalType": "datetime"
-								}
-							},
-							{
-								"sink": {
-									"name": "LastViewedDate",
-									"type": "DateTime",
-									"physicalType": "datetime"
-								}
-							},
-							{
-								"sink": {
-									"name": "LastReferencedDate",
-									"type": "DateTime",
-									"physicalType": "datetime"
-								}
-							},
-							{
 								"source": {
-									"name": "DonorId",
+									"name": "DonorID",
 									"type": "String",
 									"physicalType": "nvarchar"
 								},
@@ -1223,89 +1151,17 @@
 							},
 							{
 								"sink": {
-									"name": "CampaignId",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "Description",
-									"type": "String",
-									"physicalType": "textarea"
-								}
-							},
-							{
-								"source": {
-									"name": "ActualAmount",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 6,
-									"precision": 30
-								},
-								"sink": {
-									"name": "CurrentAmount",
-									"type": "Decimal",
-									"physicalType": "currency"
-								}
-							},
-							{
-								"sink": {
-									"name": "RefundedAmount",
-									"type": "Decimal",
-									"physicalType": "currency"
-								}
-							},
-							{
-								"source": {
-									"name": "Amount",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 4,
-									"precision": 20
-								},
-								"sink": {
-									"name": "DonorCoverAmount",
-									"type": "Decimal",
-									"physicalType": "currency"
-								}
-							},
-							{
-								"sink": {
 									"name": "TransactionDate",
 									"type": "DateTime",
 									"physicalType": "date"
 								}
 							},
 							{
-								"sink": {
-									"name": "IsPartiallyRefunded",
-									"type": "Boolean",
-									"physicalType": "boolean"
-								}
-							},
-							{
-								"sink": {
-									"name": "IsPaid",
-									"type": "Boolean",
-									"physicalType": "boolean"
-								}
-							},
-							{
-								"sink": {
-									"name": "IsWrittenOff",
-									"type": "Boolean",
-									"physicalType": "boolean"
-								}
-							},
-							{
-								"sink": {
-									"name": "IsFullyRefunded",
-									"type": "Boolean",
-									"physicalType": "boolean"
-								}
-							},
-							{
+								"source": {
+									"name": "Status",
+									"type": "String",
+									"physicalType": "varchar"
+								},
 								"sink": {
 									"name": "Status",
 									"type": "String",
@@ -1313,6 +1169,11 @@
 								}
 							},
 							{
+								"source": {
+									"name": "PaymentMenhod",
+									"type": "String",
+									"physicalType": "varchar"
+								},
 								"sink": {
 									"name": "PaymentMethod",
 									"type": "String",
@@ -1328,7 +1189,7 @@
 							},
 							{
 								"source": {
-									"name": "SalesforceGCId",
+									"name": "SalesforceGCID",
 									"type": "String",
 									"physicalType": "nvarchar"
 								},
@@ -1339,465 +1200,17 @@
 								}
 							},
 							{
-								"sink": {
-									"name": "MatchingEmployerTransactionId",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
+								"source": {
+									"name": "OriginalAmount",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 30
+								},
 								"sink": {
 									"name": "OriginalAmount",
 									"type": "Decimal",
 									"physicalType": "currency"
-								}
-							},
-							{
-								"sink": {
-									"name": "PaymentIdentifier",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "CheckDate",
-									"type": "DateTime",
-									"physicalType": "date"
-								}
-							},
-							{
-								"sink": {
-									"name": "AcknowledgementDate",
-									"type": "DateTime",
-									"physicalType": "date"
-								}
-							},
-							{
-								"sink": {
-									"name": "GiftType",
-									"type": "String",
-									"physicalType": "picklist"
-								}
-							},
-							{
-								"sink": {
-									"name": "OutreachSourceCodeId",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "GiftCommitmentScheduleId",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "TransactionDueDate",
-									"type": "DateTime",
-									"physicalType": "date"
-								}
-							},
-							{
-								"sink": {
-									"name": "PaymentInstrumentId",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "GatewayTransactionFee",
-									"type": "Decimal",
-									"physicalType": "currency"
-								}
-							},
-							{
-								"sink": {
-									"name": "ProcessorTransactionFee",
-									"type": "Decimal",
-									"physicalType": "currency"
-								}
-							},
-							{
-								"sink": {
-									"name": "TotalTransactionFee",
-									"type": "Decimal",
-									"physicalType": "currency"
-								}
-							},
-							{
-								"sink": {
-									"name": "ProcessorReference",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "GatewayReference",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "LastGatewayResponseCode",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "LastGatewayErrorMessage",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "LastGatewayProcessedDate",
-									"type": "DateTime",
-									"physicalType": "datetime"
-								}
-							},
-							{
-								"sink": {
-									"name": "NonTaxDeductibleAmount",
-									"type": "Decimal",
-									"physicalType": "currency"
-								}
-							},
-							{
-								"sink": {
-									"name": "TaxReceiptStatus",
-									"type": "String",
-									"physicalType": "picklist"
-								}
-							},
-							{
-								"sink": {
-									"name": "GenerationalCohort",
-									"type": "String",
-									"physicalType": "picklist"
-								}
-							},
-							{
-								"sink": {
-									"name": "TaxDeductionAmount",
-									"type": "Decimal",
-									"physicalType": "currency"
-								}
-							},
-							{
-								"sink": {
-									"name": "PartyPhilanthropicRsrchPrflId",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "fdff__Payment_Method__c",
-									"type": "String",
-									"physicalType": "picklist"
-								}
-							},
-							{
-								"sink": {
-									"name": "fdff__Bank_Statement_Description__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "fdff__Custom_Payment_Reference__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "fdff__Generated_Payment_QR__c",
-									"type": "String",
-									"physicalType": "textarea"
-								}
-							},
-							{
-								"sink": {
-									"name": "fdff__Generated_Payment_Reference__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "fdff__Generated_Payment_Url__c",
-									"type": "String",
-									"physicalType": "url"
-								}
-							},
-							{
-								"sink": {
-									"name": "fdff__Mandate__c",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "fdff__Payment_Profile__c",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "fdff__Recurring_Payment_QR__c",
-									"type": "String",
-									"physicalType": "textarea"
-								}
-							},
-							{
-								"sink": {
-									"name": "fdff__Recurring_Payment_Reference__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "fdff__Recurring_Payment_Url__c",
-									"type": "String",
-									"physicalType": "url"
-								}
-							},
-							{
-								"sink": {
-									"name": "fdff__Final_Payment_Reference__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "fdff__Payment_Processor__c",
-									"type": "String",
-									"physicalType": "picklist"
-								}
-							},
-							{
-								"sink": {
-									"name": "fdff__Target__c",
-									"type": "String",
-									"physicalType": "picklist"
-								}
-							},
-							{
-								"sink": {
-									"name": "Committee_Code__c",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "Account_Code__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Cost_Centre__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Appeal_Code__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Batch_Type__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "SUN_Journal_Id__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Gift_Team__c",
-									"type": "String",
-									"physicalType": "picklist"
-								}
-							},
-							{
-								"sink": {
-									"name": "Related_Gift_Aid_Transaction__c",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "Related_Gift_Transaction__c",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "Bank_Account_Name__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Bank_Account_Number__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Bank_Account_Sort_Code__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Card_Expiry_Date__c",
-									"type": "DateTime",
-									"physicalType": "date"
-								}
-							},
-							{
-								"sink": {
-									"name": "Card_Issue_Number__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Card_Number__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Card_Start_Date__c",
-									"type": "DateTime",
-									"physicalType": "date"
-								}
-							},
-							{
-								"sink": {
-									"name": "Stripe_Customer_Id__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Stripe_Order_Id__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Stripe_Recent_Transaction__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Stripe_Subscription_Id__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Bank_Account__c",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "Committee__c",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "Control_Account__c",
-									"type": "String",
-									"physicalType": "reference"
-								}
-							},
-							{
-								"sink": {
-									"name": "Supplier_Batch_Id__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Supplier_Id__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Supplier_Name__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Supplier_Reference__c",
-									"type": "String",
-									"physicalType": "string"
-								}
-							},
-							{
-								"sink": {
-									"name": "Supplier_Transaction_Registration_Date__c",
-									"type": "DateTime",
-									"physicalType": "datetime"
-								}
-							},
-							{
-								"sink": {
-									"name": "f_Supplier_Name__c",
-									"type": "String",
-									"physicalType": "string"
 								}
 							}
 						],

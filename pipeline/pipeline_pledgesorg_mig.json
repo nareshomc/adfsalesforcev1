@@ -1112,7 +1112,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select \n'Historic Test' as Name,\n'Paid' as Status,\nDonorID,\nSalesforceGCID,\nActualamount as OriginalAmount,\n'Cash Donation' as PaymentMethod,\nDATE_1ST_PAY as TransactionDate\nfrom stg.sf_transactionorg",
+						"sqlReaderQuery": "select \n'Historic Test' as Name,\n'Paid' as Status,\nDonorID,\nSalesforceGCID,\nActualamount as OriginalAmount,\n'Cash Donation' as PaymentMethod,\nDATE_1ST_PAY as TransactionDate,\nGiftdate as TransactionDueDate\nfrom stg.sf_transactionorg",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -1209,6 +1209,18 @@
 									"name": "OriginalAmount",
 									"type": "Decimal",
 									"physicalType": "currency"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionDueDate",
+									"type": "Date",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "TransactionDueDate",
+									"type": "DateTime",
+									"physicalType": "date"
 								}
 							}
 						],

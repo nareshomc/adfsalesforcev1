@@ -1150,6 +1150,11 @@
 								}
 							},
 							{
+								"source": {
+									"name": "TransactionDate",
+									"type": "Date",
+									"physicalType": "date"
+								},
 								"sink": {
 									"name": "TransactionDate",
 									"type": "DateTime",
@@ -1170,19 +1175,12 @@
 							},
 							{
 								"source": {
-									"name": "PaymentMenhod",
+									"name": "PaymentMethod",
 									"type": "String",
 									"physicalType": "varchar"
 								},
 								"sink": {
 									"name": "PaymentMethod",
-									"type": "String",
-									"physicalType": "picklist"
-								}
-							},
-							{
-								"sink": {
-									"name": "AcknowledgementStatus",
 									"type": "String",
 									"physicalType": "picklist"
 								}

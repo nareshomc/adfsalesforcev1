@@ -19,7 +19,15 @@
 					"name": "installmenthistory"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sftransaction"
+				}
+			],
 			"transformations": [
 				{
 					"name": "selectgift"
@@ -35,6 +43,9 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "filter2"
 				}
 			],
 			"scriptLines": [
@@ -58,10 +69,10 @@
 				"          CURRENCY_COUNTRY as integer,",
 				"          CURRENCY_EXCHANGE_RATE as decimal(34,10),",
 				"          CURRENCY_RECEIPT_AMOUNT as decimal(30,6),",
-				"          DATE_1ST_PAY as timestamp,",
+				"          DATE_1ST_PAY as date,",
 				"          DATEADDED as timestamp,",
 				"          DATECHANGED as timestamp,",
-				"          DTE as timestamp,",
+				"          DTE as date,",
 				"          EXPIRES_ON as string,",
 				"          GIFT_CODE as integer,",
 				"          ID as integer,",
@@ -176,7 +187,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> giftorg",
+				"     query: 'select * from dbo.gift3 where id in (7604151, 8392505)',",
+				"     format: 'query') ~> giftorg",
 				"source(output(",
 				"          InstallmentPaymentId as integer,",
 				"          InstallmentId as integer,",
@@ -197,7 +209,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectgift",
-				"installmenthistory select(mapColumn(",
+				"filter2 select(mapColumn(",
 				"          InstallmentId,",
 				"          PaymentId,",
 				"          PledgeId,",
@@ -217,13 +229,44 @@
 				"          DATE_1ST_PAY,",
 				"          GiftDate,",
 				"          GIFTid,",
-				"          InstallmentId,",
-				"          PaymentId,",
-				"          PledgeId,",
 				"          Amount",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"installmenthistory filter(in ([7604151, 8392505], PledgeId)) ~> filter2",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          ID as integer,",
+				"          OrgName as string,",
+				"          RECID as integer,",
+				"          IMPORT_IDrec as string,",
+				"          GRId as integer,",
+				"          GiftDate as date,",
+				"          StatusDate as date,",
+				"          Amount as decimal(20,4),",
+				"          GiftStatus as string,",
+				"          InstallmentFrequency as string,",
+				"          CONSTIT_ID as integer,",
+				"          IMPORT_IDgift as string,",
+				"          GiftID as integer,",
+				"          InstallmentAmount as decimal(20,4),",
+				"          InstallmentDate as date,",
+				"          Reference as string,",
+				"          GiftType as string,",
+				"          Name as string,",
+				"          ScheduleType as string,",
+				"          SalesforceIDorg as string,",
+				"          CURRENT_TIMESTAMP as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sftransaction"
 			]
 		}
 	}

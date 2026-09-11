@@ -1199,8 +1199,11 @@
 							},
 							{
 								"source": {
-									"name": "Amount",
-									"physicalType": "decimal"
+									"name": "OriginalAmount",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 4,
+									"precision": 20
 								},
 								"sink": {
 									"name": "OriginalAmount",

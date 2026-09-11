@@ -203,7 +203,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: 'select * from dbo.gift3 where id in (7604151, 8392505)',",
+				"     query: 'select * from dbo.gift3 where CONSTIT_ID = 679827',",
 				"     format: 'query') ~> giftorg",
 				"source(output(",
 				"          InstallmentPaymentId as integer,",

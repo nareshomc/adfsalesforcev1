@@ -26,6 +26,15 @@
 				},
 				{
 					"name": "selecthistory"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -179,7 +188,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> installmenthistory",
-				"giftorg select(mapColumn(",
+				"filter1 select(mapColumn(",
 				"          ActualAmount = AMOUNT_SUBJECT_TO_VAT,",
 				"          CONSTIT_ID,",
 				"          DATE_1ST_PAY,",
@@ -189,14 +198,32 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectgift",
 				"installmenthistory select(mapColumn(",
-				"          InstallmentPaymentId,",
 				"          InstallmentId,",
 				"          PaymentId,",
 				"          PledgeId,",
 				"          Amount",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selecthistory"
+				"     skipDuplicateMapOutputs: true) ~> selecthistory",
+				"giftorg filter(in ([7604151, 8392505], ID)) ~> filter1",
+				"selectgift, selecthistory join(GIFTid == PledgeId,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          ActualAmount,",
+				"          CONSTIT_ID,",
+				"          DATE_1ST_PAY,",
+				"          GiftDate,",
+				"          GIFTid,",
+				"          InstallmentId,",
+				"          PaymentId,",
+				"          PledgeId,",
+				"          Amount",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}

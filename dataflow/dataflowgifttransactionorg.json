@@ -265,7 +265,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selecthistory",
-				"giftorg filter(in ([7604151, 8392505], ID)) ~> filter1",
+				"giftorg filter(CONSTIT_ID == 679827 && TYPE == 2  ) ~> filter1",
 				"selectgift, selecthistory join(GIFTid == PledgeId,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",

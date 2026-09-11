@@ -1061,7 +1061,7 @@
 							},
 							"installmenthistory": {
 								"SchemaName": "dbo",
-								"TableName": "InstallPayment3"
+								"TableName": "InstallmentPayment3"
 							},
 							"sfgcscheduleorg": {
 								"SchemaName": "stg",

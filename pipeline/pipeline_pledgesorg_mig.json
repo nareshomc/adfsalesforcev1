@@ -1126,7 +1126,11 @@
 				"inputs": [
 					{
 						"referenceName": "ds_migrationdb",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "stg",
+							"TableName": "sf_transactionorg"
+						}
 					}
 				],
 				"outputs": [

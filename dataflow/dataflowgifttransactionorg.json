@@ -49,9 +49,6 @@
 					"name": "select1"
 				},
 				{
-					"name": "filter2"
-				},
-				{
 					"name": "select2"
 				},
 				{
@@ -253,7 +250,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectgift",
-				"filter2 select(mapColumn(",
+				"installmenthistory select(mapColumn(",
 				"          InstallmentId,",
 				"          PaymentId,",
 				"          PledgeId,",
@@ -276,7 +273,6 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"installmenthistory filter(in ([7604151, 8392505], PledgeId)) ~> filter2",
 				"sfgcscheduleorg select(mapColumn(",
 				"          OrgName,",
 				"          GRId,",

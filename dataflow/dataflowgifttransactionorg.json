@@ -301,7 +301,6 @@
 				"          ActualAmount,",
 				"          CONSTIT_ID,",
 				"          InstallmentId = select1@InstallmentId,",
-				"          DATE_1ST_PAY,",
 				"          TransactionDate,",
 				"          GIFTid = select1@GIFTid,",
 				"          Amount,",

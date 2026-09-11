@@ -309,7 +309,6 @@
 				"          Amount,",
 				"          OrgName,",
 				"          GRId,",
-				"          GiftID = select2@GiftID,",
 				"          SalesforceIDorg,",
 				"          DonorId,",
 				"          SalesforceGCId",

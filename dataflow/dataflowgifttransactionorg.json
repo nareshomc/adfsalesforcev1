@@ -43,9 +43,6 @@
 					"name": "selecthistory"
 				},
 				{
-					"name": "filter1"
-				},
-				{
 					"name": "join1"
 				},
 				{
@@ -248,7 +245,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sfgcscheduleorg",
-				"filter1 select(mapColumn(",
+				"giftorg select(mapColumn(",
 				"          ActualAmount = AMOUNT_SUBJECT_TO_VAT,",
 				"          CONSTIT_ID,",
 				"          TransactionDate = DTE,",
@@ -264,7 +261,6 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selecthistory",
-				"giftorg filter(CONSTIT_ID == 679827  ) ~> filter1",
 				"selectgift, selecthistory join(GIFTid == PaymentId,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",

@@ -686,6 +686,8 @@
 			{
 				"name": "Copygiftcommschedule",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowmergegcsfacc",
@@ -833,8 +835,6 @@
 			{
 				"name": "Dataflowkeyworkeracc",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copygiftcommschedule",

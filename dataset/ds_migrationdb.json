@@ -115,6 +115,10 @@
 				"type": "nvarchar"
 			},
 			{
+				"name": "SalesforceID",
+				"type": "nvarchar"
+			},
+			{
 				"name": "CURRENT_TIMESTAMP",
 				"type": "datetime",
 				"precision": 23,

@@ -835,6 +835,8 @@
 			{
 				"name": "Dataflowkeyworkeracc",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copygiftcommschedule",
@@ -880,8 +882,6 @@
 			{
 				"name": "Copygiftcommitment",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowkeyworkeracc",
@@ -968,8 +968,6 @@
 			{
 				"name": "Data flow1",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copygiftcommitment",
@@ -1006,14 +1004,6 @@
 							"sftransaction": {
 								"SchemaName": "stg",
 								"TableName": "sf_transactionacc"
-							}
-						},
-						"linkedServiceParameters": {
-							"sftransaction": {
-								"schemaLinkedService": {
-									"SchemaName": "stg",
-									"TableName": "sf_transactionacc"
-								}
 							}
 						}
 					},

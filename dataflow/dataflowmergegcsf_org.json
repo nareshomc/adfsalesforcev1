@@ -40,9 +40,6 @@
 				},
 				{
 					"name": "select2"
-				},
-				{
-					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -87,7 +84,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sfgiftcommitmentsforg",
-				"filter1 select(mapColumn(",
+				"sfpledgemergeorg select(mapColumn(",
 				"          OrgName,",
 				"          RECID,",
 				"          IMPORT_IDrec,",
@@ -161,7 +158,6 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
-				"sfpledgemergeorg filter(SalesforceIDorg  == '001Qz00000cYuejIAC') ~> filter1",
 				"select2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

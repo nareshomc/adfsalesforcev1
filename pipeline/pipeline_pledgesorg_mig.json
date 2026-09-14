@@ -190,14 +190,6 @@
 								"SchemaName": "stg",
 								"TableName": "sf_pledgemergeorg"
 							}
-						},
-						"linkedServiceParameters": {
-							"sinkpledgemerge": {
-								"schemaLinkedService": {
-									"SchemaName": "stg",
-									"TableName": "sf_pledgemergeorg"
-								}
-							}
 						}
 					},
 					"compute": {
@@ -342,7 +334,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "\nselect distinct salesforceIDorg,recid,\ngiftstatus, giftdate,  amount, gifttype, Reference as concatenatednotes, Name,\nScheduleType\nfrom  stg.sf_pledgemergeorg ",
+						"sqlReaderQuery": "\nselect distinct salesforceIDorg,recid,giftid,\ngiftstatus, giftdate,  amount, gifttype, Reference as concatenatednotes, Name,\nScheduleType\nfrom  stg.sf_pledgemergeorg ",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},

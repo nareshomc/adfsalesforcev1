@@ -1001,11 +1001,11 @@
 							},
 							"sfgcscheduleorg": {
 								"SchemaName": "stg",
-								"TableName": "sf_gcscheduleorg"
+								"TableName": "sf_gcscheduleacc"
 							},
 							"sftransaction": {
 								"SchemaName": "stg",
-								"TableName": "sf_transactionorg"
+								"TableName": "sf_transactionacc"
 							}
 						}
 					},

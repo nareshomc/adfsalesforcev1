@@ -22,7 +22,11 @@
 				"precision": 10
 			},
 			{
-				"name": "OrgName",
+				"name": "CONSTITUENT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FIRST_NAME",
 				"type": "nvarchar"
 			},
 			{
@@ -32,6 +36,10 @@
 			},
 			{
 				"name": "IMPORT_IDrec",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LAST_NAME",
 				"type": "nvarchar"
 			},
 			{
@@ -104,10 +112,6 @@
 			},
 			{
 				"name": "ScheduleType",
-				"type": "nvarchar"
-			},
-			{
-				"name": "SalesforceIDorg",
 				"type": "nvarchar"
 			},
 			{

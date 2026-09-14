@@ -964,6 +964,217 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Copygiftcommitment",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflowgifttransactionorg",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"giftorg": {
+								"SchemaName": "dbo",
+								"TableName": "gift3"
+							},
+							"installmenthistory": {
+								"SchemaName": "dbo",
+								"TableName": "InstallmentPayment3"
+							},
+							"sfgcscheduleorg": {
+								"SchemaName": "stg",
+								"TableName": "sf_gcscheduleorg"
+							},
+							"sftransaction": {
+								"SchemaName": "stg",
+								"TableName": "sf_transactionorg"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Data flow1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "select \n'Historic Pledge Donation' as Name,\n'Paid' as Status,\nDonorID,\nSalesforceGCID,\nAmount as OriginalAmount,\n'Cash Donation' as PaymentMethod,\nTransactiondate as TransactionDate,\nTransactiondate as TransactionDueDate\nfrom stg.sf_transactionorg",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SalesforceServiceCloudV2Sink",
+						"writeBatchSize": 100000,
+						"writeBehavior": "insert"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Name",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Name",
+									"type": "String",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "DonorID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "DonorId",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionDate",
+									"type": "Date",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "TransactionDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Status",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Status",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"source": {
+									"name": "PaymentMethod",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "PaymentMethod",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"source": {
+									"name": "SalesforceGCID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "GiftCommitmentId",
+									"type": "String",
+									"physicalType": "reference"
+								}
+							},
+							{
+								"source": {
+									"name": "OriginalAmount",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 4,
+									"precision": 20
+								},
+								"sink": {
+									"name": "OriginalAmount",
+									"type": "Decimal",
+									"physicalType": "currency"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionDueDate",
+									"type": "Date",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "TransactionDueDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "stg",
+							"TableName": "sf_transactionorg"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_salesforcegiftTransactionmig",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []

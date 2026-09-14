@@ -1015,6 +1015,14 @@
 								"SchemaName": "stg",
 								"TableName": "sf_transactionacc"
 							}
+						},
+						"linkedServiceParameters": {
+							"sftransaction": {
+								"schemaLinkedService": {
+									"SchemaName": "stg",
+									"TableName": "sf_transactionacc"
+								}
+							}
 						}
 					},
 					"compute": {

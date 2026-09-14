@@ -333,7 +333,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select distinct salesforceID,recid,\ngiftstatus, giftdate,  amount, gifttype, Reference as concatenatednotes, Name,\nScheduleType\nfrom  stg.sf_pledgemergeacc ",
+						"sqlReaderQuery": "select distinct salesforceID,recid,giftid,\ngiftstatus, giftdate,  amount, gifttype, Reference as concatenatednotes, Name,\nScheduleType\nfrom  stg.sf_pledgemergeacc ",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -1037,8 +1037,6 @@
 			{
 				"name": "Copy data1",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Data flow1",

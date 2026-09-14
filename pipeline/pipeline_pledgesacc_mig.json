@@ -672,6 +672,14 @@
 								"SchemaName": "stg",
 								"TableName": "sf_gcscheduleacc"
 							}
+						},
+						"linkedServiceParameters": {
+							"gcscheduleordg": {
+								"schemaLinkedService": {
+									"SchemaName": "stg",
+									"TableName": "sf_gcscheduleacc"
+								}
+							}
 						}
 					},
 					"compute": {

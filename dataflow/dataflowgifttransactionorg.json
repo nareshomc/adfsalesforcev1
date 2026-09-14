@@ -323,7 +323,7 @@
 				"          GIFTid = select1@GIFTid,",
 				"          Amount = select1@Amount,",
 				"          GRId,",
-				"          SalesforceIDorg = SalesforceIDacc,",
+				"          SalesforceIDacc,",
 				"          DonorId,",
 				"          SalesforceGCId",
 				"     ),",

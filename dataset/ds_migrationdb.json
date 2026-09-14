@@ -15,64 +15,7 @@
 		},
 		"annotations": [],
 		"type": "SqlServerTable",
-		"schema": [
-			{
-				"name": "ActualAmount",
-				"type": "decimal",
-				"precision": 30,
-				"scale": 6
-			},
-			{
-				"name": "CONSTIT_ID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "InstallmentId",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "TransactionDate",
-				"type": "date"
-			},
-			{
-				"name": "GIFTid",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "Amount",
-				"type": "decimal",
-				"precision": 20,
-				"scale": 4
-			},
-			{
-				"name": "FirstName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "LastName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "GRId",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "SalesforceIDacc",
-				"type": "nvarchar"
-			},
-			{
-				"name": "DonorId",
-				"type": "nvarchar"
-			},
-			{
-				"name": "SalesforceGCId",
-				"type": "nvarchar"
-			}
-		],
+		"schema": [],
 		"typeProperties": {
 			"schema": {
 				"value": "@dataset().SchemaName",

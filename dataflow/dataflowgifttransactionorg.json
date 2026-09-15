@@ -56,6 +56,9 @@
 				},
 				{
 					"name": "select3"
+				},
+				{
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -276,7 +279,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"sfgcscheduleorg select(mapColumn(",
+				"filter1 select(mapColumn(",
 				"          ID,",
 				"          CONSTITUENT_ID,",
 				"          FIRST_NAME,",
@@ -331,6 +334,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3",
+				"sfgcscheduleorg filter(SalesforceGCId == '6gcQz0000002lHaIAI') ~> filter1",
 				"select3 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

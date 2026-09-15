@@ -1068,7 +1068,7 @@
 							},
 							"sftransaction": {
 								"SchemaName": "stg",
-								"TableName": "sf_transactionorg"
+								"TableName": "sf_transactionorg_test"
 							}
 						}
 					},

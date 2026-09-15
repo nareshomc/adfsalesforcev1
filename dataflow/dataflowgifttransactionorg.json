@@ -203,7 +203,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: 'select * from dbo.gift3 where ID = 84415',",
+				"     query: 'select * from dbo.gift3 where constit_id = 84415',",
 				"     format: 'query') ~> giftorg",
 				"source(output(",
 				"          InstallmentPaymentId as integer,",

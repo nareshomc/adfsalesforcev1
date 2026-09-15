@@ -880,8 +880,6 @@
 			{
 				"name": "Copygiftcommitment",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowkeyworkeracc",

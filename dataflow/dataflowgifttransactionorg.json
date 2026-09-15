@@ -59,6 +59,9 @@
 				},
 				{
 					"name": "filter1"
+				},
+				{
+					"name": "filter2"
 				}
 			],
 			"scriptLines": [
@@ -248,7 +251,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sfgcscheduleorg",
-				"giftorg select(mapColumn(",
+				"filter2 select(mapColumn(",
 				"          ActualAmount = AMOUNT_SUBJECT_TO_VAT,",
 				"          CONSTIT_ID,",
 				"          TransactionDate = DTE,",
@@ -335,6 +338,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3",
 				"sfgcscheduleorg filter(SalesforceGCId == '6gcQz0000002lHaIAI') ~> filter1",
+				"giftorg filter(TYPE == 2) ~> filter2",
 				"select3 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

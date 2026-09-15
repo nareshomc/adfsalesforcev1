@@ -1040,7 +1040,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select \n'Historic Pledge Donation' as Name,\n'Paid' as Status,\nDonorID,\nSalesforceGCID,\nAmount as OriginalAmount,\n'Cash Donation' as PaymentMethod,\nTransactiondate as TransactionDate,\nTransactiondate as TransactionDueDate\nfrom stg.sf_transactionacc",
+						"sqlReaderQuery": "select distinct \n'Historic Pledge Donation' as Name,\n'Paid' as Status,\nDonorID,\nSalesforceGCID,\nAmount as OriginalAmount,\n'Cash Donation' as PaymentMethod,\nTransactiondate as TransactionDate,\nTransactiondate as TransactionDueDate\nfrom stg.sf_transactionacc",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},

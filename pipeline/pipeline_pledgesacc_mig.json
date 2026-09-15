@@ -639,6 +639,8 @@
 			{
 				"name": "Dataflowmergegcsfacc",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copysfpledgemerge",

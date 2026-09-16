@@ -31,6 +31,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "resepdate"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_redb",
+						"type": "DatasetReference"
+					},
+					"name": "retableentries"
 				}
 			],
 			"sinks": [],
@@ -216,6 +223,10 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> resepdate",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> retableentries",
 				"rerecords filter(KEY_INDICATOR == 'I' && INACTIVE == 0 ) ~> filter1",
 				"filter1 select(mapColumn(",
 				"          FIRST_NAME,",

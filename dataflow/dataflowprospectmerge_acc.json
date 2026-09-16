@@ -29,6 +29,9 @@
 				},
 				{
 					"name": "join1"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -84,7 +87,22 @@
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join1"
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          RECID = selectsfprospectacc@RECID,",
+				"          Grid = selectsfprospectacc@Grid,",
+				"          FIRST_NAME,",
+				"          LAST_NAME,",
+				"          IMPORT_ID,",
+				"          AdditionalInformation,",
+				"          Biography,",
+				"          CapacitytoDonate,",
+				"          LikelihoodtoDonate,",
+				"          PersonName,",
+				"          SalesforceIDacc = SalesforceID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}

@@ -85,6 +85,12 @@
 				},
 				{
 					"name": "filter3"
+				},
+				{
+					"name": "select5"
+				},
+				{
+					"name": "pivot1"
 				}
 			],
 			"scriptLines": [
@@ -404,7 +410,20 @@
 				"select4 window(over(ParentId),",
 				"     asc(DateAdded, true),",
 				"     rowno = rowNumber()) ~> window1",
-				"reConstituentNotepad3 filter(in ([881822,1011863,1010434,1008869], ParentId)) ~> filter3"
+				"reConstituentNotepad3 filter(in ([881822,1011863,1010434,1008869], ParentId)) ~> filter3",
+				"window1 select(mapColumn(",
+				"          ActualNotes,",
+				"          ParentId,",
+				"          DateAdded,",
+				"          rowno",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select5",
+				"select5 pivot(groupBy(ParentId),",
+				"     pivotBy(rowno),",
+				"     {Description_$$} = first(ActualNotes),",
+				"     columnNaming: '$N$V',",
+				"     lateral: true) ~> pivot1"
 			]
 		}
 	}

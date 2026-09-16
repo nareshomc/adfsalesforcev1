@@ -488,8 +488,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select7",
-				"select7, selectratings join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
-				"     joinType:'inner',",
+				"select7, selectratings join(select7@PROSPECT_ID == selectratings@PROSPECT_ID,",
+				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join3"

@@ -65,6 +65,8 @@
 			{
 				"name": "Copysfaccount",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowprospect",

@@ -75,7 +75,7 @@
 					"name": "filter2"
 				},
 				{
-					"name": "select3"
+					"name": "selecttableentries"
 				},
 				{
 					"name": "select4"
@@ -127,6 +127,12 @@
 				},
 				{
 					"name": "select9"
+				},
+				{
+					"name": "join5"
+				},
+				{
+					"name": "select10"
 				}
 			],
 			"scriptLines": [
@@ -412,7 +418,7 @@
 				"          LONGDESCRIPTION",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select3",
+				"     skipDuplicateMapOutputs: true) ~> selecttableentries",
 				"filter3 select(mapColumn(",
 				"          ActualNotes,",
 				"          ParentId,",
@@ -522,14 +528,33 @@
 				"          RECID,",
 				"          IMPORT_ID,",
 				"          LAST_NAME,",
-				"          CATEGORY_CODE,",
 				"          TABLEENTRY,",
 				"          ParentId,",
 				"          Biography = {Description_$1},",
 				"          AdditionalInformation",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select9"
+				"     skipDuplicateMapOutputs: true) ~> select9",
+				"select9, selecttableentries join(TABLEENTRY == TABLEENTRIESID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join5",
+				"join5 select(mapColumn(",
+				"          FIRST_NAME,",
+				"          RECID,",
+				"          IMPORT_ID,",
+				"          LAST_NAME,",
+				"          CATEGORY_CODE,",
+				"          TABLEENTRY,",
+				"          ParentId,",
+				"          Biography,",
+				"          AdditionalInformation,",
+				"          TABLEENTRIESID,",
+				"          LONGDESCRIPTION",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select10"
 			]
 		}
 	}

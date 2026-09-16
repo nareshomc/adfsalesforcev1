@@ -553,6 +553,8 @@
 			{
 				"name": "Dataflowmergegcsforg",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copysfpledgemerge",
@@ -598,6 +600,8 @@
 			{
 				"name": "Copygiftcommschedule",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowmergegcsforg",
@@ -744,6 +748,8 @@
 			{
 				"name": "Dataflowgiftcodemerge",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copygiftcommschedule",
@@ -793,8 +799,6 @@
 			{
 				"name": "Dataflowkeyworkerorg",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowgiftcodemerge",

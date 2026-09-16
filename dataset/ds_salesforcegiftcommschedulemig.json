@@ -2,7 +2,7 @@
 	"name": "ds_salesforcegiftcommschedulemig",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_salesforcemig",
+			"referenceName": "ls_Salesforceprod",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],

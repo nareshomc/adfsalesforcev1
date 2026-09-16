@@ -1181,6 +1181,8 @@
 			{
 				"name": "CopygiftdefaultDesignation",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowgiftcodemerge",

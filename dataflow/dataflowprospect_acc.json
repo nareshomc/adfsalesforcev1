@@ -153,6 +153,9 @@
 				},
 				{
 					"name": "join6"
+				},
+				{
+					"name": "select12"
 				}
 			],
 			"scriptLines": [
@@ -621,7 +624,20 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join6",
-				"aggregate1 sink(allowSchemaDrift: true,",
+				"aggregate1 select(mapColumn(",
+				"          RECID,",
+				"          Grid,",
+				"          FIRST_NAME,",
+				"          LAST_NAME,",
+				"          IMPORT_ID,",
+				"          AdditionalInformation,",
+				"          Biography,",
+				"          CapacitytoDonate,",
+				"          LikelihoodtoDonate",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select12",
+				"select12 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

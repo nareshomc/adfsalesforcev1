@@ -294,7 +294,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_salesforceaccountprod",
+						"referenceName": "ds_salesforceaccountmig",
 						"type": "DatasetReference"
 					}
 				],
@@ -464,7 +464,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_salesforcegiftcommprod",
+						"referenceName": "ds_salesforcegiftcommmig",
 						"type": "DatasetReference"
 					}
 				]
@@ -621,7 +621,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_salesforcegiftcommprod",
+						"referenceName": "ds_salesforcegiftcommmig",
 						"type": "DatasetReference"
 					}
 				],
@@ -827,7 +827,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_salesforcegiftcommscheduleprod",
+						"referenceName": "ds_salesforcegiftcommschedulemig",
 						"type": "DatasetReference"
 					}
 				]

@@ -38,6 +38,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "retableentries"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_redb",
+						"type": "DatasetReference"
+					},
+					"name": "reConstituentNotepad3"
 				}
 			],
 			"sinks": [],
@@ -279,6 +286,10 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> retableentries",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> reConstituentNotepad3",
 				"rerecords filter(KEY_INDICATOR == 'I' && INACTIVE == 0 ) ~> filter1",
 				"filter1 select(mapColumn(",
 				"          FIRST_NAME,",

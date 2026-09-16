@@ -19,7 +19,15 @@
 					"name": "accountssfrecord"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "mergeprospectacc"
+				}
+			],
 			"transformations": [
 				{
 					"name": "selectsfprospectacc"
@@ -91,8 +99,6 @@
 				"join1 select(mapColumn(",
 				"          RECID = selectsfprospectacc@RECID,",
 				"          Grid = selectsfprospectacc@Grid,",
-				"          FIRST_NAME,",
-				"          LAST_NAME,",
 				"          IMPORT_ID,",
 				"          AdditionalInformation,",
 				"          Biography,",
@@ -102,7 +108,16 @@
 				"          SalesforceIDacc = SalesforceID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> mergeprospectacc"
 			]
 		}
 	}

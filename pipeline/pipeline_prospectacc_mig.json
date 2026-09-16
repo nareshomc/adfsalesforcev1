@@ -205,6 +205,10 @@
 							"accountssfrecord": {
 								"SchemaName": "stg",
 								"TableName": "accounts_sfrecord"
+							},
+							"mergeprospectacc": {
+								"SchemaName": "stg",
+								"TableName": "sf_prospectmergeacc"
 							}
 						}
 					},

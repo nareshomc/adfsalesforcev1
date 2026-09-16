@@ -175,6 +175,8 @@
 			{
 				"name": "Dataflowprospectmerge",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copysfaccount",

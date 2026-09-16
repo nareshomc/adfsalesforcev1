@@ -100,6 +100,12 @@
 				},
 				{
 					"name": "selectfinalbiography"
+				},
+				{
+					"name": "selectprospect"
+				},
+				{
+					"name": "join1"
 				}
 			],
 			"scriptLines": [
@@ -451,7 +457,18 @@
 				"          AdditionalInformation",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectfinalbiography"
+				"     skipDuplicateMapOutputs: true) ~> selectfinalbiography",
+				"rePROSPECT3 select(mapColumn(",
+				"          CONSTIT_ID,",
+				"          STATUS",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectprospect",
+				"select1, selectprospect join(RECID == CONSTIT_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1"
 			]
 		}
 	}

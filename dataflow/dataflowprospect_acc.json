@@ -121,6 +121,9 @@
 				},
 				{
 					"name": "select8"
+				},
+				{
+					"name": "join4"
 				}
 			],
 			"scriptLines": [
@@ -501,17 +504,16 @@
 				"          RECID,",
 				"          IMPORT_ID,",
 				"          LAST_NAME,",
-				"          CONSTIT_ID,",
-				"          STATUS,",
-				"          Pr0spectID,",
-				"          ProspectID,",
-				"          PROSPECT_ID = select7@PROSPECT_ID,",
 				"          CATEGORY_CODE,",
-				"          PROSPECT_ID = selectratings@PROSPECT_ID,",
 				"          TABLEENTRY",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select8"
+				"     skipDuplicateMapOutputs: true) ~> select8",
+				"select8, selectfinalbiography join(RECID == ParentId,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join4"
 			]
 		}
 	}

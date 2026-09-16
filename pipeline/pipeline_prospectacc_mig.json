@@ -196,7 +196,13 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "dataflowprospectmerge_acc",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"sfprospectacc": {
+								"SchemaName": "stg",
+								"TableName": "sf_prospectacc"
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,

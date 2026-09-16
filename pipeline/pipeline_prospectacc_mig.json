@@ -17,7 +17,17 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "dataflowprospect_acc",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"rerecords": {
+								"SchemaName": "dbo",
+								"TableName": "records3"
+							},
+							"reproposal": {
+								"SchemaName": "dbo",
+								"TableName": "PROPOSAL3"
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,

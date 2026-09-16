@@ -173,7 +173,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: 'select * from dbo.records3 where id in in (881822,1011863,1010434,1008869)',",
+				"     query: 'select * from dbo.records3 where id in (881822,1011863,1010434,1008869)',",
 				"     format: 'query') ~> rerecords",
 				"source(output(",
 				"          ADDED_BY as integer,",

@@ -144,6 +144,9 @@
 				},
 				{
 					"name": "derivedColumn2"
+				},
+				{
+					"name": "select11"
 				}
 			],
 			"scriptLines": [
@@ -580,7 +583,19 @@
 				"    toString(null())",
 				")",
 				") ~> derivedColumn2",
-				"derivedColumn2 sink(allowSchemaDrift: true,",
+				"derivedColumn2 select(mapColumn(",
+				"          FIRST_NAME,",
+				"          RECID,",
+				"          IMPORT_ID,",
+				"          LAST_NAME,",
+				"          Biography,",
+				"          AdditionalInformation,",
+				"          CapacitytoDonate,",
+				"          LikelihoodtoDonate",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select11",
+				"select11 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

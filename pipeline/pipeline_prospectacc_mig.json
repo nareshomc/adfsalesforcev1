@@ -61,7 +61,7 @@
 				}
 			},
 			{
-				"name": "Copyorgaccount_copy1",
+				"name": "Copysfaccount",
 				"type": "Copy",
 				"state": "Inactive",
 				"onInactiveMarkAs": "Succeeded",
@@ -177,7 +177,7 @@
 				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
-						"activity": "Copyorgaccount_copy1",
+						"activity": "Copysfaccount",
 						"dependencyConditions": [
 							"Succeeded"
 						]

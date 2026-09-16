@@ -76,6 +76,9 @@
 				},
 				{
 					"name": "select3"
+				},
+				{
+					"name": "select4"
 				}
 			],
 			"scriptLines": [
@@ -306,7 +309,7 @@
 				"          Sequence as short,",
 				"          ParentId as integer,",
 				"          Import_Id as string,",
-				"          DateAdded as timestamp,",
+				"          DateAdded as date,",
 				"          AddedById as integer,",
 				"          DateChanged as timestamp,",
 				"          LastChangedById as integer",
@@ -384,7 +387,26 @@
 				"          LONGDESCRIPTION",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select3"
+				"     skipDuplicateMapOutputs: true) ~> select3",
+				"reConstituentNotepad3 select(mapColumn(",
+				"          NotesId,",
+				"          NoteTypeId,",
+				"          NotepadDate,",
+				"          Title,",
+				"          Description,",
+				"          Author,",
+				"          Notes,",
+				"          ActualNotes,",
+				"          Sequence,",
+				"          ParentId,",
+				"          Import_Id,",
+				"          DateAdded,",
+				"          AddedById,",
+				"          DateChanged,",
+				"          LastChangedById",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select4"
 			]
 		}
 	}

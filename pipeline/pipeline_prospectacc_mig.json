@@ -48,7 +48,8 @@
 								"TableName": "PROSPECT3"
 							},
 							"sfprospectacc": {
-								"SchemaName": "stg"
+								"SchemaName": "stg",
+								"TableName": "sf_prospectacc"
 							}
 						}
 					},

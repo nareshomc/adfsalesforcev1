@@ -112,6 +112,12 @@
 				},
 				{
 					"name": "join2"
+				},
+				{
+					"name": "select7"
+				},
+				{
+					"name": "join3"
 				}
 			],
 			"scriptLines": [
@@ -379,32 +385,9 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectproposal",
 				"reratings select(mapColumn(",
-				"          BOOLEAN,",
-				"          COMMENTS,",
-				"          CURR,",
-				"          DATE_TIME,",
-				"          DTE,",
-				"          ID,",
-				"          IMPORT_ID,",
-				"          NUM,",
-				"          SEQUENCE,",
-				"          SOURCE,",
-				"          CATEGORY_ID,",
 				"          CATEGORY_CODE,",
-				"          TEXT,",
-				"          STATICENTRY,",
 				"          PROSPECT_ID,",
-				"          ADDED_BY,",
-				"          DATE_ADDED,",
-				"          LAST_CHANGED_BY,",
-				"          DATE_LAST_CHANGED,",
-				"          TABLEENTRY,",
-				"          VERSION,",
-				"          SCORE_COMMITMENT,",
-				"          SCORE_ABILITY,",
-				"          WealthFinderHash,",
-				"          WealthFinderPartialHash,",
-				"          GIVING_SCORE_RUN",
+				"          TABLEENTRY",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectratings",
@@ -491,7 +474,25 @@
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join2"
+				"     broadcast: 'auto')~> join2",
+				"join2 select(mapColumn(",
+				"          FIRST_NAME,",
+				"          RECID,",
+				"          IMPORT_ID,",
+				"          LAST_NAME,",
+				"          CONSTIT_ID,",
+				"          STATUS,",
+				"          Pr0spectID,",
+				"          ProspectID,",
+				"          PROSPECT_ID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select7",
+				"select7, selectratings join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join3"
 			]
 		}
 	}

@@ -106,6 +106,12 @@
 				},
 				{
 					"name": "join1"
+				},
+				{
+					"name": "select6"
+				},
+				{
+					"name": "join2"
 				}
 			],
 			"scriptLines": [
@@ -460,7 +466,8 @@
 				"     skipDuplicateMapOutputs: true) ~> selectfinalbiography",
 				"rePROSPECT3 select(mapColumn(",
 				"          CONSTIT_ID,",
-				"          STATUS",
+				"          STATUS,",
+				"          Pr0spectID = ID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectprospect",
@@ -468,7 +475,23 @@
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join1"
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          FIRST_NAME,",
+				"          RECID,",
+				"          IMPORT_ID,",
+				"          LAST_NAME,",
+				"          CONSTIT_ID,",
+				"          STATUS,",
+				"          Pr0spectID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select6",
+				"select6, selectproposal join(Pr0spectID == PROSPECT_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2"
 			]
 		}
 	}

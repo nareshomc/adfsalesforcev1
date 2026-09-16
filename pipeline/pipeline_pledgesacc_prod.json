@@ -153,6 +153,8 @@
 			{
 				"name": "Dataflowmergepledge",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copyorgaccount_copy1",
@@ -198,6 +200,8 @@
 			{
 				"name": "Copyorgaccount_copy1",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowgiftsolicitor-nr",

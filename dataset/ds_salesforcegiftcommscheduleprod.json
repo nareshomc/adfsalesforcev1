@@ -1,0 +1,15 @@
+{
+	"name": "ds_salesforcegiftcommscheduleprod",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_Salesforceprod",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SalesforceServiceCloudV2Object",
+		"schema": [],
+		"typeProperties": {
+			"objectApiName": "GiftCommitmentSchedule"
+		}
+	}
+}

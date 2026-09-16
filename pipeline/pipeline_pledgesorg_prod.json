@@ -748,8 +748,6 @@
 			{
 				"name": "Dataflowgiftcodemerge",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copygiftcommschedule",
@@ -799,6 +797,8 @@
 			{
 				"name": "Dataflowkeyworkerorg",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowgiftcodemerge",
@@ -844,6 +844,8 @@
 			{
 				"name": "Copygiftcommitment",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowkeyworkerorg",
@@ -930,6 +932,8 @@
 			{
 				"name": "CopygiftdefaultDesignation",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copygiftcommitment",

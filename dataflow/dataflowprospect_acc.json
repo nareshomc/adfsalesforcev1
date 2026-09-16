@@ -56,6 +56,9 @@
 				},
 				{
 					"name": "select2"
+				},
+				{
+					"name": "filter2"
 				}
 			],
 			"scriptLines": [
@@ -289,22 +292,13 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectratings",
-				"resepdate select(mapColumn(",
+				"filter2 select(mapColumn(",
 				"          Source,",
-				"          SourceId,",
-				"          GoldenRank,",
-				"          GRId,",
-				"          OriginalSource,",
-				"          GiftAidOriginalSource,",
-				"          OriginalCreationDate,",
-				"          LastChangeDate,",
-				"          CreationDate,",
-				"          CreationSource,",
-				"          UpdateDate,",
-				"          UpdateSource",
+				"          SourceId",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select2"
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"resepdate filter(OriginalSource == 'RE') ~> filter2"
 			]
 		}
 	}

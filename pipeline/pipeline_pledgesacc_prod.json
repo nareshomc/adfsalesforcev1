@@ -1268,7 +1268,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_salesforcegiftdefaultdesigorgmig",
+						"referenceName": "ds_salesforcegiftdefaultdesigorgprod",
 						"type": "DatasetReference"
 					}
 				]

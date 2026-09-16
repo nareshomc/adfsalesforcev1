@@ -1202,7 +1202,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": " select distinct SalesforceGCid,  Salesforceidgift, Allocatedpercentage \n from stg.sf_resfgiftcodesorg",
+						"sqlReaderQuery": " select distinct SalesforceGCid,  Salesforceidgift, Allocatedpercentage \n from stg.sf_resfgiftcodesacc",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -1266,7 +1266,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "stg",
-							"TableName": "sf_resfgiftcodesorg"
+							"TableName": "sf_resfgiftcodesacc"
 						}
 					}
 				],

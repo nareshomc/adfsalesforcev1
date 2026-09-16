@@ -827,7 +827,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_salesforcegiftcommschedulemig",
+						"referenceName": "ds_salesforcegiftcommscheduleprod",
 						"type": "DatasetReference"
 					}
 				]

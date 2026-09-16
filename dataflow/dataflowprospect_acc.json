@@ -53,6 +53,9 @@
 				},
 				{
 					"name": "selectratings"
+				},
+				{
+					"name": "select2"
 				}
 			],
 			"scriptLines": [
@@ -219,7 +222,21 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> reratings",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          Source as string,",
+				"          SourceId as integer,",
+				"          GoldenRank as integer,",
+				"          GRId as integer,",
+				"          OriginalSource as string,",
+				"          GiftAidOriginalSource as string,",
+				"          OriginalCreationDate as timestamp,",
+				"          LastChangeDate as timestamp,",
+				"          CreationDate as timestamp,",
+				"          CreationSource as string,",
+				"          UpdateDate as timestamp,",
+				"          UpdateSource as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> resepdate",
@@ -271,7 +288,23 @@
 				"          GIVING_SCORE_RUN",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectratings"
+				"     skipDuplicateMapOutputs: true) ~> selectratings",
+				"resepdate select(mapColumn(",
+				"          Source,",
+				"          SourceId,",
+				"          GoldenRank,",
+				"          GRId,",
+				"          OriginalSource,",
+				"          GiftAidOriginalSource,",
+				"          OriginalCreationDate,",
+				"          LastChangeDate,",
+				"          CreationDate,",
+				"          CreationSource,",
+				"          UpdateDate,",
+				"          UpdateSource",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2"
 			]
 		}
 	}

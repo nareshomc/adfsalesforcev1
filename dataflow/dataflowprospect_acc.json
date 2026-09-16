@@ -401,7 +401,9 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select4",
-				"select4 window() ~> window1",
+				"select4 window(over(DateAdded),",
+				"     asc(DateAdded, true),",
+				"     rowno = rowNumber()) ~> window1",
 				"reConstituentNotepad3 filter(in ([881822,1011863,1010434,1008869], ParentId)) ~> filter3"
 			]
 		}

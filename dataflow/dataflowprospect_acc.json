@@ -91,6 +91,9 @@
 				},
 				{
 					"name": "pivot1"
+				},
+				{
+					"name": "selectfinalbiography"
 				}
 			],
 			"scriptLines": [
@@ -423,7 +426,12 @@
 				"     pivotBy(rowno),",
 				"     {Description_$$} = first(ActualNotes),",
 				"     columnNaming: '$N$V',",
-				"     lateral: true) ~> pivot1"
+				"     lateral: true) ~> pivot1",
+				"pivot1 select(mapColumn(",
+				"          ParentId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectfinalbiography"
 			]
 		}
 	}

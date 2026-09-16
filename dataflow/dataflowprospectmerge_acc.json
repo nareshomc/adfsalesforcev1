@@ -10,15 +10,37 @@
 						"type": "DatasetReference"
 					},
 					"name": "sfprospectacc"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "accountssfrecord"
 				}
 			],
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
+				"source(output(",
+				"          RECID as integer,",
+				"          Grid as integer,",
+				"          FIRST_NAME as string,",
+				"          LAST_NAME as string,",
+				"          IMPORT_ID as string,",
+				"          AdditionalInformation as string,",
+				"          Biography as string,",
+				"          CapacitytoDonate as string,",
+				"          LikelihoodtoDonate as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sfprospectacc",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> sfprospectacc"
+				"     format: 'table') ~> accountssfrecord"
 			]
 		}
 	}

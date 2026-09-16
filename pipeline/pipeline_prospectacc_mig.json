@@ -201,6 +201,10 @@
 							"sfprospectacc": {
 								"SchemaName": "stg",
 								"TableName": "sf_prospectacc"
+							},
+							"accountssfrecord": {
+								"SchemaName": "stg",
+								"TableName": "accounts_sfrecord"
 							}
 						}
 					},

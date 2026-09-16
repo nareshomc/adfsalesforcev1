@@ -1171,7 +1171,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_salesforcegiftTransactionmig",
+						"referenceName": "ds_salesforcegiftTransactionprod",
 						"type": "DatasetReference"
 					}
 				]

@@ -150,6 +150,9 @@
 				},
 				{
 					"name": "aggregate1"
+				},
+				{
+					"name": "join6"
 				}
 			],
 			"scriptLines": [
@@ -425,7 +428,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectratings",
 				"filter2 select(mapColumn(",
-				"          Source,",
+				"          Grid = GRId,",
 				"          SourceId",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
@@ -487,7 +490,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectprospect",
-				"select1, selectprospect join(RECID == CONSTIT_ID,",
+				"join6, selectprospect join(RECID == CONSTIT_ID,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
@@ -499,7 +502,8 @@
 				"          LAST_NAME,",
 				"          CONSTIT_ID,",
 				"          STATUS,",
-				"          Pr0spectID",
+				"          Pr0spectID,",
+				"          Grid",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select6",
@@ -602,6 +606,11 @@
 				"          FIRST_NAME,",
 				"          LAST_NAME,",
 				"          IMPORT_ID)) ~> aggregate1",
+				"select1, selectsepdata join(RECID == SourceId,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join6",
 				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

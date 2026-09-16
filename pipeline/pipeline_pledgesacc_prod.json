@@ -464,7 +464,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_salesforcegiftcommmig",
+						"referenceName": "ds_salesforcegiftcommprod",
 						"type": "DatasetReference"
 					}
 				]
@@ -621,7 +621,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_salesforcegiftcommmig",
+						"referenceName": "ds_salesforcegiftcommprod",
 						"type": "DatasetReference"
 					}
 				],

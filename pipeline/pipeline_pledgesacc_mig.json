@@ -956,7 +956,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SchemaName": "stg",
-							"TableName": "sf_keyworkersog"
+							"TableName": "sf_keyworkersacc"
 						}
 					}
 				],

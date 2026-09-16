@@ -222,8 +222,6 @@
 			{
 				"name": "Copy data1",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowprospectmerge",
@@ -242,14 +240,100 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SalesforceServiceCloudV2Source",
-						"includeDeletedObjects": false,
-						"partitionOption": "AutoDetect",
-						"preserveScaleFromSchema": false
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "SalesforceServiceCloudV2Sink",
+						"writeBatchSize": 100000,
+						"writeBehavior": "upsert",
+						"externalIdFieldName": "Id",
+						"ignoreNullValues": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "SalesforceIDacc",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "String",
+									"physicalType": "id"
+								}
+							},
+							{
+								"source": {
+									"name": "AdditionalInformation",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Additional_information__c",
+									"type": "String",
+									"physicalType": "textarea"
+								}
+							},
+							{
+								"source": {
+									"name": "Biography",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Biography__c",
+									"type": "String",
+									"physicalType": "textarea"
+								}
+							},
+							{
+								"source": {
+									"name": "CapacitytoDonate",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Capacity__c",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"source": {
+									"name": "LikelihoodtoDonate",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Likelihood_to_give__c",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
+					{
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "stg",
+							"TableName": "sf_prospectmergeacc"
+						}
+					}
+				],
+				"outputs": [
 					{
 						"referenceName": "ds_salesforceaccountmig",
 						"type": "DatasetReference"

@@ -430,7 +430,7 @@
 				"     skipDuplicateMapOutputs: true) ~> select5",
 				"select5 pivot(groupBy(ParentId),",
 				"     pivotBy(rowno, [1, 2, 3, 4, 5]),",
-				"     {Description_$$} = first(ActualNotes),",
+				"     {Description_$} = first(ActualNotes),",
 				"     columnNaming: '$N$V',",
 				"     lateral: true) ~> pivot1",
 				"pivot1 select(mapColumn(",

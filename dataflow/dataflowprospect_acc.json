@@ -17,6 +17,20 @@
 						"type": "DatasetReference"
 					},
 					"name": "reproposal"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_redb",
+						"type": "DatasetReference"
+					},
+					"name": "reratings"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sepdb",
+						"type": "DatasetReference"
+					},
+					"name": "resepdate"
 				}
 			],
 			"sinks": [],
@@ -29,6 +43,9 @@
 				},
 				{
 					"name": "selectproposal"
+				},
+				{
+					"name": "selectratings"
 				}
 			],
 			"scriptLines": [
@@ -163,6 +180,42 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> reproposal",
+				"source(output(",
+				"          BOOLEAN as short,",
+				"          COMMENTS as string,",
+				"          CURR as decimal(30,6),",
+				"          DATE_TIME as timestamp,",
+				"          DTE as timestamp,",
+				"          ID as integer,",
+				"          IMPORT_ID as string,",
+				"          NUM as integer,",
+				"          SEQUENCE as short,",
+				"          SOURCE as integer,",
+				"          CATEGORY_ID as integer,",
+				"          CATEGORY_CODE as integer,",
+				"          TEXT as string,",
+				"          STATICENTRY as integer,",
+				"          PROSPECT_ID as integer,",
+				"          ADDED_BY as integer,",
+				"          DATE_ADDED as timestamp,",
+				"          LAST_CHANGED_BY as integer,",
+				"          DATE_LAST_CHANGED as timestamp,",
+				"          TABLEENTRY as integer,",
+				"          VERSION as integer,",
+				"          SCORE_COMMITMENT as integer,",
+				"          SCORE_ABILITY as integer,",
+				"          WealthFinderHash as string,",
+				"          WealthFinderPartialHash as string,",
+				"          GIVING_SCORE_RUN as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> reratings",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> resepdate",
 				"rerecords filter(KEY_INDICATOR == 'I' && INACTIVE == 0 ) ~> filter1",
 				"filter1 select(mapColumn(",
 				"          FIRST_NAME,",
@@ -177,7 +230,37 @@
 				"          PROSPECT_ID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectproposal"
+				"     skipDuplicateMapOutputs: true) ~> selectproposal",
+				"reratings select(mapColumn(",
+				"          BOOLEAN,",
+				"          COMMENTS,",
+				"          CURR,",
+				"          DATE_TIME,",
+				"          DTE,",
+				"          ID,",
+				"          IMPORT_ID,",
+				"          NUM,",
+				"          SEQUENCE,",
+				"          SOURCE,",
+				"          CATEGORY_ID,",
+				"          CATEGORY_CODE,",
+				"          TEXT,",
+				"          STATICENTRY,",
+				"          PROSPECT_ID,",
+				"          ADDED_BY,",
+				"          DATE_ADDED,",
+				"          LAST_CHANGED_BY,",
+				"          DATE_LAST_CHANGED,",
+				"          TABLEENTRY,",
+				"          VERSION,",
+				"          SCORE_COMMITMENT,",
+				"          SCORE_ABILITY,",
+				"          WealthFinderHash,",
+				"          WealthFinderPartialHash,",
+				"          GIVING_SCORE_RUN",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectratings"
 			]
 		}
 	}

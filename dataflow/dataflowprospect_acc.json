@@ -94,6 +94,9 @@
 				},
 				{
 					"name": "selectfinalbiography"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -436,7 +439,9 @@
 				"          {Description_$5}",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectfinalbiography"
+				"     skipDuplicateMapOutputs: true) ~> selectfinalbiography",
+				"selectfinalbiography derive(AdditionalInformation = concatWS('\\n', Description_$2, Description_$3, Description_$4, Description_$5)",
+				") ~> derivedColumn1"
 			]
 		}
 	}

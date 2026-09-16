@@ -93,10 +93,13 @@
 					"name": "pivot1"
 				},
 				{
-					"name": "selectfinalbiography"
+					"name": "selectbiography"
 				},
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "selectfinalbiography"
 				}
 			],
 			"scriptLines": [
@@ -439,9 +442,16 @@
 				"          {Description_$5}",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectfinalbiography",
-				"selectfinalbiography derive(AdditionalInformation = concatWS('\\n', Description_$2, Description_$3, Description_$4, Description_$5)",
-				") ~> derivedColumn1"
+				"     skipDuplicateMapOutputs: true) ~> selectbiography",
+				"selectbiography derive(AdditionalInformation = concatWS('\\n', Description_$2, Description_$3, Description_$4, Description_$5)",
+				") ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          ParentId,",
+				"          {Description_$1},",
+				"          AdditionalInformation",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectfinalbiography"
 			]
 		}
 	}

@@ -20,7 +20,17 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "selectsfprospectacc"
+				},
+				{
+					"name": "selectaccountsfrecord"
+				},
+				{
+					"name": "join1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          RECID as integer,",
@@ -37,10 +47,44 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sfprospectacc",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          ID as integer,",
+				"          GRID as integer,",
+				"          RECID as string,",
+				"          PersonName as string,",
+				"          SalesforceID as string,",
+				"          CURRENT_TIMESTAMP as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> accountssfrecord"
+				"     format: 'table') ~> accountssfrecord",
+				"sfprospectacc select(mapColumn(",
+				"          RECID,",
+				"          Grid,",
+				"          FIRST_NAME,",
+				"          LAST_NAME,",
+				"          IMPORT_ID,",
+				"          AdditionalInformation,",
+				"          Biography,",
+				"          CapacitytoDonate,",
+				"          LikelihoodtoDonate",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectsfprospectacc",
+				"accountssfrecord select(mapColumn(",
+				"          GRID,",
+				"          RECID,",
+				"          PersonName,",
+				"          SalesforceID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectaccountsfrecord",
+				"selectsfprospectacc, selectaccountsfrecord join(selectsfprospectacc@Grid == selectaccountsfrecord@GRID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1"
 			]
 		}
 	}

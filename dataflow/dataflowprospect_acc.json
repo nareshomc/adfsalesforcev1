@@ -545,7 +545,6 @@
 				"          RECID,",
 				"          IMPORT_ID,",
 				"          LAST_NAME,",
-				"          CATEGORY_CODE,",
 				"          TABLEENTRY,",
 				"          ParentId,",
 				"          Biography,",

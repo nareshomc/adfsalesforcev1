@@ -79,6 +79,12 @@
 				},
 				{
 					"name": "select4"
+				},
+				{
+					"name": "window1"
+				},
+				{
+					"name": "filter3"
 				}
 			],
 			"scriptLines": [
@@ -388,25 +394,15 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3",
-				"reConstituentNotepad3 select(mapColumn(",
-				"          NotesId,",
-				"          NoteTypeId,",
-				"          NotepadDate,",
-				"          Title,",
-				"          Description,",
-				"          Author,",
-				"          Notes,",
+				"filter3 select(mapColumn(",
 				"          ActualNotes,",
-				"          Sequence,",
 				"          ParentId,",
-				"          Import_Id,",
-				"          DateAdded,",
-				"          AddedById,",
-				"          DateChanged,",
-				"          LastChangedById",
+				"          DateAdded",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select4"
+				"     skipDuplicateMapOutputs: true) ~> select4",
+				"select4 window() ~> window1",
+				"reConstituentNotepad3 filter(in ([881822,1011863,1010434,1008869], ParentId)) ~> filter3"
 			]
 		}
 	}

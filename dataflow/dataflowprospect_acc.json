@@ -54,7 +54,15 @@
 					"name": "rePROSPECT3"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sfprospectacc"
+				}
+			],
 			"transformations": [
 				{
 					"name": "filter1"
@@ -552,7 +560,16 @@
 				"          LONGDESCRIPTION",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select10"
+				"     skipDuplicateMapOutputs: true) ~> select10",
+				"select10 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sfprospectacc"
 			]
 		}
 	}

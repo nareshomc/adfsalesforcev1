@@ -202,8 +202,6 @@
 			{
 				"name": "Copyorgaccount_copy1",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowgiftsolicitor-nr",

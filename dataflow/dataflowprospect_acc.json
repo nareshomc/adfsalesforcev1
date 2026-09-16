@@ -26,6 +26,9 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "selectproposal"
 				}
 			],
 			"scriptLines": [
@@ -168,7 +171,13 @@
 				"          LAST_NAME",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"reproposal select(mapColumn(",
+				"          ProspectID = ID,",
+				"          PROSPECT_ID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectproposal"
 			]
 		}
 	}

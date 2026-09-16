@@ -313,8 +313,6 @@
 			{
 				"name": "Copypledgemergetosf",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowmergepledge",

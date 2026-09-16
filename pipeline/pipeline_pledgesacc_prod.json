@@ -1317,7 +1317,7 @@
 							},
 							"resfgiftcodesorg": {
 								"SchemaName": "stg",
-								"TableName": "sf_resfgiftcodesorg"
+								"TableName": "sf_resfgiftcodesacc"
 							}
 						}
 					},

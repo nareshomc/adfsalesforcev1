@@ -124,6 +124,9 @@
 				},
 				{
 					"name": "join4"
+				},
+				{
+					"name": "select9"
 				}
 			],
 			"scriptLines": [
@@ -513,7 +516,20 @@
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join4"
+				"     broadcast: 'auto')~> join4",
+				"join4 select(mapColumn(",
+				"          FIRST_NAME,",
+				"          RECID,",
+				"          IMPORT_ID,",
+				"          LAST_NAME,",
+				"          CATEGORY_CODE,",
+				"          TABLEENTRY,",
+				"          ParentId,",
+				"          Biography = {Description_$1},",
+				"          AdditionalInformation",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select9"
 			]
 		}
 	}

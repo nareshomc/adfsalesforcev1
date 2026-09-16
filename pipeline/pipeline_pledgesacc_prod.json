@@ -833,8 +833,6 @@
 			{
 				"name": "Dataflowkeyworkeracc",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copygiftcommschedule",
@@ -1278,8 +1276,6 @@
 			{
 				"name": "Dataflowgiftcodemerge",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowkeyworkeracc",

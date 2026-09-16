@@ -69,7 +69,7 @@
 					"name": "selectratings"
 				},
 				{
-					"name": "select2"
+					"name": "selectsepdata"
 				},
 				{
 					"name": "filter2"
@@ -412,7 +412,7 @@
 				"          SourceId",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select2",
+				"     skipDuplicateMapOutputs: true) ~> selectsepdata",
 				"resepdate filter(OriginalSource == 'RE') ~> filter2",
 				"retableentries select(mapColumn(",
 				"          TABLEENTRIESID,",

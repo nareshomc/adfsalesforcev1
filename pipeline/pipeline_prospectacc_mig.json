@@ -26,6 +26,29 @@
 							"reproposal": {
 								"SchemaName": "dbo",
 								"TableName": "PROPOSAL3"
+							},
+							"reratings": {
+								"SchemaName": "dbo",
+								"TableName": "ratings3"
+							},
+							"resepdate": {
+								"SchemaName": "dbo",
+								"TableName": "supportersourceid3"
+							},
+							"retableentries": {
+								"SchemaName": "dbo",
+								"TableName": "tableentries3"
+							},
+							"reConstituentNotepad3": {
+								"SchemaName": "dbo",
+								"TableName": "ConstituentNotepad3"
+							},
+							"rePROSPECT3": {
+								"SchemaName": "dbo",
+								"TableName": "PROSPECT3"
+							},
+							"sfprospectacc": {
+								"SchemaName": "stg"
 							}
 						}
 					},

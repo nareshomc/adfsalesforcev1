@@ -147,6 +147,9 @@
 				},
 				{
 					"name": "select11"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -595,7 +598,11 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select11",
-				"select11 sink(allowSchemaDrift: true,",
+				"select11 aggregate(groupBy(RECID,",
+				"          FIRST_NAME,",
+				"          LAST_NAME,",
+				"          IMPORT_ID)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

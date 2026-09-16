@@ -423,7 +423,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select5",
 				"select5 pivot(groupBy(ParentId),",
-				"     pivotBy(rowno),",
+				"     pivotBy(rowno, [1, 2]),",
 				"     {Description_$$} = first(ActualNotes),",
 				"     columnNaming: '$N$V',",
 				"     lateral: true) ~> pivot1",

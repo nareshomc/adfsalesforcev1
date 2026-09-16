@@ -118,6 +118,9 @@
 				},
 				{
 					"name": "join3"
+				},
+				{
+					"name": "select8"
 				}
 			],
 			"scriptLines": [
@@ -492,7 +495,23 @@
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join3"
+				"     broadcast: 'auto')~> join3",
+				"join3 select(mapColumn(",
+				"          FIRST_NAME,",
+				"          RECID,",
+				"          IMPORT_ID,",
+				"          LAST_NAME,",
+				"          CONSTIT_ID,",
+				"          STATUS,",
+				"          Pr0spectID,",
+				"          ProspectID,",
+				"          PROSPECT_ID = select7@PROSPECT_ID,",
+				"          CATEGORY_CODE,",
+				"          PROSPECT_ID = selectratings@PROSPECT_ID,",
+				"          TABLEENTRY",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select8"
 			]
 		}
 	}

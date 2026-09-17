@@ -5,6 +5,8 @@
 			{
 				"name": "Dataflowprospect",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -63,8 +65,6 @@
 			{
 				"name": "Dataflowprospectmerge",
 				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copyorgaccount",
@@ -233,8 +233,6 @@
 			{
 				"name": "Copyorgaccount",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowprospect",

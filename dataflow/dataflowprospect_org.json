@@ -153,6 +153,9 @@
 				},
 				{
 					"name": "select12"
+				},
+				{
+					"name": "filter3"
 				}
 			],
 			"scriptLines": [
@@ -437,7 +440,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selecttableentries",
-				"reConstituentNotepad3 select(mapColumn(",
+				"filter3 select(mapColumn(",
 				"          ActualNotes,",
 				"          ParentId,",
 				"          DateAdded",
@@ -619,6 +622,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select12",
+				"reConstituentNotepad3 filter(ParentId == 51862) ~> filter3",
 				"select12 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

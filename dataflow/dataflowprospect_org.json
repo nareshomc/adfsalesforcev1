@@ -140,9 +140,6 @@
 					"name": "select12"
 				},
 				{
-					"name": "filter3"
-				},
-				{
 					"name": "split1"
 				},
 				{
@@ -449,7 +446,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selecttableentries",
-				"filter3 select(mapColumn(",
+				"reConstituentNotepad3 select(mapColumn(",
 				"          ActualNotes,",
 				"          ParentId,",
 				"          DateAdded",
@@ -600,7 +597,6 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select12",
-				"reConstituentNotepad3 filter(ParentId == 51862) ~> filter3",
 				"window1 split(rowno == 1,",
 				"     disjoint: false) ~> split1@(rowno, rownogt2)",
 				"split1@rowno select(mapColumn(",

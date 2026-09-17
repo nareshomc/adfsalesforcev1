@@ -406,7 +406,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> rePROSPECT3",
-				"rerecords filter(KEY_INDICATOR == 'O' && INACTIVE == 0) ~> filter1",
+				"rerecords filter(KEY_INDICATOR == 'O' ) ~> filter1",
 				"filter1 select(mapColumn(",
 				"          FIRST_NAME,",
 				"          RECID = ID,",

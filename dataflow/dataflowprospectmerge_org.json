@@ -9,7 +9,7 @@
 						"referenceName": "ds_migrationdb",
 						"type": "DatasetReference"
 					},
-					"name": "sfprospectacc"
+					"name": "sfprospectorg"
 				},
 				{
 					"dataset": {
@@ -25,7 +25,7 @@
 						"referenceName": "ds_migrationdb",
 						"type": "DatasetReference"
 					},
-					"name": "mergeprospectacc"
+					"name": "mergeprospectorg"
 				}
 			],
 			"transformations": [
@@ -57,7 +57,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> sfprospectacc",
+				"     format: 'table') ~> sfprospectorg",
 				"source(output(",
 				"          ID as integer,",
 				"          GRID as integer,",
@@ -70,7 +70,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> accountssfrecord",
-				"sfprospectacc select(mapColumn(",
+				"sfprospectorg select(mapColumn(",
 				"          RECID,",
 				"          Grid,",
 				"          FIRST_NAME,",
@@ -118,7 +118,7 @@
 				"     recreate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> mergeprospectacc"
+				"     skipDuplicateMapOutputs: true) ~> mergeprospectorg"
 			]
 		}
 	}

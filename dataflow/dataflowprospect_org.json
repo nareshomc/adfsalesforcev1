@@ -162,6 +162,9 @@
 				},
 				{
 					"name": "selectfinalBiography"
+				},
+				{
+					"name": "filter3"
 				}
 			],
 			"scriptLines": [
@@ -446,7 +449,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selecttableentries",
-				"reConstituentNotepad3 select(mapColumn(",
+				"filter3 select(mapColumn(",
 				"          ActualNotes,",
 				"          ParentId,",
 				"          DateAdded",
@@ -616,8 +619,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select14",
 				"select14 aggregate(groupBy(ParentId),",
-				"     ActualNotes = toString(collect(ActualNotes))",
-				") ~> aggregate2",
+				"     ActualNotes = toString(collect(ActualNotes))) ~> aggregate2",
 				"select13 select(mapColumn(",
 				"          Biography,",
 				"          ParentId",
@@ -642,6 +644,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectfinalBiography",
+				"reConstituentNotepad3 filter(in ([2049,3520], NoteTypeId)) ~> filter3",
 				"select12 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

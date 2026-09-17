@@ -150,6 +150,9 @@
 				},
 				{
 					"name": "select14"
+				},
+				{
+					"name": "aggregate2"
 				}
 			],
 			"scriptLines": [
@@ -604,6 +607,9 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select14",
+				"select14 aggregate(groupBy(ParentId),",
+				"     ActualNotes = toString(collect(ActualNotes))",
+				") ~> aggregate2",
 				"select12 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

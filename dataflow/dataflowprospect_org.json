@@ -165,6 +165,9 @@
 				},
 				{
 					"name": "filter3"
+				},
+				{
+					"name": "derivedColumn3"
 				}
 			],
 			"scriptLines": [
@@ -626,7 +629,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select15",
-				"aggregate2 select(mapColumn(",
+				"derivedColumn3 select(mapColumn(",
 				"          ParentId,",
 				"          AdditionalInformation = ActualNotes",
 				"     ),",
@@ -645,6 +648,8 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectfinalBiography",
 				"reConstituentNotepad3 filter(in ([2049,3520], NoteTypeId)) ~> filter3",
+				"aggregate2 derive(ActualNotes = regexReplace(regexReplace(ActualNotes, '^\\\\[\\\\s*\\\\\"|\\\\\"\\\\s*\\\\]$', ''), '\\\\\"\\\\s*,\\\\s*\\\\\"', '\\n')",
+				") ~> derivedColumn3",
 				"select12 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

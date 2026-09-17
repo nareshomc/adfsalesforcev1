@@ -92,9 +92,6 @@
 					"name": "window1"
 				},
 				{
-					"name": "filter3"
-				},
-				{
 					"name": "select5"
 				},
 				{
@@ -440,7 +437,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selecttableentries",
-				"filter3 select(mapColumn(",
+				"reConstituentNotepad3 select(mapColumn(",
 				"          ActualNotes,",
 				"          ParentId,",
 				"          DateAdded",
@@ -450,7 +447,6 @@
 				"select4 window(over(ParentId),",
 				"     asc(DateAdded, true),",
 				"     rowno = rowNumber()) ~> window1",
-				"reConstituentNotepad3 filter(in ([881822,1011863,1010434,1008869], ParentId)) ~> filter3",
 				"window1 select(mapColumn(",
 				"          ActualNotes,",
 				"          ParentId,",

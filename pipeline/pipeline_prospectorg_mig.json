@@ -191,7 +191,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflowprospectmerge_acc",
+						"referenceName": "dataflowprospectmerge_org",
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"sfprospectacc": {

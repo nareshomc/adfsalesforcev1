@@ -153,6 +153,18 @@
 				},
 				{
 					"name": "aggregate2"
+				},
+				{
+					"name": "select15"
+				},
+				{
+					"name": "select16"
+				},
+				{
+					"name": "join7"
+				},
+				{
+					"name": "selectfinalBiography"
 				}
 			],
 			"scriptLines": [
@@ -592,7 +604,7 @@
 				"window1 split(rowno == 1,",
 				"     disjoint: false) ~> split1@(rowno, rownogt2)",
 				"split1@rowno select(mapColumn(",
-				"          ActualNotes,",
+				"          Biography = ActualNotes,",
 				"          ParentId,",
 				"          DateAdded,",
 				"          rowno",
@@ -610,6 +622,31 @@
 				"select14 aggregate(groupBy(ParentId),",
 				"     ActualNotes = toString(collect(ActualNotes))",
 				") ~> aggregate2",
+				"select13 select(mapColumn(",
+				"          Biography,",
+				"          ParentId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select15",
+				"aggregate2 select(mapColumn(",
+				"          ParentId,",
+				"          AdditionalInformation = ActualNotes",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select16",
+				"select15, select16 join(select15@ParentId == select16@ParentId,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join7",
+				"join7 select(mapColumn(",
+				"          Biography,",
+				"          ParentId = select15@ParentId,",
+				"          ParentId = select16@ParentId,",
+				"          AdditionalInformation",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectfinalBiography",
 				"select12 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

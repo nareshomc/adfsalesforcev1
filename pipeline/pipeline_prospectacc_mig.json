@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Dataflowprospect",
+				"name": "Dataflowprospectind",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -67,7 +67,7 @@
 				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
-						"activity": "Dataflowprospect",
+						"activity": "Dataflowprospectind",
 						"dependencyConditions": [
 							"Succeeded"
 						]

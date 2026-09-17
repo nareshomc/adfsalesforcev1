@@ -1,0 +1,125 @@
+{
+	"name": "dataflowprospectmerge_org",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sfprospectacc"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "accountssfrecord"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "mergeprospectacc"
+				}
+			],
+			"transformations": [
+				{
+					"name": "selectsfprospectacc"
+				},
+				{
+					"name": "selectaccountsfrecord"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          RECID as integer,",
+				"          Grid as integer,",
+				"          FIRST_NAME as string,",
+				"          LAST_NAME as string,",
+				"          IMPORT_ID as string,",
+				"          AdditionalInformation as string,",
+				"          Biography as string,",
+				"          CapacitytoDonate as string,",
+				"          LikelihoodtoDonate as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sfprospectacc",
+				"source(output(",
+				"          ID as integer,",
+				"          GRID as integer,",
+				"          RECID as string,",
+				"          PersonName as string,",
+				"          SalesforceID as string,",
+				"          CURRENT_TIMESTAMP as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> accountssfrecord",
+				"sfprospectacc select(mapColumn(",
+				"          RECID,",
+				"          Grid,",
+				"          FIRST_NAME,",
+				"          LAST_NAME,",
+				"          IMPORT_ID,",
+				"          AdditionalInformation,",
+				"          Biography,",
+				"          CapacitytoDonate,",
+				"          LikelihoodtoDonate",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectsfprospectacc",
+				"accountssfrecord select(mapColumn(",
+				"          GRID,",
+				"          RECID,",
+				"          PersonName,",
+				"          SalesforceID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectaccountsfrecord",
+				"selectsfprospectacc, selectaccountsfrecord join(selectsfprospectacc@Grid == selectaccountsfrecord@GRID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          RECID = selectsfprospectacc@RECID,",
+				"          Grid = selectsfprospectacc@Grid,",
+				"          IMPORT_ID,",
+				"          AdditionalInformation,",
+				"          Biography,",
+				"          CapacitytoDonate,",
+				"          LikelihoodtoDonate,",
+				"          PersonName,",
+				"          SalesforceIDacc = SalesforceID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> mergeprospectacc"
+			]
+		}
+	}
+}

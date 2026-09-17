@@ -164,7 +164,7 @@
 					"name": "join7"
 				},
 				{
-					"name": "select16"
+					"name": "selectfinalBiography"
 				}
 			],
 			"scriptLines": [
@@ -657,7 +657,7 @@
 				"          AdditionalInformation",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select16",
+				"     skipDuplicateMapOutputs: true) ~> selectfinalBiography",
 				"select12 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

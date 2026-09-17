@@ -165,6 +165,9 @@
 				},
 				{
 					"name": "selectfinalBiography"
+				},
+				{
+					"name": "derivedColumn3"
 				}
 			],
 			"scriptLines": [
@@ -463,7 +466,7 @@
 				"     desc(DateAdded, true),",
 				"     rowno = rowNumber()) ~> window1",
 				"reConstituentNotepad3 filter(in ([881822,1011863,1010434,1008869], ParentId) && ",
-				"in ([2049,3520], NoteTypeId)  ) ~> filter3",
+				"in ([2049,3520], NoteTypeId)) ~> filter3",
 				"window1 select(mapColumn(",
 				"          ActualNotes,",
 				"          ParentId,",
@@ -641,7 +644,7 @@
 				"     skipDuplicateMapOutputs: true) ~> select14",
 				"select14 aggregate(groupBy(ParentId),",
 				"     ActualNotes = toString(collect(ActualNotes))) ~> aggregate2",
-				"aggregate2 select(mapColumn(",
+				"derivedColumn3 select(mapColumn(",
 				"          ParentId,",
 				"          AdditionalInformation = ActualNotes",
 				"     ),",
@@ -659,6 +662,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectfinalBiography",
+				"aggregate2 derive(ActualNotes = regexReplace(regexReplace(ActualNotes, '^\\\\[\\\\s*\\\\\"|\\\\\"\\\\s*\\\\]$', ''), '\\\\\"\\\\s*,\\\\s*\\\\\"', '\\n')",
+				") ~> derivedColumn3",
 				"select12 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

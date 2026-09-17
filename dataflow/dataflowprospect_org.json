@@ -92,21 +92,6 @@
 					"name": "window1"
 				},
 				{
-					"name": "select5"
-				},
-				{
-					"name": "pivot1"
-				},
-				{
-					"name": "selectbiography"
-				},
-				{
-					"name": "derivedColumn1"
-				},
-				{
-					"name": "selectfinalbiography"
-				},
-				{
 					"name": "selectprospect"
 				},
 				{
@@ -156,6 +141,15 @@
 				},
 				{
 					"name": "filter3"
+				},
+				{
+					"name": "split1"
+				},
+				{
+					"name": "select13"
+				},
+				{
+					"name": "select14"
 				}
 			],
 			"scriptLines": [
@@ -450,37 +444,6 @@
 				"select4 window(over(ParentId),",
 				"     asc(DateAdded, true),",
 				"     rowno = rowNumber()) ~> window1",
-				"window1 select(mapColumn(",
-				"          ActualNotes,",
-				"          ParentId,",
-				"          DateAdded,",
-				"          rowno",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select5",
-				"select5 pivot(groupBy(ParentId),",
-				"     pivotBy(rowno, [1, 2, 3, 4, 5]),",
-				"     {Description_$} = first(ActualNotes),",
-				"     columnNaming: '$N$V',",
-				"     lateral: true) ~> pivot1",
-				"pivot1 select(mapColumn(",
-				"          ParentId,",
-				"          {Description_$1},",
-				"          {Description_$2},",
-				"          {Description_$3},",
-				"          {Description_$4},",
-				"          {Description_$5}",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectbiography",
-				"selectbiography derive(AdditionalInformation = concatWS('\\n', {Description_$2})) ~> derivedColumn1",
-				"derivedColumn1 select(mapColumn(",
-				"          ParentId,",
-				"          {Description_$1},",
-				"          AdditionalInformation",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectfinalbiography",
 				"rePROSPECT3 select(mapColumn(",
 				"          CONSTIT_ID,",
 				"          STATUS,",
@@ -537,7 +500,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select8",
-				"select8, selectfinalbiography join(RECID == ParentId,",
+				"select8, window1 join(RECID == ParentId,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
@@ -623,6 +586,24 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select12",
 				"reConstituentNotepad3 filter(ParentId == 51862) ~> filter3",
+				"window1 split(rowno == 1,",
+				"     disjoint: false) ~> split1@(rowno, rownogt2)",
+				"split1@rowno select(mapColumn(",
+				"          ActualNotes,",
+				"          ParentId,",
+				"          DateAdded,",
+				"          rowno",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select13",
+				"split1@rownogt2 select(mapColumn(",
+				"          ActualNotes,",
+				"          ParentId,",
+				"          DateAdded,",
+				"          rowno",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select14",
 				"select12 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

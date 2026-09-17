@@ -60,7 +60,7 @@
 						"referenceName": "ds_migrationdb",
 						"type": "DatasetReference"
 					},
-					"name": "sfprospectacc"
+					"name": "sfprospectorg"
 				}
 			],
 			"transformations": [
@@ -643,7 +643,7 @@
 				"     recreate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sfprospectacc"
+				"     skipDuplicateMapOutputs: true) ~> sfprospectorg"
 			]
 		}
 	}

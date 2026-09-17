@@ -147,7 +147,7 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "SalesforceIDacc",
+									"name": "SalesforceIDorg",
 									"type": "String",
 									"physicalType": "nvarchar"
 								},

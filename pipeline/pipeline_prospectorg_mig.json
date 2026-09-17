@@ -86,7 +86,7 @@
 						"datasetParameters": {
 							"sfprospectacc": {
 								"SchemaName": "stg",
-								"TableName": "sf_prospectacc"
+								"TableName": "sf_prospectorg"
 							},
 							"accountssfrecord": {
 								"SchemaName": "stg",
@@ -94,7 +94,7 @@
 							},
 							"mergeprospectacc": {
 								"SchemaName": "stg",
-								"TableName": "sf_prospectmergeacc"
+								"TableName": "sf_prospectmergeorg"
 							}
 						}
 					},

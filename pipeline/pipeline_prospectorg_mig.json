@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflowprospect_acc",
+						"referenceName": "dataflowprospect_org",
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"rerecords": {

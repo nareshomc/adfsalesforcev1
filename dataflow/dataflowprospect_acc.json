@@ -162,6 +162,9 @@
 				},
 				{
 					"name": "join7"
+				},
+				{
+					"name": "select16"
 				}
 			],
 			"scriptLines": [
@@ -620,7 +623,7 @@
 				"select5 split(rowno == 1,",
 				"     disjoint: false) ~> split1@(rowno, rownogr)",
 				"split1@rowno select(mapColumn(",
-				"          ActualNotes,",
+				"          Biography = ActualNotes,",
 				"          ParentId,",
 				"          DateAdded,",
 				"          rowno",
@@ -639,7 +642,7 @@
 				"     ActualNotes = toString(collect(ActualNotes))) ~> aggregate2",
 				"aggregate2 select(mapColumn(",
 				"          ParentId,",
-				"          ActualNotes",
+				"          AdditionalInformation = ActualNotes",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select15",
@@ -648,6 +651,13 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join7",
+				"join7 select(mapColumn(",
+				"          ParentId = select13@ParentId,",
+				"          Biography,",
+				"          AdditionalInformation",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select16",
 				"select12 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

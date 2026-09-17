@@ -61,7 +61,7 @@
 				}
 			},
 			{
-				"name": "Dataflowprospectmerge",
+				"name": "Dataflowprospectmergeorg",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -112,7 +112,7 @@
 				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
-						"activity": "Dataflowprospectmerge",
+						"activity": "Dataflowprospectmergeorg",
 						"dependencyConditions": [
 							"Succeeded"
 						]

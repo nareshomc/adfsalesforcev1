@@ -233,6 +233,8 @@
 			{
 				"name": "Copyorgaccount",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Dataflowprospect",

@@ -210,6 +210,14 @@
 								"SchemaName": "stg",
 								"TableName": "sf_prospectmergeacc"
 							}
+						},
+						"linkedServiceParameters": {
+							"mergeprospectacc": {
+								"schemaLinkedService": {
+									"SchemaName": "stg",
+									"TableName": "sf_prospectmergeacc"
+								}
+							}
 						}
 					},
 					"integrationRuntime": {

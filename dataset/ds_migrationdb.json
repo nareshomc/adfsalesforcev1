@@ -15,7 +15,57 @@
 		},
 		"annotations": [],
 		"type": "SqlServerTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RECID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Grid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FIRST_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LAST_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IMPORT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AdditionalInformation",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Biography",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CapacitytoDonate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LikelihoodtoDonate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CURRENT_TIMESTAMP",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
 		"typeProperties": {
 			"schema": {
 				"value": "@dataset().SchemaName",

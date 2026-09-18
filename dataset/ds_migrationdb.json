@@ -56,6 +56,10 @@
 				"type": "nvarchar"
 			},
 			{
+				"name": "SalesforceIDorg",
+				"type": "nvarchar"
+			},
+			{
 				"name": "CURRENT_TIMESTAMP",
 				"type": "datetime",
 				"precision": 23,

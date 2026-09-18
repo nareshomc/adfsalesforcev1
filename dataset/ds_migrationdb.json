@@ -32,6 +32,10 @@
 				"precision": 10
 			},
 			{
+				"name": "OrgName",
+				"type": "nvarchar"
+			},
+			{
 				"name": "IMPORT_ID",
 				"type": "nvarchar"
 			},
@@ -52,11 +56,11 @@
 				"type": "nvarchar"
 			},
 			{
-				"name": "PersonName",
+				"name": "SalesforceIDorg",
 				"type": "nvarchar"
 			},
 			{
-				"name": "SalesforceIDacc",
+				"name": "ExpectedRegion",
 				"type": "nvarchar"
 			},
 			{

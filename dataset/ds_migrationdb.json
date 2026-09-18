@@ -32,14 +32,6 @@
 				"precision": 10
 			},
 			{
-				"name": "FIRST_NAME",
-				"type": "nvarchar"
-			},
-			{
-				"name": "LAST_NAME",
-				"type": "nvarchar"
-			},
-			{
 				"name": "IMPORT_ID",
 				"type": "nvarchar"
 			},
@@ -57,6 +49,14 @@
 			},
 			{
 				"name": "LikelihoodtoDonate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PersonName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SalesforceIDacc",
 				"type": "nvarchar"
 			},
 			{

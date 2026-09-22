@@ -42,6 +42,9 @@
 				},
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "select3"
 				}
 			],
 			"scriptLines": [
@@ -215,7 +218,57 @@
 				" in(['Volunteer Partnerships'],OrganisedBy), 'Volunteer Board Fundraising', ",
 				"",
 				"    'None'",
-				")) ~> derivedColumn1"
+				")) ~> derivedColumn1",
+				"specialevents select(mapColumn(",
+				"          ID,",
+				"          NAME,",
+				"          EVENTID,",
+				"          LASTCHANGEDBYID,",
+				"          ClassFrequency,",
+				"          NumClasses,",
+				"          ClassStartDate,",
+				"          ClassEndDate,",
+				"          ClassStartTime,",
+				"          ClassEndTime,",
+				"          ClassMonth,",
+				"          ClassDayOfMonth1,",
+				"          ClassDayOfWeek,",
+				"          ClassSpacing,",
+				"          ClassFreqSubType,",
+				"          ClassWeek,",
+				"          ClassWeekDays,",
+				"          LocationName,",
+				"          LocationCountry,",
+				"          LocationAddress,",
+				"          LocationCity,",
+				"          LocationState,",
+				"          LocationPostCode,",
+				"          LocationPhone,",
+				"          LocationContact,",
+				"          LocationNotes,",
+				"          LocationCounty,",
+				"          LocationNZCity,",
+				"          LocationNZSuburb,",
+				"          LocationSuburb,",
+				"          ItineraryDesc,",
+				"          SeatingBasis,",
+				"          SeatingNumSections,",
+				"          SeatingNumTables,",
+				"          SeatingNumSeats,",
+				"          SeatingCapacity,",
+				"          AnnotationText,",
+				"          AnnotationAutoDisplay,",
+				"          ClassDayOfMonth2,",
+				"          ClassDayType1,",
+				"          ClassDayType2,",
+				"          GiftDefaultsID,",
+				"          DefaultReceiptAmtType,",
+				"          DefaultReceiptAmtValue,",
+				"          CAMPAIGN_ID,",
+				"          TCode_TE_ID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3"
 			]
 		}
 	}

@@ -157,7 +157,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_salesforceaccountmig",
+						"referenceName": "ds_salesforceaccountprod",
 						"type": "DatasetReference"
 					}
 				],

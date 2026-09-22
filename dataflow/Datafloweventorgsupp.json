@@ -76,10 +76,22 @@
 					"name": "join2"
 				},
 				{
-					"name": "select5"
+					"name": "selectsupp"
 				},
 				{
 					"name": "selectorganisedby"
+				},
+				{
+					"name": "join3"
+				},
+				{
+					"name": "select6"
+				},
+				{
+					"name": "join4"
+				},
+				{
+					"name": "select7"
 				}
 			],
 			"scriptLines": [
@@ -390,13 +402,39 @@
 				"          SupportedBy",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select5",
+				"     skipDuplicateMapOutputs: true) ~> selectsupp",
 				"derivedColumn1 select(mapColumn(",
 				"          ParentID,",
 				"          OrganisedBy",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectorganisedby"
+				"     skipDuplicateMapOutputs: true) ~> selectorganisedby",
+				"select3, selectorganisedby join(ID == ParentID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join3",
+				"join3 select(mapColumn(",
+				"          ID,",
+				"          NAME,",
+				"          EVENTID,",
+				"          OrganisedBy",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select6",
+				"select6, selectsupp join(ID == PARENTID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join4",
+				"join4 select(mapColumn(",
+				"          NAME,",
+				"          EVENTID,",
+				"          OrganisedBy,",
+				"          SupportedBy",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select7"
 			]
 		}
 	}

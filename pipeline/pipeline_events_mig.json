@@ -51,6 +51,41 @@
 					},
 					"traceLevel": "Fine"
 				}
+			},
+			{
+				"name": "Copydataevents",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Datafloweventorgsupp",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SalesforceServiceCloudV2Source",
+						"includeDeletedObjects": false,
+						"partitionOption": "AutoDetect",
+						"preserveScaleFromSchema": false
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_salesforceeventmig",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []

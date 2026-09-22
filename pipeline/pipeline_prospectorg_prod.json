@@ -1,0 +1,348 @@
+{
+	"name": "pipeline_prospectorg_prod",
+	"properties": {
+		"activities": [
+			{
+				"name": "Dataflowprospectorg",
+				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflowprospect_org",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"rerecords": {
+								"SchemaName": "dbo",
+								"TableName": "records3"
+							},
+							"reproposal": {
+								"SchemaName": "dbo",
+								"TableName": "PROPOSAL3"
+							},
+							"reratings": {
+								"SchemaName": "dbo",
+								"TableName": "ratings3"
+							},
+							"resepdate": {
+								"SchemaName": "dbo",
+								"TableName": "supportersourceid3"
+							},
+							"retableentries": {
+								"SchemaName": "dbo",
+								"TableName": "tableentries3"
+							},
+							"reConstituentNotepad3": {
+								"SchemaName": "dbo",
+								"TableName": "ConstituentNotepad3"
+							},
+							"rePROSPECT3": {
+								"SchemaName": "dbo",
+								"TableName": "PROSPECT3"
+							},
+							"sfprospectorg": {
+								"SchemaName": "stg",
+								"TableName": "sf_prospectorg"
+							}
+						}
+					},
+					"integrationRuntime": {
+						"referenceName": "integrationRuntime1",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Dataflowprospectmergeorg",
+				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Copyorgaccount",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflowprospectmerge_org",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"sfprospectorg": {
+								"SchemaName": "stg",
+								"TableName": "sf_prospectorg"
+							},
+							"accountssfrecord": {
+								"SchemaName": "stg",
+								"TableName": "sf_orgrecordids"
+							},
+							"mergeprospectorg": {
+								"SchemaName": "stg",
+								"TableName": "sf_prospectmergeorg"
+							}
+						}
+					},
+					"integrationRuntime": {
+						"referenceName": "integrationRuntime1",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Dataflowprospectmergeorg",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "select * from stg.sf_prospectmergeorg ",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SalesforceServiceCloudV2Sink",
+						"writeBatchSize": 100000,
+						"writeBehavior": "upsert",
+						"externalIdFieldName": "Id",
+						"ignoreNullValues": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "SalesforceIDorg",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "String",
+									"physicalType": "id"
+								}
+							},
+							{
+								"source": {
+									"name": "AdditionalInformation",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Additional_information__c",
+									"type": "String",
+									"physicalType": "textarea"
+								}
+							},
+							{
+								"source": {
+									"name": "Biography",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Biography__c",
+									"type": "String",
+									"physicalType": "textarea"
+								}
+							},
+							{
+								"source": {
+									"name": "CapacitytoDonate",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Capacity__c",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							},
+							{
+								"source": {
+									"name": "LikelihoodtoDonate",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Likelihood_to_give__c",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "stg",
+							"TableName": "sf_prospectmergeorg"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_salesforceaccountmig",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Copyorgaccount",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Dataflowprospectorg",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SalesforceServiceCloudV2Source",
+						"query": "SELECT Id, Golden_Record_ID__c, Name, Raisers_Edge_ID__c FROM Account where Golden_Record_ID__c <> NULL",
+						"includeDeletedObjects": false,
+						"partitionOption": "AutoDetect",
+						"preserveScaleFromSchema": false
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Golden_Record_ID__c",
+									"type": "String",
+									"physicalType": "string"
+								},
+								"sink": {
+									"name": "GRID",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Raisers_Edge_ID__c",
+									"type": "String",
+									"physicalType": "string"
+								},
+								"sink": {
+									"name": "RECID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Name",
+									"type": "String",
+									"physicalType": "string"
+								},
+								"sink": {
+									"name": "OrganisationName",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Id",
+									"type": "String",
+									"physicalType": "id"
+								},
+								"sink": {
+									"name": "SalesforceID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_salesforceaccountmig",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "stg",
+							"TableName": "sf_orgrecordids"
+						}
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

@@ -57,6 +57,8 @@
 			{
 				"name": "Copydataevents",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Datafloweventorgsupp",
@@ -153,6 +155,8 @@
 			{
 				"name": "Datafloweventmerge",
 				"type": "ExecuteDataFlow",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copydataevents",

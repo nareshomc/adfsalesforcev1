@@ -15,6 +15,34 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"dataflow": {
+						"referenceName": "Datafloweventorgsupp",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"specialevents": {
+								"SchemaName": "dbo"
+							},
+							"tableentries": {
+								"SchemaName": "dbo",
+								"TableName": "TABLEENTRIES3"
+							},
+							"eventattributes": {
+								"SchemaName": "dbo",
+								"TableName": "EventAttributes3"
+							},
+							"eventattributessupported": {
+								"SchemaName": "dbo",
+								"TableName": "EventAttributes3"
+							},
+							"tableentriessuppor": {
+								"SchemaName": "dbo",
+								"TableName": "TABLEENTRIES3"
+							},
+							"sinkevents": {
+								"SchemaName": "stg"
+							}
+						}
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"

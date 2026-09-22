@@ -70,7 +70,10 @@
 					"name": "filter2"
 				},
 				{
-					"name": "select5"
+					"name": "selectsupport"
+				},
+				{
+					"name": "join2"
 				}
 			],
 			"scriptLines": [
@@ -370,7 +373,12 @@
 				"          SupportedBy = LONGDESCRIPTION",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select5"
+				"     skipDuplicateMapOutputs: true) ~> selectsupport",
+				"select4, selectsupport join(select4@TABLEENTRIESID == selectsupport@TABLEENTRIESID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2"
 			]
 		}
 	}

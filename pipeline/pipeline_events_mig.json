@@ -221,7 +221,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "\nselect distinct eventid, organisedby, eventname, salesforceid  from stg.sf_eventsorgsupload \nwhere organisedby <> ''",
+						"sqlReaderQuery": "select distinct eventid, organisedby, eventname, salesforceid  from stg.sf_eventsorgsupload \nwhere organisedby <> ''\nand eventname like '%Cardiff Half Marathon 2026%'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},

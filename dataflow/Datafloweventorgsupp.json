@@ -40,7 +40,15 @@
 					"name": "tableentriessuppor"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "sinkevents"
+				}
+			],
 			"transformations": [
 				{
 					"name": "selecttableentriesorganised"
@@ -434,7 +442,30 @@
 				"          SupportedBy",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select7"
+				"     skipDuplicateMapOutputs: true) ~> select7",
+				"select7 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          ID as integer,",
+				"          RECID as integer,",
+				"          Grid as integer,",
+				"          OrgName as string,",
+				"          IMPORT_ID as string,",
+				"          AdditionalInformation as string,",
+				"          Biography as string,",
+				"          CapacitytoDonate as string,",
+				"          LikelihoodtoDonate as string,",
+				"          SalesforceIDorg as string,",
+				"          ExpectedRegion as string,",
+				"          CURRENT_TIMESTAMP as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkevents"
 			]
 		}
 	}

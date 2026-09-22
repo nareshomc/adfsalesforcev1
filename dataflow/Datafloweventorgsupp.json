@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "specialevents"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_redb",
+						"type": "DatasetReference"
+					},
+					"name": "tableentries"
 				}
 			],
 			"sinks": [],
@@ -18,7 +25,11 @@
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> specialevents"
+				"     format: 'table') ~> specialevents",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> tableentries"
 			]
 		}
 	}

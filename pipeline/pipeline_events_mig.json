@@ -221,7 +221,48 @@
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "SalesforceServiceCloudV2Sink",
+						"writeBatchSize": 100000,
+						"writeBehavior": "upsert",
+						"externalIdFieldName": "Id",
+						"ignoreNullValues": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "salesforceid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "String",
+									"physicalType": "id"
+								}
+							},
+							{
+								"source": {
+									"name": "organisedby",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Organised_by__c",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
@@ -231,6 +272,12 @@
 							"SchemaName": "stg",
 							"TableName": "sf_eventsorgsupload "
 						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_salesforceeventmig",
+						"type": "DatasetReference"
 					}
 				]
 			}

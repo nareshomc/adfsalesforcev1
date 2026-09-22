@@ -20,7 +20,8 @@
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"specialevents": {
-								"SchemaName": "dbo"
+								"SchemaName": "dbo",
+								"TableName": "special_event3"
 							},
 							"tableentries": {
 								"SchemaName": "dbo",

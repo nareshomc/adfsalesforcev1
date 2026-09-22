@@ -39,7 +39,8 @@
 								"TableName": "TABLEENTRIES3"
 							},
 							"sinkevents": {
-								"SchemaName": "stg"
+								"SchemaName": "stg",
+								"TableName": "sf_eventorgsupp"
 							}
 						}
 					},

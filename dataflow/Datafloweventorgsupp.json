@@ -27,7 +27,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "selecttableentries"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          CAPACITY as integer,",
@@ -131,10 +135,32 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> tableentries",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          ATTRIBUTESID as integer,",
+				"          ATTRIBUTETYPESID as integer,",
+				"          TEXT as string,",
+				"          NUM as integer,",
+				"          DATETIME as timestamp,",
+				"          CURRENCY as decimal(19,4),",
+				"          BOOLEAN as short,",
+				"          COMMENTS as string,",
+				"          SEQUENCE as short,",
+				"          TABLEENTRIESID as integer,",
+				"          ATTRIBUTEDATE as timestamp,",
+				"          PARENTID as integer,",
+				"          IMPORTID as string,",
+				"          ConstitID as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> eventattributes"
+				"     format: 'table') ~> eventattributes",
+				"tableentries select(mapColumn(",
+				"          TABLEENTRIESID,",
+				"          LONGDESCRIPTION",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selecttableentries"
 			]
 		}
 	}

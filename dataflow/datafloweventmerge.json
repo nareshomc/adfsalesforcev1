@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sfeventorgsupp"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference"
+					},
+					"name": "eventssfrecord"
 				}
 			],
 			"sinks": [],
@@ -32,7 +39,25 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> sfeventorgsupp"
+				"     format: 'table') ~> sfeventorgsupp",
+				"source(output(",
+				"          ID as integer,",
+				"          RECID as integer,",
+				"          Grid as integer,",
+				"          OrgName as string,",
+				"          IMPORT_ID as string,",
+				"          AdditionalInformation as string,",
+				"          Biography as string,",
+				"          CapacitytoDonate as string,",
+				"          LikelihoodtoDonate as string,",
+				"          SalesforceIDorg as string,",
+				"          ExpectedRegion as string,",
+				"          CURRENT_TIMESTAMP as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> eventssfrecord"
 			]
 		}
 	}

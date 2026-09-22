@@ -132,9 +132,24 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
+					"dataflow": {
+						"referenceName": "datafloweventmerge",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"sfeventorgsupp": {
+								"SchemaName": "stg"
+							},
+							"eventssfrecord": {
+								"SchemaName": "stg"
+							},
+							"sinkmerge": {
+								"SchemaName": "stg"
+							}
+						}
+					},
+					"integrationRuntime": {
+						"referenceName": "integrationRuntime1",
+						"type": "IntegrationRuntimeReference"
 					},
 					"traceLevel": "Fine"
 				}

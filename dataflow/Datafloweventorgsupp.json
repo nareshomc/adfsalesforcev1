@@ -30,6 +30,9 @@
 			"transformations": [
 				{
 					"name": "selecttableentries"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -160,7 +163,13 @@
 				"          LONGDESCRIPTION",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selecttableentries"
+				"     skipDuplicateMapOutputs: true) ~> selecttableentries",
+				"eventattributes select(mapColumn(",
+				"          ParentID = PARENTID,",
+				"          TABLEENTRIESID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}

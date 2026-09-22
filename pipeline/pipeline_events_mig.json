@@ -145,7 +145,8 @@
 								"TableName": "events_sfrecord"
 							},
 							"sinkmerge": {
-								"SchemaName": "stg"
+								"SchemaName": "stg",
+								"TableName": "sf_eventsorgsupload"
 							}
 						}
 					},

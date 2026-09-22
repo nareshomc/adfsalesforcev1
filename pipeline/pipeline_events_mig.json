@@ -90,6 +90,11 @@
 						"type": "TabularTranslator",
 						"mappings": [
 							{
+								"source": {
+									"name": "Event_ID__c",
+									"type": "String",
+									"physicalType": "string"
+								},
 								"sink": {
 									"name": "Eventid",
 									"type": "String",
@@ -97,6 +102,11 @@
 								}
 							},
 							{
+								"source": {
+									"name": "Name",
+									"type": "String",
+									"physicalType": "string"
+								},
 								"sink": {
 									"name": "EventName",
 									"type": "String",

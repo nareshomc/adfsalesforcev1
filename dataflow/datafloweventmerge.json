@@ -20,21 +20,17 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "select1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
-				"          ID as integer,",
-				"          RECID as integer,",
-				"          Grid as integer,",
-				"          OrgName as string,",
-				"          IMPORT_ID as string,",
-				"          AdditionalInformation as string,",
-				"          Biography as string,",
-				"          CapacitytoDonate as string,",
-				"          LikelihoodtoDonate as string,",
-				"          SalesforceIDorg as string,",
-				"          ExpectedRegion as string,",
-				"          CURRENT_TIMESTAMP as timestamp",
+				"          NAME as string,",
+				"          EVENTID as string,",
+				"          OrganisedBy as string,",
+				"          SupportedBy as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -50,7 +46,14 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> eventssfrecord"
+				"     format: 'table') ~> eventssfrecord",
+				"eventssfrecord select(mapColumn(",
+				"          Eventid,",
+				"          EventName,",
+				"          SalesforceID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}

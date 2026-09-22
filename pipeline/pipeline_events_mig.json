@@ -137,10 +137,12 @@
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"sfeventorgsupp": {
-								"SchemaName": "stg"
+								"SchemaName": "stg",
+								"TableName": "sf_eventorgsupp"
 							},
 							"eventssfrecord": {
-								"SchemaName": "stg"
+								"SchemaName": "stg",
+								"TableName": "events_sfrecord"
 							},
 							"sinkmerge": {
 								"SchemaName": "stg"

@@ -65,6 +65,12 @@
 				},
 				{
 					"name": "select4"
+				},
+				{
+					"name": "filter2"
+				},
+				{
+					"name": "select5"
 				}
 			],
 			"scriptLines": [
@@ -327,7 +333,44 @@
 				"          PARENTID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select4"
+				"     skipDuplicateMapOutputs: true) ~> select4",
+				"tableentriessuppor filter(in([17876",
+				",2308",
+				",17870",
+				",3862",
+				",17879",
+				",17869",
+				",16168",
+				",3860",
+				",16180",
+				",18846",
+				",17880",
+				",18975",
+				",18849",
+				",18847",
+				",13680",
+				",18848",
+				",13672",
+				",17877",
+				",17878",
+				",3861",
+				",15061",
+				",16019",
+				",23040",
+				",18897",
+				",18899",
+				",18898",
+				",18850",
+				",3859",
+				",23611",
+				",23609",
+				",23610], TABLEENTRIESID)) ~> filter2",
+				"filter2 select(mapColumn(",
+				"          TABLEENTRIESID,",
+				"          SupportedBy = LONGDESCRIPTION",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select5"
 			]
 		}
 	}

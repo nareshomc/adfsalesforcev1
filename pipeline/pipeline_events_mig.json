@@ -78,12 +78,35 @@
 						"partitionOption": "AutoDetect",
 						"preserveScaleFromSchema": false
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "ds_salesforceeventmig",
 						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_migrationdb",
+						"type": "DatasetReference",
+						"parameters": {
+							"SchemaName": "stg",
+							"TableName": "events_sfrecord"
+						}
 					}
 				]
 			}

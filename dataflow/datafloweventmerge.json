@@ -23,6 +23,15 @@
 			"transformations": [
 				{
 					"name": "select1"
+				},
+				{
+					"name": "select2"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select3"
 				}
 			],
 			"scriptLines": [
@@ -53,7 +62,31 @@
 				"          SalesforceID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"sfeventorgsupp select(mapColumn(",
+				"          NAME,",
+				"          EVENTID,",
+				"          OrganisedBy,",
+				"          SupportedBy",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2, select1 join(select2@EVENTID == select1@Eventid,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          NAME,",
+				"          EVENTID = select2@EVENTID,",
+				"          OrganisedBy,",
+				"          SupportedBy,",
+				"          Eventid = select1@Eventid,",
+				"          EventName,",
+				"          SalesforceID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3"
 			]
 		}
 	}

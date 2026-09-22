@@ -9,7 +9,7 @@
 						"referenceName": "ds_migrationdb",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "sfeventorgsupp"
 				}
 			],
 			"sinks": [],
@@ -32,7 +32,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> source1"
+				"     format: 'table') ~> sfeventorgsupp"
 			]
 		}
 	}

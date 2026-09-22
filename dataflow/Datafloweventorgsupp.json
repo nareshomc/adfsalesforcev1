@@ -29,7 +29,7 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "selecttableentries"
+					"name": "selecttableentriesorganised"
 				},
 				{
 					"name": "select1"
@@ -45,6 +45,9 @@
 				},
 				{
 					"name": "select3"
+				},
+				{
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -170,19 +173,19 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> eventattributes",
-				"tableentries select(mapColumn(",
+				"filter1 select(mapColumn(",
 				"          TABLEENTRIESID,",
 				"          LONGDESCRIPTION",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selecttableentries",
+				"     skipDuplicateMapOutputs: true) ~> selecttableentriesorganised",
 				"eventattributes select(mapColumn(",
 				"          ParentID = PARENTID,",
 				"          TABLEENTRIESID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1, selecttableentries join(select1@TABLEENTRIESID == selecttableentries@TABLEENTRIESID,",
+				"select1, selecttableentriesorganised join(select1@TABLEENTRIESID == selecttableentriesorganised@TABLEENTRIESID,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
@@ -225,7 +228,30 @@
 				"          EVENTID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select3"
+				"     skipDuplicateMapOutputs: true) ~> select3",
+				"tableentries filter(in ([2276,",
+				"13673,",
+				"17386,",
+				"13580,",
+				"17882,",
+				"13676,",
+				"13671,",
+				"23025,",
+				"13678,",
+				"13679,",
+				"20390,",
+				"23027,",
+				"23026,",
+				"20389,",
+				"18066,",
+				"17881,",
+				"23028,",
+				"19989,",
+				"22644,",
+				"20619,",
+				"17875,",
+				"22661,",
+				"22952], TABLEENTRIESID)) ~> filter1"
 			]
 		}
 	}

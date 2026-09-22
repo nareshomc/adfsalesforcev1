@@ -325,7 +325,7 @@
 				" in(['Special Events'],OrganisedBy), 'Special Events', ",
 				" in(['Volunteer Partnerships'],OrganisedBy), 'Volunteer Board Fundraising', ",
 				"",
-				"    'None'",
+				"    ''",
 				")) ~> derivedColumn1",
 				"specialevents select(mapColumn(",
 				"          ID,",

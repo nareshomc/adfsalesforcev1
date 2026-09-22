@@ -62,6 +62,9 @@
 				},
 				{
 					"name": "filter1"
+				},
+				{
+					"name": "select4"
 				}
 			],
 			"scriptLines": [
@@ -318,7 +321,13 @@
 				"20619,",
 				"17875,",
 				"22661,",
-				"22952], TABLEENTRIESID)) ~> filter1"
+				"22952], TABLEENTRIESID)) ~> filter1",
+				"eventattributessupported select(mapColumn(",
+				"          TABLEENTRIESID,",
+				"          PARENTID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select4"
 			]
 		}
 	}

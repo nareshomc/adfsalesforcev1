@@ -38,6 +38,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "tableentriessuppor"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_redb",
+						"type": "DatasetReference"
+					},
+					"name": "AttributeTypes3"
 				}
 			],
 			"sinks": [
@@ -284,6 +291,10 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> tableentriessuppor",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> AttributeTypes3",
 				"filter1 select(mapColumn(",
 				"          TABLEENTRIESID,",
 				"          LONGDESCRIPTION",

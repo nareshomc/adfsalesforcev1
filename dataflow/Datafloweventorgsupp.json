@@ -102,9 +102,6 @@
 					"name": "select7"
 				},
 				{
-					"name": "filter3"
-				},
-				{
 					"name": "derivedColumn2"
 				},
 				{
@@ -253,8 +250,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: 'select * FROM dbo.EventAttributes3 where parentid = 2304',",
-				"     format: 'query') ~> eventattributessupported",
+				"     format: 'table') ~> eventattributessupported",
 				"source(output(",
 				"          TABLEENTRIESID as integer,",
 				"          ACTIVE as short,",
@@ -367,7 +363,7 @@
 				"17875,",
 				"22661,",
 				"22952], TABLEENTRIESID)) ~> filter1",
-				"filter3 select(mapColumn(",
+				"eventattributessupported select(mapColumn(",
 				"          TABLEENTRIESID,",
 				"          PARENTID",
 				"     ),",
@@ -445,7 +441,6 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select7",
-				"eventattributessupported filter(PARENTID == 2304) ~> filter3",
 				"selectsupp derive(SupportedBy = case(",
 				"    in( ['Community - East of England',",
 				"'Community - London & SE',",

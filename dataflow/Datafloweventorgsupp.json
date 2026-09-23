@@ -140,7 +140,13 @@
 					"name": "join6"
 				},
 				{
-					"name": "aggregate1"
+					"name": "filter5"
+				},
+				{
+					"name": "window1"
+				},
+				{
+					"name": "filter6"
 				}
 			],
 			"scriptLines": [
@@ -364,7 +370,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selecttableentriesorganised",
-				"eventattributes select(mapColumn(",
+				"filter5 select(mapColumn(",
 				"          ParentID = PARENTID,",
 				"          TABLEENTRIESID,",
 				"          ATTRIBUTETYPESID",
@@ -383,7 +389,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
-				"aggregate1 derive(OrganisedBy = case(",
+				"filter6 derive(OrganisedBy = case(",
 				"    in( ['Community - East of England',",
 				"'Community - London & SE',",
 				"'Community - Midlands',",
@@ -572,9 +578,11 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join6",
-				"select2 aggregate(groupBy(ParentID,",
-				"          OrganisedBy),",
-				"     DATECHANGED = max(DATECHANGED)) ~> aggregate1",
+				"eventattributes filter(PARENTID == 1954) ~> filter5",
+				"select2 window(over(ParentID),",
+				"     desc(DATECHANGED, true),",
+				"     rowno = rowNumber()) ~> window1",
+				"window1 filter(rowno == 1) ~> filter6",
 				"select7 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",

@@ -106,6 +106,9 @@
 				},
 				{
 					"name": "derivedColumn2"
+				},
+				{
+					"name": "selectsuppfinal"
 				}
 			],
 			"scriptLines": [
@@ -469,6 +472,12 @@
 				"",
 				"    ''",
 				")) ~> derivedColumn2",
+				"derivedColumn2 select(mapColumn(",
+				"          PARENTID,",
+				"          SupportedBy",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectsuppfinal",
 				"select7 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",

@@ -144,6 +144,12 @@
 				},
 				{
 					"name": "filter6"
+				},
+				{
+					"name": "window2"
+				},
+				{
+					"name": "filter7"
 				}
 			],
 			"scriptLines": [
@@ -485,7 +491,8 @@
 				"     broadcast: 'auto')~> join2",
 				"join2 select(mapColumn(",
 				"          PARENTID,",
-				"          SupportedBy",
+				"          SupportedBy,",
+				"          DATECHANGED",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectsupp",
@@ -521,7 +528,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select7",
-				"selectsupp derive(SupportedBy = case(",
+				"filter7 derive(SupportedBy = case(",
 				"    in( ['Community - East of England',",
 				"'Community - London & SE',",
 				"'Community - Midlands',",
@@ -580,6 +587,10 @@
 				"     desc(DATECHANGED, true),",
 				"     rowno = rowNumber()) ~> window1",
 				"window1 filter(rowno == 1) ~> filter6",
+				"selectsupp window(over(PARENTID),",
+				"     desc(DATECHANGED, true),",
+				"     rowno = rowNumber()) ~> window2",
+				"window2 filter(rowno == 1) ~> filter7",
 				"select7 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",

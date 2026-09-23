@@ -100,6 +100,9 @@
 				},
 				{
 					"name": "select7"
+				},
+				{
+					"name": "filter3"
 				}
 			],
 			"scriptLines": [
@@ -357,7 +360,7 @@
 				"17875,",
 				"22661,",
 				"22952], TABLEENTRIESID)) ~> filter1",
-				"eventattributessupported select(mapColumn(",
+				"filter3 select(mapColumn(",
 				"          TABLEENTRIESID,",
 				"          PARENTID",
 				"     ),",
@@ -435,6 +438,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select7",
+				"eventattributessupported filter(PARENTID == 2304) ~> filter3",
 				"select7 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",

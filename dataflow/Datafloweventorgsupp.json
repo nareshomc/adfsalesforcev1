@@ -119,6 +119,9 @@
 				},
 				{
 					"name": "selectorg"
+				},
+				{
+					"name": "join5"
 				}
 			],
 			"scriptLines": [
@@ -397,7 +400,8 @@
 				"22952], TABLEENTRIESID)) ~> filter1",
 				"eventattributessupported select(mapColumn(",
 				"          TABLEENTRIESID,",
-				"          PARENTID",
+				"          PARENTID,",
+				"          ATTRIBUTETYPESID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select4",
@@ -430,7 +434,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectsupport",
-				"select4, selectsupport join(select4@TABLEENTRIESID == selectsupport@TABLEENTRIESID,",
+				"join5, selectsupport join(select4@TABLEENTRIESID == selectsupport@TABLEENTRIESID,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
@@ -512,6 +516,11 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectorg",
+				"select4, selectorg join(select4@ATTRIBUTETYPESID == selectorg@ATTRIBUTETYPESID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join5",
 				"select7 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",

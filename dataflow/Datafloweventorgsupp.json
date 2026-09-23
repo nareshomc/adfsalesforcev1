@@ -138,6 +138,9 @@
 				},
 				{
 					"name": "join6"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -380,7 +383,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
-				"select2 derive(OrganisedBy = case(",
+				"aggregate1 derive(OrganisedBy = case(",
 				"    in( ['Community - East of England',",
 				"'Community - London & SE',",
 				"'Community - Midlands',",
@@ -569,6 +572,9 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join6",
+				"select2 aggregate(groupBy(ParentID,",
+				"          OrganisedBy),",
+				"     DATECHANGED = max(DATECHANGED)) ~> aggregate1",
 				"select7 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",

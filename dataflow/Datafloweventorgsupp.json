@@ -45,6 +45,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "AttributeTypes3"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_redb",
+						"type": "DatasetReference"
+					},
+					"name": "AttributeTypessupport"
 				}
 			],
 			"sinks": [
@@ -122,6 +129,12 @@
 				},
 				{
 					"name": "join5"
+				},
+				{
+					"name": "filter4"
+				},
+				{
+					"name": "selectsupported"
 				}
 			],
 			"scriptLines": [
@@ -319,6 +332,25 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> AttributeTypes3",
+				"source(output(",
+				"          ATTRIBUTETYPESID as integer,",
+				"          RECORDTYPE as short,",
+				"          DESCRIPTION as string,",
+				"          TYPEOFDATA as short,",
+				"          CODETABLESID as integer,",
+				"          REQUIRED as short,",
+				"          IMPORTID as string,",
+				"          SystemMask as integer,",
+				"          MUSTBEUNIQUE as short,",
+				"          SEQUENCE as integer,",
+				"          PRODUCTFLAG as integer,",
+				"          COUNTRYMASK as integer,",
+				"          ACTIVE as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> AttributeTypessupport",
 				"filter1 select(mapColumn(",
 				"          TABLEENTRIESID,",
 				"          LONGDESCRIPTION",
@@ -521,6 +553,13 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join5",
+				"AttributeTypessupport filter(ATTRIBUTETYPESID == 1165) ~> filter4",
+				"filter4 select(mapColumn(",
+				"          ATTRIBUTETYPESID,",
+				"          DESCRIPTION",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectsupported",
 				"select7 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",

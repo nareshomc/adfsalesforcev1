@@ -552,7 +552,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectorg",
-				"select4, selectsupported join(select4@ATTRIBUTETYPESID == selectorg@ATTRIBUTETYPESID,",
+				"select4, selectsupported join(select4@ATTRIBUTETYPESID == selectsupported@ATTRIBUTETYPESID,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",

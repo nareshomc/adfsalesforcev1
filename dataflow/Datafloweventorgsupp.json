@@ -140,9 +140,6 @@
 					"name": "join6"
 				},
 				{
-					"name": "filter5"
-				},
-				{
 					"name": "window1"
 				},
 				{
@@ -370,7 +367,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selecttableentriesorganised",
-				"filter5 select(mapColumn(",
+				"eventattributes select(mapColumn(",
 				"          ParentID = PARENTID,",
 				"          TABLEENTRIESID,",
 				"          ATTRIBUTETYPESID",
@@ -578,7 +575,6 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join6",
-				"eventattributes filter(PARENTID == 1954) ~> filter5",
 				"select2 window(over(ParentID),",
 				"     desc(DATECHANGED, true),",
 				"     rowno = rowNumber()) ~> window1",

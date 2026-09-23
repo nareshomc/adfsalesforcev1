@@ -135,6 +135,9 @@
 				},
 				{
 					"name": "selectsupported"
+				},
+				{
+					"name": "join6"
 				}
 			],
 			"scriptLines": [
@@ -359,11 +362,12 @@
 				"     skipDuplicateMapOutputs: true) ~> selecttableentriesorganised",
 				"eventattributes select(mapColumn(",
 				"          ParentID = PARENTID,",
-				"          TABLEENTRIESID",
+				"          TABLEENTRIESID,",
+				"          ATTRIBUTETYPESID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1, selecttableentriesorganised join(select1@TABLEENTRIESID == selecttableentriesorganised@TABLEENTRIESID,",
+				"join6, selecttableentriesorganised join(select1@TABLEENTRIESID == selecttableentriesorganised@TABLEENTRIESID,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
@@ -560,6 +564,11 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectsupported",
+				"select1, selectorg join(select1@ATTRIBUTETYPESID == selectorg@ATTRIBUTETYPESID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join6",
 				"select7 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",

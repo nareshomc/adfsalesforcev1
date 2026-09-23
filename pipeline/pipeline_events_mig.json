@@ -261,9 +261,25 @@
 									"name": "organisedby",
 									"type": "String",
 									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Organised_by__c",
+									"type": "String",
+									"physicalType": "picklist"
 								}
 							},
-							null
+							{
+								"source": {
+									"name": "supportedby",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Supported_By__c",
+									"type": "String",
+									"physicalType": "picklist"
+								}
+							}
 						],
 						"typeConversion": true,
 						"typeConversionSettings": {

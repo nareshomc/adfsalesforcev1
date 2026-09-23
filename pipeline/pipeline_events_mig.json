@@ -39,6 +39,14 @@
 								"SchemaName": "dbo",
 								"TableName": "TABLEENTRIES3"
 							},
+							"AttributeTypes3": {
+								"SchemaName": "dbo",
+								"TableName": "AttributeTypes3"
+							},
+							"AttributeTypessupport": {
+								"SchemaName": "dbo",
+								"TableName": "AttributeTypes3"
+							},
 							"sinkevents": {
 								"SchemaName": "stg",
 								"TableName": "sf_eventorgsupp"

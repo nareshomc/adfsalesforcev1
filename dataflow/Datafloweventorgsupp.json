@@ -432,7 +432,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select6",
-				"select6, selectsupp join(ID == PARENTID,",
+				"select6, selectsuppfinal join(ID == PARENTID,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
